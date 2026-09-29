@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(() => {
       transition.classList.remove("active");
-    }, 150);
+    }, 800);
 
     setTimeout(() => {
       transition.style.opacity = "0";
@@ -262,26 +262,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-  /* =========================
-     ENTRATA NELLA NUOVA PAGINA
-  ========================= */
-
-  window.addEventListener("pageshow", () => {
-
-    const transition = document.querySelector(".page-transition");
-
-    if (!transition) return;
-
-    const wasTransitioned = sessionStorage.getItem("gdl-page-transition");
-
-    if (wasTransitioned === "true") {
-
-      sessionStorage.removeItem("gdl-page-transition");
-
-      transition.classList.add("active");
-
-      setTimeout(() => {
-        transition.classList.remove("active");
-      }, 800);
-    }
-  });
+ 
