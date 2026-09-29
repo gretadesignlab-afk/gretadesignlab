@@ -9,8 +9,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Font principale più leggibile -->
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
 
@@ -41,9 +43,9 @@
     }
 
 
-    /* =========================================
+    /* ================================
        CURSORE
-       ========================================= */
+       ================================ */
 
     .cursor {
       position: fixed;
@@ -77,9 +79,9 @@
     }
 
 
-    /* =========================================
+    /* ================================
        MACCHIA
-       ========================================= */
+       ================================ */
 
     .macchia {
       position: fixed;
@@ -111,9 +113,9 @@
     }
 
 
-    /* =========================================
+    /* ================================
        NAVBAR
-       ========================================= */
+       ================================ */
 
     .navbar {
       position: fixed;
@@ -150,7 +152,9 @@
     }
 
     .nav-logo:hover {
-      transform: rotate(-2deg) scale(1.05);
+      transform:
+        rotate(-2deg)
+        scale(1.05);
     }
 
     .nav-links {
@@ -208,9 +212,9 @@
     }
 
 
-    /* =========================================
+    /* ================================
        HERO
-       ========================================= */
+       ================================ */
 
     .hero {
       position: relative;
@@ -242,9 +246,9 @@
     }
 
 
-    /* =========================================
-       PICCOLO LABEL
-       ========================================= */
+    /* ================================
+       PICCOLO TESTO SUPERIORE
+       ================================ */
 
     .hero-label {
       display: flex;
@@ -261,7 +265,7 @@
 
       font-weight: 500;
 
-      letter-spacing: 0.28em;
+      letter-spacing: 0.25em;
 
       text-transform: uppercase;
 
@@ -280,12 +284,15 @@
     }
 
 
-    /* =========================================
+    /* ================================
        GRETA DESIGN LAB
-       ========================================= */
+       ================================ */
 
     .hero-title {
-      font-family: "DM Serif Display", Georgia, serif;
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
 
       font-size:
         clamp(
@@ -303,9 +310,6 @@
       color: var(--burgundy);
 
       max-width: 1100px;
-
-      transition:
-        transform 0.4s ease;
     }
 
     .hero-title .word {
@@ -325,13 +329,13 @@
     .hero-title .design {
       margin-left: 12vw;
 
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     .hero-title .lab {
       margin-left: 25vw;
 
-      margin-top: 15px;
+      margin-top: 18px;
 
       color: var(--black);
     }
@@ -345,18 +349,21 @@
     }
 
 
-    /* =========================================
+    /* ================================
        SLOGAN
-       ========================================= */
+       ================================ */
 
     .hero-slogan {
-      margin-top: 58px;
+      margin-top: 62px;
 
       margin-left: 46vw;
 
-      max-width: 360px;
+      max-width: 380px;
 
-      font-family: "DM Serif Display", Georgia, serif;
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
 
       font-size:
         clamp(
@@ -384,34 +391,9 @@
     }
 
 
-    /* =========================================
-       INFO
-       ========================================= */
-
-    .hero-footer {
-      margin-top: 42px;
-
-      margin-left: 46vw;
-
-      font-family: "Inter", Arial, sans-serif;
-
-      font-size: 9px;
-
-      font-weight: 500;
-
-      letter-spacing: 0.25em;
-
-      text-transform: uppercase;
-
-      color: var(--black);
-
-      opacity: 0.5;
-    }
-
-
-    /* =========================================
+    /* ================================
        PAROLE INTERATTIVE
-       ========================================= */
+       ================================ */
 
     .floating-word {
       position: absolute;
@@ -457,9 +439,9 @@
     }
 
 
-    /* =========================================
+    /* ================================
        LINEE DI COSTRUZIONE
-       ========================================= */
+       ================================ */
 
     .construction-line {
       position: absolute;
@@ -491,13 +473,14 @@
 
     .construction-horizontal:hover {
       transform: scaleX(1.4);
+
       opacity: 0.7;
     }
 
 
-    /* =========================================
-       PICCOLE MACCHIE STATICHE
-       ========================================= */
+    /* ================================
+       PICCOLE MACCHIE
+       ================================ */
 
     .ink-dot {
       position: absolute;
@@ -544,9 +527,9 @@
     }
 
 
-    /* =========================================
-       RESPONSIVE
-       ========================================= */
+    /* ================================
+       TABLET
+       ================================ */
 
     @media (max-width: 900px) {
 
@@ -585,13 +568,16 @@
         margin-left: 20vw;
       }
 
-      .hero-slogan,
-      .hero-footer {
+      .hero-slogan {
         margin-left: 38vw;
       }
 
     }
 
+
+    /* ================================
+       TELEFONO
+       ================================ */
 
     @media (max-width: 600px) {
 
@@ -655,13 +641,13 @@
       .hero-title .design {
         margin-left: 7vw;
 
-        margin-top: 7px;
+        margin-top: 8px;
       }
 
       .hero-title .lab {
         margin-left: 15vw;
 
-        margin-top: 12px;
+        margin-top: 13px;
       }
 
       .hero-slogan {
@@ -670,14 +656,6 @@
         margin-left: 18vw;
 
         font-size: 18px;
-      }
-
-      .hero-footer {
-        margin-top: 35px;
-
-        margin-left: 18vw;
-
-        font-size: 7px;
       }
 
       .floating-word {
@@ -743,13 +721,21 @@
 
     <div class="nav-links">
 
-      <a href="#home">Home</a>
+      <a href="#home">
+        Home
+      </a>
 
-      <a href="#portfolio">Portfolio</a>
+      <a href="#portfolio">
+        Portfolio
+      </a>
 
-      <a href="#chi-sono">Chi sono</a>
+      <a href="#chi-sono">
+        Chi sono
+      </a>
 
-      <a href="#contatti">Contatti</a>
+      <a href="#contatti">
+        Contatti
+      </a>
 
     </div>
 
@@ -767,7 +753,7 @@
 
 
       <div class="hero-label">
-        Graphic & Creative Studio
+        Un laboratorio di idee
       </div>
 
 
@@ -795,15 +781,10 @@
 
       </p>
 
-
-      <p class="hero-footer">
-        Graphic · Creative · Visual Design
-      </p>
-
     </div>
 
 
-    <!-- PAROLE -->
+    <!-- PAROLE INTERATTIVE -->
 
     <span class="floating-word word-idea">
       IDEA
@@ -829,7 +810,7 @@
     </span>
 
 
-    <!-- MACCHIE -->
+    <!-- PICCOLE MACCHIE -->
 
     <span class="ink-dot ink-one"></span>
 
@@ -844,9 +825,9 @@
 
   <script>
 
-    /* =========================================
+    /* ================================
        MACCHIA
-       ========================================= */
+       ================================ */
 
     const macchia =
       document.querySelector(".macchia");
@@ -903,9 +884,9 @@
     animaMacchia();
 
 
-    /* =========================================
+    /* ================================
        CURSORE
-       ========================================= */
+       ================================ */
 
     const cursor =
       document.querySelector(".cursor");
@@ -927,7 +908,7 @@
 
     const interactiveElements =
       document.querySelectorAll(
-        "a, .word, .floating-word, .ink-dot, .construction-horizontal"
+        "a, .word, .floating-word, .ink-dot, .construction-horizontal, .hero-slogan"
       );
 
 
@@ -955,7 +936,6 @@
 
       }
     );
-
 
   </script>
 
