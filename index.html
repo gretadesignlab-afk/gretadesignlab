@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Greta Design Lab</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      background: #f3eee6;
+      color: #641426;
+      font-family: Arial, sans-serif;
+    }
+
+    /* MACCHIA */
+
+    .macchia {
+      position: fixed;
+      width: 280px;
+      height: 230px;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      z-index: 0;
+      transform: translate(-50%, -50%);
+
+      background:
+        radial-gradient(
+          ellipse at center,
+          rgba(100, 20, 38, 0.38) 0%,
+          rgba(100, 20, 38, 0.25) 45%,
+          rgba(100, 20, 38, 0.08) 72%,
+          rgba(100, 20, 38, 0) 100%
+        );
+
+      border-radius: 48% 52% 43% 57% / 54% 42% 58% 46%;
+
+      filter: blur(8px);
+      opacity: 0.8;
+    }
+
+    /* HERO */
+
+    .hero {
+      position: relative;
+      z-index: 1;
+
+      width: 100%;
+      height: 100vh;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+      padding: 40px;
+    }
+
+    .logo {
+      width: min(330px, 55vw);
+      height: auto;
+      margin-bottom: 35px;
+
+      transition: transform 0.4s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.025);
+    }
+
+    .title {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(42px, 7vw, 82px);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      line-height: 0.9;
+    }
+
+    .slogan {
+      margin-top: 22px;
+
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(20px, 3vw, 30px);
+      font-style: italic;
+
+      color: #171313;
+    }
+
+    .descriptor {
+      margin-top: 25px;
+
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      color: #171313;
+      opacity: 0.7;
+    }
+
+    .number {
+      position: absolute;
+      top: 35px;
+      left: 40px;
+
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 15px;
+      letter-spacing: 0.12em;
+    }
+
+    .note {
+      position: absolute;
+      right: 40px;
+      bottom: 35px;
+
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+
+      color: #171313;
+      opacity: 0.65;
+    }
+
+    @media (max-width: 600px) {
+
+      .hero {
+        padding: 25px;
+      }
+
+      .logo {
+        width: 260px;
+        margin-bottom: 25px;
+      }
+
+      .number {
+        top: 25px;
+        left: 25px;
+      }
+
+      .note {
+        right: 25px;
+        bottom: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="macchia"></div>
+
+  <main class="hero">
+
+    <div class="number">GDL / 01</div>
+
+    <img
+      class="logo"
+      src="IMG-20260904-WA0029.jpg"
+      alt="Greta Design Lab logo"
+    >
+
+    <h1 class="title">
+      GRETA DESIGN LAB
+    </h1>
+
+    <p class="slogan">
+      Anche la perfezione lascia una macchia.
+    </p>
+
+    <p class="descriptor">
+      GRAPHIC · CREATIVE · VISUAL DESIGN
+    </p>
+
+    <div class="note">
+      laboratorio creativo / milano
+    </div>
+
+  </main>
+
+  <script>
+
+    const macchia = document.querySelector(".macchia");
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+
+    let macchiaX = mouseX;
+    let macchiaY = mouseY;
+
+    document.addEventListener("mousemove", (event) => {
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+    });
+
+    function animaMacchia() {
+
+      macchiaX += (mouseX - macchiaX) * 0.07;
+      macchiaY += (mouseY - macchiaY) * 0.07;
+
+      macchia.style.left = macchiaX + "px";
+      macchia.style.top = macchiaY + "px";
+
+      requestAnimationFrame(animaMacchia);
+    }
+
+    animaMacchia();
+
+  </script>
+
+</body>
+</html>
