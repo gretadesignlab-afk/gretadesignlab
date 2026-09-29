@@ -13,4 +13,1124 @@
 * {
   box-sizing: border-box;
   margin: 0;
- 
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--black);
+  font-family: var(--sans);
+  overflow-x: hidden;
+}
+
+body,
+a,
+button {
+  cursor: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* =========================
+   CURSORE
+========================= */
+
+.custom-cursor {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--burgundy);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    background 0.25s ease;
+}
+
+.custom-cursor.hover {
+  width: 38px;
+  height: 38px;
+  background: var(--pink);
+  mix-blend-mode: multiply;
+}
+
+
+/* =========================
+   MACCHIA
+========================= */
+
+.macchia {
+  position: fixed;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  background:
+    radial-gradient(
+      circle at 45% 42%,
+      rgba(100, 20, 38, 0.25) 0%,
+      rgba(100, 20, 38, 0.18) 28%,
+      rgba(100, 20, 38, 0.08) 52%,
+      transparent 72%
+    );
+  filter: blur(2px);
+  opacity: 0.8;
+  transition:
+    width 0.4s ease,
+    height 0.4s ease;
+}
+
+
+/* =========================
+   TRANSIZIONE TRA PAGINE
+========================= */
+
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.page-transition.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.ink-blob {
+  position: absolute;
+  background: var(--burgundy);
+  border-radius: 50%;
+  transform: scale(0);
+}
+
+.ink-blob-1 {
+  width: 65vw;
+  height: 65vw;
+  top: -30vw;
+  left: -20vw;
+}
+
+.ink-blob-2 {
+  width: 70vw;
+  height: 70vw;
+  right: -30vw;
+  bottom: -30vw;
+}
+
+.ink-blob-3 {
+  width: 45vw;
+  height: 45vw;
+  left: 25%;
+  bottom: -25vw;
+}
+
+.ink-blob-4 {
+  width: 40vw;
+  height: 40vw;
+  right: 20%;
+  top: -25vw;
+}
+
+.page-transition.active .ink-blob {
+  animation: inkIn 0.75s cubic-bezier(.77, 0, .18, 1) forwards;
+}
+
+.page-transition.active .ink-blob-2 {
+  animation-delay: 0.04s;
+}
+
+.page-transition.active .ink-blob-3 {
+  animation-delay: 0.08s;
+}
+
+.page-transition.active .ink-blob-4 {
+  animation-delay: 0.12s;
+}
+
+.transition-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cream);
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 6vw, 6rem);
+  font-style: italic;
+  opacity: 0;
+  z-index: 2;
+}
+
+.page-transition.active .transition-label {
+  animation: labelIn 0.35s ease 0.35s forwards;
+}
+
+@keyframes inkIn {
+  to {
+    transform: scale(3);
+  }
+}
+
+@keyframes labelIn {
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 92px;
+  padding: 22px 4vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+  mix-blend-mode: normal;
+}
+
+.nav-logo {
+  display: block;
+  width: 64px;
+  height: 64px;
+}
+
+.nav-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  gap: clamp(20px, 3vw, 48px);
+  align-items: center;
+}
+
+.nav-links a {
+  position: relative;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+  width: 100%;
+  height: 1px;
+  background: var(--burgundy);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+
+/* =========================
+   TESTI GENERALI
+========================= */
+
+.eyebrow {
+  font-size: 0.67rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+}
+
+em {
+  color: var(--burgundy);
+  font-style: italic;
+}
+
+
+/* =========================
+   HOME / HERO
+========================= */
+
+.hero {
+  min-height: 100vh;
+  position: relative;
+  padding: 170px 7vw 100px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+}
+
+.hero-label {
+  margin-bottom: 32px;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(5rem, 13vw, 12rem);
+  line-height: 0.76;
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
+}
+
+.hero-title .burgundy {
+  color: var(--burgundy);
+}
+
+.hero-title .black {
+  color: var(--black);
+  margin-left: 0.07em;
+}
+
+.hero-slogan {
+  margin-top: 70px;
+  margin-left: 43%;
+  max-width: 430px;
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 2.6vw, 2.8rem);
+  line-height: 1.05;
+  color: var(--burgundy);
+}
+
+.hero-lines {
+  position: absolute;
+  width: 45vw;
+  height: 45vw;
+  right: 5vw;
+  bottom: 2vh;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-lines::before,
+.hero-lines::after {
+  content: "";
+  position: absolute;
+  background: var(--line);
+}
+
+.hero-lines::before {
+  width: 100%;
+  height: 1px;
+  top: 50%;
+  left: 0;
+}
+
+.hero-lines::after {
+  height: 100%;
+  width: 1px;
+  left: 50%;
+  top: 0;
+}
+
+.floating-word {
+  position: absolute;
+  z-index: 4;
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 2vw, 2rem);
+  font-style: italic;
+  color: var(--burgundy);
+  transition: transform 0.5s cubic-bezier(.2,.8,.2,1);
+  pointer-events: auto;
+}
+
+.floating-word.idea {
+  top: 22%;
+  right: 16%;
+}
+
+.floating-word.forma {
+  bottom: 17%;
+  left: 13%;
+}
+
+.floating-word.identita {
+  top: 48%;
+  right: 5%;
+}
+
+
+/* =========================
+   HOME — INTRO
+========================= */
+
+.intro-section {
+  padding: 150px 8vw;
+  border-top: 1px solid var(--line);
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 8vw;
+  align-items: start;
+}
+
+.intro-title {
+  font-size: clamp(3rem, 6vw, 6rem);
+  line-height: 0.9;
+}
+
+.intro-text {
+  max-width: 680px;
+  font-size: clamp(1rem, 1.4vw, 1.35rem);
+  line-height: 1.6;
+}
+
+.intro-text p + p {
+  margin-top: 30px;
+}
+
+
+/* =========================
+   SERVIZI
+========================= */
+
+.services-section {
+  padding: 80px 8vw 150px;
+}
+
+.services-title {
+  margin-bottom: 70px;
+  font-size: clamp(3rem, 6vw, 6rem);
+  line-height: 0.9;
+}
+
+.service-list {
+  border-top: 1px solid var(--line);
+}
+
+.service-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 80px 1fr 50px;
+  align-items: center;
+  gap: 30px;
+  padding: 38px 0;
+  border-bottom: 1px solid var(--line);
+  transition:
+    padding-left 0.45s ease,
+    background 0.45s ease;
+}
+
+.service-row:hover {
+  padding-left: 25px;
+  background: rgba(205, 167, 173, 0.12);
+}
+
+.service-number {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--burgundy);
+}
+
+.service-name {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 4rem);
+}
+
+.service-description {
+  margin-top: 8px;
+  max-width: 500px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  opacity: 0.65;
+}
+
+.service-arrow {
+  font-size: 1.5rem;
+  color: var(--burgundy);
+  transition: transform 0.4s ease;
+}
+
+.service-row:hover .service-arrow {
+  transform: translate(5px, -5px);
+}
+
+
+/* =========================
+   PAGINA PORTFOLIO
+========================= */
+
+.portfolio-page,
+.about-page,
+.contact-page {
+  padding-top: 92px;
+}
+
+.portfolio-intro {
+  min-height: 75vh;
+  padding: 150px 8vw 100px;
+  display: grid;
+  grid-template-columns: 1fr 1.7fr;
+  gap: 6vw;
+  align-items: end;
+  border-bottom: 1px solid var(--line);
+}
+
+.portfolio-intro h1 {
+  font-size: clamp(5rem, 11vw, 11rem);
+  line-height: 0.78;
+  letter-spacing: -0.05em;
+}
+
+.portfolio-intro h1 span {
+  color: var(--burgundy);
+  font-style: italic;
+}
+
+.portfolio-intro-text {
+  max-width: 500px;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  padding-bottom: 10px;
+}
+
+
+/* =========================
+   CATEGORIE PORTFOLIO
+========================= */
+
+.portfolio-categories {
+  padding: 70px 8vw 130px;
+}
+
+.portfolio-category {
+  display: grid;
+  grid-template-columns: 80px 1fr 60px;
+  align-items: center;
+  gap: 30px;
+  padding: 55px 0;
+  border-bottom: 1px solid var(--line);
+  transition:
+    padding-left 0.45s ease,
+    background 0.45s ease;
+}
+
+.portfolio-category:hover {
+  padding-left: 30px;
+  background: rgba(205, 167, 173, 0.12);
+}
+
+.category-number {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--burgundy);
+}
+
+.category-label {
+  margin-bottom: 10px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--burgundy);
+}
+
+.portfolio-category h2 {
+  font-size: clamp(3rem, 6vw, 6rem);
+  line-height: 0.85;
+}
+
+.category-arrow {
+  font-size: 2rem;
+  color: var(--burgundy);
+  transition: transform 0.4s ease;
+}
+
+.portfolio-category:hover .category-arrow {
+  transform: translate(7px, -7px);
+}
+
+
+/* =========================
+   SEZIONI PROGETTI
+========================= */
+
+.portfolio-section {
+  min-height: 80vh;
+  padding: 130px 8vw;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 90px;
+}
+
+.portfolio-section:nth-of-type(even) {
+  background: rgba(205, 167, 173, 0.08);
+}
+
+.section-heading {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 70px;
+}
+
+.section-heading span {
+  color: var(--burgundy);
+  font-size: 0.7rem;
+}
+
+.section-heading p {
+  font-size: 0.67rem;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+}
+
+.portfolio-section h2 {
+  max-width: 900px;
+  font-size: clamp(4rem, 9vw, 9rem);
+  line-height: 0.82;
+  letter-spacing: -0.045em;
+}
+
+.portfolio-section > p:last-child {
+  max-width: 520px;
+  margin-top: 55px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   CHI SONO
+========================= */
+
+.about-intro {
+  min-height: 72vh;
+  padding: 150px 8vw 100px;
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 6vw;
+  align-items: end;
+  border-bottom: 1px solid var(--line);
+}
+
+.about-intro h1 {
+  font-size: clamp(4.5rem, 10vw, 10rem);
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+}
+
+.about-intro h1 span {
+  color: var(--burgundy);
+  font-style: italic;
+}
+
+.about-intro-text {
+  max-width: 550px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.about-story {
+  padding: 130px 8vw;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 10vw;
+  align-items: center;
+}
+
+.about-image {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: var(--pink);
+  position: relative;
+  overflow: hidden;
+}
+
+.image-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  color: var(--burgundy);
+}
+
+.about-copy {
+  max-width: 650px;
+}
+
+.about-small-title {
+  margin-bottom: 30px;
+  color: var(--burgundy);
+  font-size: 0.67rem;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+}
+
+.about-copy h2 {
+  margin-bottom: 45px;
+  font-size: clamp(3.5rem, 6vw, 6rem);
+  line-height: 0.85;
+}
+
+.about-copy p {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.about-copy p + p {
+  margin-top: 28px;
+}
+
+.about-manifesto {
+  padding: 150px 8vw;
+  background: var(--burgundy);
+  color: var(--cream);
+}
+
+.about-manifesto .eyebrow {
+  color: var(--pink);
+}
+
+.about-manifesto h2 {
+  margin-top: 70px;
+  max-width: 1000px;
+  font-size: clamp(4rem, 9vw, 9rem);
+  line-height: 0.8;
+}
+
+.about-manifesto h2 em {
+  color: var(--pink);
+}
+
+.about-manifesto > p:last-child {
+  margin-top: 60px;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.about-final {
+  padding: 150px 8vw;
+}
+
+.about-final > p:first-child {
+  max-width: 500px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.large-final-text {
+  margin-top: 100px;
+  font-family: var(--serif);
+  font-size: clamp(4rem, 9vw, 9rem);
+  line-height: 0.82;
+}
+
+.large-final-text em {
+  color: var(--burgundy);
+}
+
+
+/* =========================
+   CONTATTI
+========================= */
+
+.contact-intro {
+  min-height: 72vh;
+  padding: 150px 8vw 100px;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 7vw;
+  align-items: end;
+  background: var(--burgundy);
+  color: var(--cream);
+}
+
+.contact-intro .eyebrow {
+  color: var(--pink);
+}
+
+.contact-intro h1 {
+  font-size: clamp(5rem, 11vw, 11rem);
+  line-height: 0.78;
+  letter-spacing: -0.05em;
+}
+
+.contact-intro h1 span {
+  color: var(--pink);
+}
+
+.contact-intro-text {
+  max-width: 500px;
+  padding-bottom: 8px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.contact-details {
+  padding: 80px 8vw 120px;
+}
+
+.contact-item {
+  display: grid;
+  grid-template-columns: 80px 1fr 60px;
+  align-items: center;
+  gap: 30px;
+  padding: 45px 0;
+  border-bottom: 1px solid var(--line);
+  transition:
+    padding-left 0.45s ease,
+    background 0.45s ease;
+}
+
+.contact-item:hover {
+  padding-left: 30px;
+  background: rgba(205, 167, 173, 0.12);
+}
+
+.contact-number {
+  font-size: 0.7rem;
+  color: var(--burgundy);
+}
+
+.contact-label {
+  margin-bottom: 10px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--burgundy);
+}
+
+.contact-item h2 {
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 0.9;
+  word-break: break-word;
+}
+
+.contact-arrow {
+  color: var(--burgundy);
+  font-size: 2rem;
+  transition: transform 0.4s ease;
+}
+
+.contact-item:hover .contact-arrow {
+  transform: translate(7px, -7px);
+}
+
+.contact-final {
+  padding: 150px 8vw;
+  background: rgba(205, 167, 173, 0.12);
+}
+
+.contact-final > p {
+  font-size: 1rem;
+  margin-bottom: 70px;
+}
+
+.contact-final h2 {
+  font-size: clamp(4rem, 9vw, 9rem);
+  line-height: 0.82;
+}
+
+.contact-final h2 em {
+  color: var(--burgundy);
+}
+
+.site-footer {
+  padding: 35px 8vw;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+}
+
+
+/* =========================
+   RESPONSIVE TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+  body,
+  a,
+  button {
+    cursor: auto;
+  }
+
+  .custom-cursor {
+    display: none;
+  }
+
+  .navbar {
+    height: 80px;
+    padding: 18px 5vw;
+  }
+
+  .nav-logo {
+    width: 54px;
+    height: 54px;
+  }
+
+  .nav-links {
+    gap: 18px;
+  }
+
+  .nav-links a {
+    font-size: 0.62rem;
+  }
+
+  .hero {
+    padding: 150px 6vw 80px;
+  }
+
+  .hero-title {
+    font-size: clamp(4rem, 15vw, 8rem);
+  }
+
+  .hero-slogan {
+    margin-left: 20%;
+    margin-top: 55px;
+  }
+
+  .hero-lines {
+    width: 60vw;
+    height: 60vw;
+    right: -10vw;
+  }
+
+  .floating-word.identita {
+    right: 8%;
+  }
+
+  .intro-grid,
+  .portfolio-intro,
+  .about-intro,
+  .contact-intro {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .intro-section,
+  .services-section,
+  .portfolio-intro,
+  .portfolio-categories,
+  .portfolio-section,
+  .about-intro,
+  .about-story,
+  .about-manifesto,
+  .about-final,
+  .contact-details,
+  .contact-final {
+    padding-left: 6vw;
+    padding-right: 6vw;
+  }
+
+  .portfolio-intro,
+  .about-intro,
+  .contact-intro {
+    min-height: auto;
+    padding-top: 130px;
+    padding-bottom: 100px;
+  }
+
+  .about-story {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .about-image {
+    max-width: 550px;
+  }
+}
+
+
+/* =========================
+   RESPONSIVE MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  .navbar {
+    height: 72px;
+    padding: 14px 5vw;
+  }
+
+  .nav-logo {
+    width: 46px;
+    height: 46px;
+  }
+
+  .nav-links {
+    gap: 11px;
+  }
+
+  .nav-links a {
+    font-size: 0.53rem;
+    letter-spacing: 0.08em;
+  }
+
+  .hero {
+    padding: 125px 6vw 70px;
+    min-height: 90vh;
+  }
+
+  .hero-title {
+    font-size: clamp(3.6rem, 17vw, 6rem);
+    line-height: 0.8;
+  }
+
+  .hero-slogan {
+    margin-left: 0;
+    margin-top: 65px;
+    max-width: 290px;
+    font-size: 1.55rem;
+  }
+
+  .hero-lines {
+    width: 90vw;
+    height: 90vw;
+    right: -35vw;
+    bottom: 4vh;
+  }
+
+  .floating-word {
+    font-size: 1rem;
+  }
+
+  .floating-word.idea {
+    top: 30%;
+    right: 8%;
+  }
+
+  .floating-word.forma {
+    bottom: 18%;
+    left: 8%;
+  }
+
+  .floating-word.identita {
+    top: 56%;
+    right: 5%;
+  }
+
+  .intro-section,
+  .services-section,
+  .portfolio-intro,
+  .portfolio-categories,
+  .portfolio-section,
+  .about-intro,
+  .about-story,
+  .about-manifesto,
+  .about-final,
+  .contact-details,
+  .contact-final {
+    padding-left: 6vw;
+    padding-right: 6vw;
+  }
+
+  .intro-section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  .intro-title,
+  .services-title {
+    font-size: 3.5rem;
+  }
+
+  .service-row,
+  .portfolio-category,
+  .contact-item {
+    grid-template-columns: 38px 1fr 30px;
+    gap: 12px;
+    padding: 30px 0;
+  }
+
+  .service-name,
+  .portfolio-category h2 {
+    font-size: 2.5rem;
+  }
+
+  .service-description {
+    font-size: 0.75rem;
+  }
+
+  .category-arrow,
+  .contact-arrow {
+    font-size: 1.3rem;
+  }
+
+  .portfolio-intro h1,
+  .about-intro h1 {
+    font-size: clamp(4rem, 18vw, 6rem);
+  }
+
+  .portfolio-section h2,
+  .about-manifesto h2,
+  .large-final-text,
+  .contact-final h2 {
+    font-size: clamp(3.5rem, 15vw, 5.5rem);
+  }
+
+  .about-copy h2 {
+    font-size: 3.5rem;
+  }
+
+  .contact-intro h1 {
+    font-size: clamp(4rem, 18vw, 6rem);
+  }
+
+  .contact-item h2 {
+    font-size: 1.8rem;
+  }
+
+  .site-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .macchia {
+    width: 180px;
+    height: 180px;
+  }
+}
