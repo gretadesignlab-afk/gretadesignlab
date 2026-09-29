@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     transition.classList.add("active");
 
-    sessionStorage.setItem("gdl-page-transition", "true");
+    sessionStorage.setItem("gdl-transition", "true");
 
     setTimeout(() => {
       window.location.href = url;
@@ -196,12 +196,12 @@ document.addEventListener("DOMContentLoaded", () => {
   ========================= */
 
   const comingFromPage = sessionStorage.getItem(
-    "gdl-page-transition"
+    "gdl-transition"
   );
 
   if (comingFromPage && transition) {
 
-    sessionStorage.removeItem("gdl-page-transition");
+    sessionStorage.removeItem("gdl-transition");
 
     transition.classList.add("active");
 
