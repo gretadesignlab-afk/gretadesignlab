@@ -16,6 +16,10 @@
 
   <style>
 
+    /* =====================================================
+       BASE
+       ===================================================== */
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -27,6 +31,7 @@
       --burgundy: #641426;
       --black: #171313;
       --pink: #cda7ad;
+      --white: #faf7f1;
     }
 
     html {
@@ -43,9 +48,9 @@
     }
 
 
-    /* ================================
+    /* =====================================================
        CURSORE
-       ================================ */
+       ===================================================== */
 
     .cursor {
       position: fixed;
@@ -59,7 +64,7 @@
 
       pointer-events: none;
 
-      z-index: 100;
+      z-index: 1000;
 
       transform: translate(-50%, -50%);
 
@@ -79,9 +84,158 @@
     }
 
 
-    /* ================================
-       MACCHIA
-       ================================ */
+    /* =====================================================
+       TRANSIZIONE A INCHIOSTRO
+       ===================================================== */
+
+    .page-transition {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 900;
+
+      pointer-events: none;
+
+      visibility: hidden;
+    }
+
+    .transition-blob {
+      position: absolute;
+
+      width: 85vw;
+      height: 85vw;
+
+      max-width: 1000px;
+      max-height: 1000px;
+
+      border-radius: 48% 52% 46% 54% /
+                   54% 44% 56% 46%;
+
+      background: var(--burgundy);
+
+      transform: scale(0);
+
+      opacity: 0.98;
+    }
+
+    .transition-blob:nth-child(1) {
+      left: -20%;
+      top: -25%;
+
+      transition-delay: 0s;
+    }
+
+    .transition-blob:nth-child(2) {
+      right: -20%;
+      bottom: -25%;
+
+      width: 75vw;
+      height: 75vw;
+
+      transition-delay: 0.05s;
+    }
+
+    .transition-blob:nth-child(3) {
+      left: 20%;
+      bottom: -35%;
+
+      width: 60vw;
+      height: 60vw;
+
+      transition-delay: 0.1s;
+    }
+
+    .transition-label {
+      position: absolute;
+
+      left: 50%;
+      top: 50%;
+
+      transform:
+        translate(-50%, -50%)
+        translateY(20px);
+
+      color: var(--cream);
+
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+
+      font-size:
+        clamp(38px, 7vw, 90px);
+
+      opacity: 0;
+
+      z-index: 5;
+
+      white-space: nowrap;
+
+      transition:
+        opacity 0.3s ease,
+        transform 0.5s ease;
+    }
+
+    .page-transition.active {
+      visibility: visible;
+      pointer-events: all;
+    }
+
+    .page-transition.active .transition-blob {
+      animation: inkIn 0.85s cubic-bezier(.7,0,.2,1) forwards;
+    }
+
+    .page-transition.active .transition-label {
+      opacity: 1;
+
+      transform:
+        translate(-50%, -50%)
+        translateY(0);
+
+      transition-delay: 0.45s;
+    }
+
+    .page-transition.leaving .transition-blob {
+      animation: inkOut 0.8s cubic-bezier(.7,0,.2,1) forwards;
+    }
+
+    .page-transition.leaving .transition-label {
+      opacity: 0;
+
+      transform:
+        translate(-50%, -50%)
+        translateY(-15px);
+    }
+
+    @keyframes inkIn {
+
+      0% {
+        transform: scale(0);
+      }
+
+      100% {
+        transform: scale(1.8);
+      }
+
+    }
+
+    @keyframes inkOut {
+
+      0% {
+        transform: scale(1.8);
+      }
+
+      100% {
+        transform: scale(0);
+      }
+
+    }
+
+
+    /* =====================================================
+       MACCHIA INTERATTIVA
+       ===================================================== */
 
     .macchia {
       position: fixed;
@@ -113,9 +267,9 @@
     }
 
 
-    /* ================================
+    /* =====================================================
        NAVBAR
-       ================================ */
+       ===================================================== */
 
     .navbar {
       position: fixed;
@@ -134,9 +288,10 @@
 
       justify-content: space-between;
 
-      z-index: 20;
+      z-index: 100;
 
-      background: rgba(243, 238, 230, 0.84);
+      background:
+        rgba(243, 238, 230, 0.84);
 
       backdrop-filter: blur(10px);
     }
@@ -171,8 +326,6 @@
       text-decoration: none;
 
       color: var(--black);
-
-      font-family: "Inter", Arial, sans-serif;
 
       font-size: 10px;
 
@@ -212,9 +365,9 @@
     }
 
 
-    /* ================================
+    /* =====================================================
        HERO
-       ================================ */
+       ===================================================== */
 
     .hero {
       position: relative;
@@ -245,11 +398,6 @@
       z-index: 2;
     }
 
-
-    /* ================================
-       PICCOLO TESTO SUPERIORE
-       ================================ */
-
     .hero-label {
       display: flex;
 
@@ -258,8 +406,6 @@
       gap: 14px;
 
       margin-bottom: 38px;
-
-      font-family: "Inter", Arial, sans-serif;
 
       font-size: 9px;
 
@@ -283,11 +429,6 @@
       background: var(--burgundy);
     }
 
-
-    /* ================================
-       GRETA DESIGN LAB
-       ================================ */
-
     .hero-title {
       font-family:
         "DM Serif Display",
@@ -295,11 +436,7 @@
         serif;
 
       font-size:
-        clamp(
-          72px,
-          11vw,
-          155px
-        );
+        clamp(72px, 11vw, 155px);
 
       font-weight: 400;
 
@@ -322,19 +459,13 @@
         color 0.3s ease;
     }
 
-    .hero-title .greta {
-      margin-left: 0;
-    }
-
     .hero-title .design {
       margin-left: 12vw;
-
       margin-top: 12px;
     }
 
     .hero-title .lab {
       margin-left: 25vw;
-
       margin-top: 18px;
 
       color: var(--black);
@@ -347,11 +478,6 @@
     .hero-title .lab:hover {
       color: var(--burgundy);
     }
-
-
-    /* ================================
-       SLOGAN
-       ================================ */
 
     .hero-slogan {
       margin-top: 62px;
@@ -366,11 +492,7 @@
         serif;
 
       font-size:
-        clamp(
-          19px,
-          2.2vw,
-          28px
-        );
+        clamp(19px, 2.2vw, 28px);
 
       line-height: 1.35;
 
@@ -382,7 +504,6 @@
 
     .hero-slogan span {
       color: var(--burgundy);
-
       font-style: italic;
     }
 
@@ -391,14 +512,12 @@
     }
 
 
-    /* ================================
-       PAROLE INTERATTIVE
-       ================================ */
+    /* =====================================================
+       PAROLE FLOTTANTI
+       ===================================================== */
 
     .floating-word {
       position: absolute;
-
-      font-family: "Inter", Arial, sans-serif;
 
       font-size: 9px;
 
@@ -439,9 +558,9 @@
     }
 
 
-    /* ================================
-       LINEE DI COSTRUZIONE
-       ================================ */
+    /* =====================================================
+       LINEE
+       ===================================================== */
 
     .construction-line {
       position: absolute;
@@ -471,16 +590,10 @@
       top: 19%;
     }
 
-    .construction-horizontal:hover {
-      transform: scaleX(1.4);
 
-      opacity: 0.7;
-    }
-
-
-    /* ================================
+    /* =====================================================
        PICCOLE MACCHIE
-       ================================ */
+       ===================================================== */
 
     .ink-dot {
       position: absolute;
@@ -498,7 +611,6 @@
 
     .ink-dot:hover {
       transform: scale(2.5);
-
       opacity: 0.8;
     }
 
@@ -527,9 +639,311 @@
     }
 
 
-    /* ================================
-       TABLET
-       ================================ */
+    /* =====================================================
+       SEZIONE DALL'IDEA ALL'IDENTITÀ
+       ===================================================== */
+
+    .identity {
+      position: relative;
+
+      min-height: 100vh;
+
+      padding:
+        150px
+        7vw
+        130px;
+
+      background: var(--cream);
+
+      overflow: hidden;
+    }
+
+    .identity-inner {
+      position: relative;
+
+      max-width: 1400px;
+
+      margin: 0 auto;
+
+      z-index: 2;
+    }
+
+    .section-number {
+      font-size: 9px;
+
+      letter-spacing: 0.25em;
+
+      text-transform: uppercase;
+
+      color: var(--burgundy);
+
+      opacity: 0.65;
+
+      margin-bottom: 30px;
+    }
+
+    .identity-title {
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+
+      font-size:
+        clamp(55px, 8vw, 105px);
+
+      font-weight: 400;
+
+      line-height: 0.9;
+
+      color: var(--black);
+    }
+
+    .identity-title span {
+      color: var(--burgundy);
+
+      font-style: italic;
+    }
+
+    .identity-intro {
+      max-width: 680px;
+
+      margin-top: 45px;
+
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+
+      font-size:
+        clamp(19px, 2.2vw, 28px);
+
+      line-height: 1.4;
+
+      color: var(--black);
+    }
+
+    .identity-intro em {
+      color: var(--burgundy);
+    }
+
+
+    /* =====================================================
+       SERVIZI INTERATTIVI
+       ===================================================== */
+
+    .services {
+      margin-top: 120px;
+
+      border-top: 1px solid
+        rgba(100, 20, 38, 0.25);
+    }
+
+    .service {
+      position: relative;
+
+      min-height: 125px;
+
+      padding: 30px 10px;
+
+      display: grid;
+
+      grid-template-columns:
+        80px
+        1fr
+        1fr;
+
+      align-items: center;
+
+      border-bottom: 1px solid
+        rgba(100, 20, 38, 0.25);
+
+      cursor: none;
+
+      transition:
+        padding 0.45s ease,
+        background 0.45s ease;
+    }
+
+    .service:hover {
+      padding-left: 35px;
+      padding-right: 35px;
+
+      background:
+        rgba(100, 20, 38, 0.045);
+    }
+
+    .service-number {
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+
+      font-size: 28px;
+
+      color: var(--burgundy);
+    }
+
+    .service-name {
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+
+      font-size:
+        clamp(28px, 4vw, 55px);
+
+      color: var(--black);
+
+      transition:
+        color 0.3s ease,
+        transform 0.45s ease;
+    }
+
+    .service:hover .service-name {
+      color: var(--burgundy);
+
+      transform:
+        translateX(12px);
+    }
+
+    .service-description {
+      max-width: 350px;
+
+      justify-self: end;
+
+      font-size: 11px;
+
+      line-height: 1.6;
+
+      letter-spacing: 0.03em;
+
+      color: var(--black);
+
+      opacity: 0.65;
+
+      transition:
+        opacity 0.3s ease;
+    }
+
+    .service:hover .service-description {
+      opacity: 1;
+    }
+
+    .service-arrow {
+      position: absolute;
+
+      right: 12px;
+
+      top: 50%;
+
+      transform:
+        translateY(-50%)
+        translateX(-8px);
+
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+
+      font-size: 25px;
+
+      color: var(--burgundy);
+
+      opacity: 0;
+
+      transition:
+        opacity 0.3s ease,
+        transform 0.4s ease;
+    }
+
+    .service:hover .service-arrow {
+      opacity: 1;
+
+      transform:
+        translateY(-50%)
+        translateX(0);
+    }
+
+
+    /* =====================================================
+       FRASE DI PAUSA
+       ===================================================== */
+
+    .statement {
+      min-height: 55vh;
+
+      padding:
+        120px 8vw;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      background: var(--burgundy);
+
+      color: var(--cream);
+
+      text-align: center;
+    }
+
+    .statement p {
+      max-width: 950px;
+
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+
+      font-size:
+        clamp(38px, 6vw, 82px);
+
+      line-height: 1;
+
+      font-style: italic;
+    }
+
+    .statement span {
+      color: var(--pink);
+    }
+
+
+    /* =====================================================
+       SEZIONI FUTURE
+       ===================================================== */
+
+    .future-section {
+      min-height: 100vh;
+
+      padding:
+        160px 8vw;
+
+      display: flex;
+
+      align-items: center;
+
+      background: var(--cream);
+    }
+
+    .future-section h2 {
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+
+      font-size:
+        clamp(65px, 10vw, 140px);
+
+      line-height: 0.9;
+
+      color: var(--burgundy);
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+       ===================================================== */
 
     @media (max-width: 900px) {
 
@@ -553,11 +967,7 @@
 
       .hero-title {
         font-size:
-          clamp(
-            65px,
-            12vw,
-            110px
-          );
+          clamp(65px, 12vw, 110px);
       }
 
       .hero-title .design {
@@ -572,12 +982,13 @@
         margin-left: 38vw;
       }
 
+      .identity {
+        padding-left: 6vw;
+        padding-right: 6vw;
+      }
+
     }
 
-
-    /* ================================
-       TELEFONO
-       ================================ */
 
     @media (max-width: 600px) {
 
@@ -629,24 +1040,18 @@
 
       .hero-title {
         font-size:
-          clamp(
-            54px,
-            17vw,
-            82px
-          );
+          clamp(54px, 17vw, 82px);
 
         line-height: 0.88;
       }
 
       .hero-title .design {
         margin-left: 7vw;
-
         margin-top: 8px;
       }
 
       .hero-title .lab {
         margin-left: 15vw;
-
         margin-top: 13px;
       }
 
@@ -685,6 +1090,68 @@
         height: 60px;
       }
 
+      .identity {
+        padding:
+          110px
+          22px
+          90px;
+      }
+
+      .identity-intro {
+        font-size: 20px;
+      }
+
+      .services {
+        margin-top: 80px;
+      }
+
+      .service {
+        min-height: 145px;
+
+        grid-template-columns:
+          45px
+          1fr;
+
+        padding:
+          25px 0;
+      }
+
+      .service-name {
+        font-size: 32px;
+      }
+
+      .service-description {
+        grid-column: 2;
+
+        justify-self: start;
+
+        margin-top: 10px;
+
+        font-size: 10px;
+      }
+
+      .service-arrow {
+        right: 0;
+      }
+
+      .statement {
+        min-height: 45vh;
+
+        padding:
+          80px 25px;
+      }
+
+      .statement p {
+        font-size: 43px;
+      }
+
+      .future-section {
+        min-height: 80vh;
+
+        padding:
+          100px 25px;
+      }
+
     }
 
   </style>
@@ -694,21 +1161,49 @@
 <body>
 
 
-  <!-- CURSORE -->
+  <!-- =====================================================
+       CURSORE
+       ===================================================== -->
 
   <div class="cursor"></div>
 
 
-  <!-- MACCHIA INTERATTIVA -->
+  <!-- =====================================================
+       TRANSIZIONE
+       ===================================================== -->
+
+  <div class="page-transition" id="pageTransition">
+
+    <div class="transition-blob"></div>
+    <div class="transition-blob"></div>
+    <div class="transition-blob"></div>
+
+    <div class="transition-label" id="transitionLabel">
+      Portfolio
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       MACCHIA
+       ===================================================== -->
 
   <div class="macchia"></div>
 
 
-  <!-- NAVBAR -->
+  <!-- =====================================================
+       NAVBAR
+       ===================================================== -->
 
   <nav class="navbar">
 
-    <a href="#home">
+    <a
+      href="#home"
+      class="nav-transition"
+      data-target="home"
+      data-label="Home"
+    >
 
       <img
         class="nav-logo"
@@ -721,19 +1216,39 @@
 
     <div class="nav-links">
 
-      <a href="#home">
+      <a
+        href="#home"
+        class="nav-transition"
+        data-target="home"
+        data-label="Home"
+      >
         Home
       </a>
 
-      <a href="#portfolio">
+      <a
+        href="#portfolio"
+        class="nav-transition"
+        data-target="portfolio"
+        data-label="Portfolio"
+      >
         Portfolio
       </a>
 
-      <a href="#chi-sono">
+      <a
+        href="#chi-sono"
+        class="nav-transition"
+        data-target="chi-sono"
+        data-label="Chi sono"
+      >
         Chi sono
       </a>
 
-      <a href="#contatti">
+      <a
+        href="#contatti"
+        class="nav-transition"
+        data-target="contatti"
+        data-label="Contatti"
+      >
         Contatti
       </a>
 
@@ -742,7 +1257,9 @@
   </nav>
 
 
-  <!-- HERO -->
+  <!-- =====================================================
+       HERO
+       ===================================================== -->
 
   <main
     id="home"
@@ -750,7 +1267,6 @@
   >
 
     <div class="hero-inner">
-
 
       <div class="hero-label">
         Un laboratorio di idee
@@ -784,8 +1300,6 @@
     </div>
 
 
-    <!-- PAROLE INTERATTIVE -->
-
     <span class="floating-word word-idea">
       IDEA
     </span>
@@ -799,18 +1313,10 @@
     </span>
 
 
-    <!-- LINEE -->
+    <span class="construction-line construction-horizontal"></span>
 
-    <span
-      class="construction-line construction-horizontal">
-    </span>
+    <span class="construction-line construction-vertical"></span>
 
-    <span
-      class="construction-line construction-vertical">
-    </span>
-
-
-    <!-- PICCOLE MACCHIE -->
 
     <span class="ink-dot ink-one"></span>
 
@@ -821,124 +1327,53 @@
   </main>
 
 
-  <!-- JAVASCRIPT -->
+  <!-- =====================================================
+       DALL'IDEA ALL'IDENTITÀ
+       ===================================================== -->
 
-  <script>
+  <section
+    id="identity"
+    class="identity"
+  >
 
-    /* ================================
-       MACCHIA
-       ================================ */
-
-    const macchia =
-      document.querySelector(".macchia");
-
-    let mouseX =
-      window.innerWidth / 2;
-
-    let mouseY =
-      window.innerHeight / 2;
-
-    let macchiaX =
-      mouseX;
-
-    let macchiaY =
-      mouseY;
+    <div class="identity-inner">
 
 
-    document.addEventListener(
-      "pointermove",
-      (event) => {
-
-        mouseX =
-          event.clientX;
-
-        mouseY =
-          event.clientY;
-
-      }
-    );
+      <div class="section-number">
+        01 / Dall'idea all'identità
+      </div>
 
 
-    function animaMacchia() {
+      <h2 class="identity-title">
 
-      macchiaX +=
-        (mouseX - macchiaX) * 0.065;
+        Dall'idea<br>
+        all'<span>identità.</span>
 
-      macchiaY +=
-        (mouseY - macchiaY) * 0.065;
-
-
-      macchia.style.left =
-        macchiaX + "px";
-
-      macchia.style.top =
-        macchiaY + "px";
+      </h2>
 
 
-      requestAnimationFrame(
-        animaMacchia
-      );
+      <p class="identity-intro">
 
-    }
+        Trasformo idee, intuizioni e visioni in
+        progetti visivi pensati per
+        <em>lasciare il segno.</em>
 
-    animaMacchia();
-
-
-    /* ================================
-       CURSORE
-       ================================ */
-
-    const cursor =
-      document.querySelector(".cursor");
+      </p>
 
 
-    document.addEventListener(
-      "pointermove",
-      (event) => {
+      <!-- SERVIZI -->
 
-        cursor.style.left =
-          event.clientX + "px";
-
-        cursor.style.top =
-          event.clientY + "px";
-
-      }
-    );
+      <div class="services">
 
 
-    const interactiveElements =
-      document.querySelectorAll(
-        "a, .word, .floating-word, .ink-dot, .construction-horizontal, .hero-slogan"
-      );
+        <article class="service">
 
+          <div class="service-number">
+            01
+          </div>
 
-    interactiveElements.forEach(
-      (element) => {
+          <div class="service-name">
+            Brand Identity
+          </div>
 
-        element.addEventListener(
-          "mouseenter",
-          () => {
-
-            cursor.classList.add("active");
-
-          }
-        );
-
-
-        element.addEventListener(
-          "mouseleave",
-          () => {
-
-            cursor.classList.remove("active");
-
-          }
-        );
-
-      }
-    );
-
-  </script>
-
-
-</body>
-</html>
+          <div class="
