@@ -139,7 +139,16 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = url;
     }, 650);
   }
+  document.querySelectorAll('a[href$=".html"], a[href*=".html#"]').forEach(link => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
 
+      const url = this.getAttribute("href");
+      const label = this.dataset.name || "";
+
+      goToPage(url, label);
+    });
+  });
 
   const pageLinks = document.querySelectorAll(
     'a[href$=".html"], a[href*=".html#"]'
