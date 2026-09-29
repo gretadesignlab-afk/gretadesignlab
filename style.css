@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --cream: #f3eee6;
+  --burgundy: #641426;
+  --black: #171313;
+  --pink: #cda7ad;
+  --line: rgba(23, 19, 19, 0.18);
+  --serif: "DM Serif Display", Georgia, serif;
+  --sans: "Inter", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+ 
