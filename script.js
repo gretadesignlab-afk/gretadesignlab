@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(() => {
       window.location.href = url;
-    }, 650);
+    }, 800);
   }
   document.querySelectorAll('a[href$=".html"], a[href*=".html#"]').forEach(link => {
     link.addEventListener("click", function (e) {
