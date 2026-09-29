@@ -1,233 +1,590 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Greta Design Lab — Graphic & Creative Design</title>
+  <title>Greta Design Lab</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
 
   <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-  <!-- TRANSIZIONE -->
-  <div class="page-transition" aria-hidden="true">
-    <div class="ink-blob ink-blob-1"></div>
-    <div class="ink-blob ink-blob-2"></div>
-    <div class="ink-blob ink-blob-3"></div>
-    <div class="ink-blob ink-blob-4"></div>
 
-    <div class="transition-label">GRETA DESIGN LAB</div>
+  <!-- ==================================================
+       CURSORE
+       ================================================== -->
+
+  <div class="cursor"></div>
+
+
+  <!-- ==================================================
+       TRANSIZIONE
+       ================================================== -->
+
+  <div
+    class="page-transition"
+    id="pageTransition"
+  >
+
+    <div class="ink-transition one"></div>
+    <div class="ink-transition two"></div>
+    <div class="ink-transition three"></div>
+    <div class="ink-transition four"></div>
+
+    <div
+      class="transition-name"
+      id="transitionName"
+    >
+      Portfolio
+    </div>
+
   </div>
 
 
-  <!-- NAVBAR -->
-  <header class="navbar">
+  <!-- ==================================================
+       MACCHIA
+       ================================================== -->
 
-    <a href="index.html" class="nav-logo">
-      <img src="IMG-20260904-WA0041.jpg" alt="Greta Design Lab">
+  <div class="macchia"></div>
+
+
+  <!-- ==================================================
+       NAVBAR
+       ================================================== -->
+
+  <nav class="navbar">
+
+
+    <a
+      href="index.html"
+      class="nav-link"
+      data-name="Home"
+    >
+
+      <img
+        class="nav-logo"
+        src="IMG-20260904-WA0041.jpg"
+        alt="Greta Design Lab"
+      >
+
     </a>
 
-    <nav class="nav-links">
-      <a href="index.html" class="active">Home</a>
-      <a href="portfolio.html">Portfolio</a>
-      <a href="chi-sono.html">Chi sono</a>
-      <a href="contatti.html">Contatti</a>
-    </nav>
 
-  </header>
+    <div class="nav-links">
 
 
-  <main>
+      <a
+        href="index.html"
+        class="nav-link"
+        data-name="Home"
+      >
+        Home
+      </a>
 
-    <!-- HERO -->
-    <section class="hero">
 
-      <div class="hero-content">
+      <a
+        href="portfolio.html"
+        class="nav-link"
+        data-name="Portfolio"
+      >
+        Portfolio
+      </a>
 
-        <p class="hero-label">
-          Un laboratorio di idee
-        </p>
 
-        <h1 class="hero-title">
-          <span class="burgundy">GRETA</span><br>
-          <span class="burgundy">DESIGN</span><br>
-          <span class="black">LAB.</span>
-        </h1>
+      <a
+        href="chi-sono.html"
+        class="nav-link"
+        data-name="Chi sono"
+      >
+        Chi sono
+      </a>
 
-        <p class="hero-slogan">
-          Anche la perfezione<br>
-          lascia una macchia.
-        </p>
 
+      <a
+        href="contatti.html"
+        class="nav-link"
+        data-name="Contatti"
+      >
+        Contatti
+      </a>
+
+
+    </div>
+
+  </nav>
+
+
+  <!-- ==================================================
+       HOME / HERO
+       ================================================== -->
+
+  <main
+    id="home"
+    class="hero"
+  >
+
+
+    <div class="hero-inner">
+
+
+      <div class="hero-label">
+        Un laboratorio di idee
       </div>
 
 
-      <!-- COSTRUZIONE -->
-      <div class="hero-lines"></div>
+      <h1 class="hero-title">
+
+        <span class="word greta">
+          GRETA
+        </span>
+
+        <span class="word design">
+          DESIGN
+        </span>
+
+        <span class="word lab">
+          LAB.
+        </span>
+
+      </h1>
 
 
-      <!-- PAROLE INTERATTIVE -->
-      <span class="floating-word idea">IDEA</span>
-      <span class="floating-word forma">FORMA</span>
-      <span class="floating-word identita">IDENTITÀ</span>
+      <p class="hero-slogan">
 
-    </section>
+        Anche la perfezione lascia una
+        <span>macchia.</span>
 
-
-    <!-- INTRO -->
-    <section class="intro-section">
-
-      <div class="intro-grid">
-
-        <h2 class="intro-title">
-          Dall'idea<br>
-          all'identità.
-        </h2>
-
-        <div class="intro-text">
-
-          <p>
-            Trasformo idee, intuizioni e visioni in progetti visivi
-            pensati per lasciare il segno.
-          </p>
-
-          <p>
-            Ogni progetto nasce da una ricerca precisa: dal concept
-            alla composizione, fino a quella piccola imperfezione
-            che può rendere il risultato riconoscibile.
-          </p>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- SERVIZI -->
-    <section class="services-section">
-
-      <h2 class="services-title">
-        Cosa posso<br>
-        fare per te.
-      </h2>
-
-
-      <div class="service-list">
-
-        <a
-          href="portfolio.html#portfolio-brand"
-          class="service-row"
-        >
-
-          <span class="service-number">01</span>
-
-          <div>
-            <h3 class="service-name">
-              Brand Identity
-            </h3>
-
-            <p class="service-description">
-              Logo, palette, tipografia e identità visiva.
-            </p>
-          </div>
-
-          <span class="service-arrow">↗</span>
-
-        </a>
-
-
-        <a
-          href="portfolio.html#portfolio-social"
-          class="service-row"
-        >
-
-          <span class="service-number">02</span>
-
-          <div>
-            <h3 class="service-name">
-              Social Design
-            </h3>
-
-            <p class="service-description">
-              Post, stories, reel e grafiche per i social.
-            </p>
-          </div>
-
-          <span class="service-arrow">↗</span>
-
-        </a>
-
-
-        <a
-          href="portfolio.html#portfolio-graphic"
-          class="service-row"
-        >
-
-          <span class="service-number">03</span>
-
-          <div>
-            <h3 class="service-name">
-              Graphic Design
-            </h3>
-
-            <p class="service-description">
-              Locandine, brochure, flyer e materiali grafici.
-            </p>
-          </div>
-
-          <span class="service-arrow">↗</span>
-
-        </a>
-
-
-        <a
-          href="portfolio.html#portfolio-creative"
-          class="service-row"
-        >
-
-          <span class="service-number">04</span>
-
-          <div>
-            <h3 class="service-name">
-              Creative Design
-            </h3>
-
-            <p class="service-description">
-              Idee, concept e soluzioni fuori dagli schemi.
-            </p>
-          </div>
-
-          <span class="service-arrow">↗</span>
-
-        </a>
-
-      </div>
-
-    </section>
-
-
-    <!-- CTA FINALE -->
-    <section class="contact-final">
-
-      <p>
-        HAI UN'IDEA PARTICOLARE?
       </p>
 
-      <h2>
-        Partiamo da lì.<br>
-        <em>Parliamone.</em>
-      </h2>
 
-    </section>
+    </div>
+
+
+    <span class="floating-word word-idea">
+      IDEA
+    </span>
+
+
+    <span class="floating-word word-forma">
+      FORMA
+    </span>
+
+
+    <span class="floating-word word-identita">
+      IDENTITÀ
+    </span>
+
+
+    <span class="construction-line construction-horizontal"></span>
+    <span class="construction-line construction-vertical"></span>
+
+    <span class="ink-dot ink-one"></span>
+    <span class="ink-dot ink-two"></span>
+    <span class="ink-dot ink-three"></span>
+
 
   </main>
 
 
-  <!-- JAVASCRIPT -->
-  <script src="script.js"></script>
+  <!-- ==================================================
+       DALL'IDEA ALL'IDENTITÀ
+       ================================================== -->
+
+  <section
+    class="identity"
+    id="identity"
+  >
+
+
+    <div class="identity-inner">
+
+
+      <div class="section-number">
+        01 / Dall'idea all'identità
+      </div>
+
+
+      <h2 class="identity-title">
+
+        Dall'idea<br>
+        all'<span>identità.</span>
+
+      </h2>
+
+
+      <p class="identity-intro">
+
+        Trasformo idee, intuizioni e visioni
+        in progetti visivi pensati per
+        <em>lasciare il segno.</em>
+
+      </p>
+
+
+      <div class="services">
+
+
+        <!-- BRAND IDENTITY -->
+
+        <a
+          class="service"
+          href="portfolio.html#portfolio-brand"
+          data-name="Brand Identity"
+        >
+
+          <div class="service-number">
+            01
+          </div>
+
+          <div class="service-name">
+            Brand Identity
+          </div>
+
+          <div class="service-description">
+            Logo, palette, tipografia e identità
+            visiva pensati per dare forma
+            a un progetto.
+          </div>
+
+          <div class="service-arrow">
+            →
+          </div>
+
+        </a>
+
+
+        <!-- SOCIAL DESIGN -->
+
+        <a
+          class="service"
+          href="portfolio.html#portfolio-social"
+          data-name="Social Design"
+        >
+
+          <div class="service-number">
+            02
+          </div>
+
+          <div class="service-name">
+            Social Design
+          </div>
+
+          <div class="service-description">
+            Post, stories, reel e contenuti
+            visivi pensati per comunicare
+            sui social.
+          </div>
+
+          <div class="service-arrow">
+            →
+          </div>
+
+        </a>
+
+
+        <!-- GRAPHIC DESIGN -->
+
+        <a
+          class="service"
+          href="portfolio.html#portfolio-graphic"
+          data-name="Graphic Design"
+        >
+
+          <div class="service-number">
+            03
+          </div>
+
+          <div class="service-name">
+            Graphic Design
+          </div>
+
+          <div class="service-description">
+            Locandine, brochure, inviti,
+            menù e materiali grafici.
+          </div>
+
+          <div class="service-arrow">
+            →
+          </div>
+
+        </a>
+
+
+        <!-- CREATIVE DESIGN -->
+
+        <a
+          class="service"
+          href="portfolio.html#portfolio-creative"
+          data-name="Creative Design"
+        >
+
+          <div class="service-number">
+            04
+          </div>
+
+          <div class="service-name">
+            Creative Design
+          </div>
+
+          <div class="service-description">
+            Idee, concept e progetti
+            personalizzati fuori dagli schemi.
+          </div>
+
+          <div class="service-arrow">
+            →
+          </div>
+
+        </a>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==================================================
+       HOME — CHIUSURA
+       ================================================== -->
+
+  <section class="contact">
+
+    <div class="contact-inner">
+
+      <h2 class="contact-title">
+
+        <span>Un'idea?</span><br>
+        Parliamone.
+
+      </h2>
+
+      <p class="contact-text">
+
+        Hai un progetto in mente?
+        Scrivimi e vediamo insieme
+        dove può portarci.
+
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==================================================
+       JAVASCRIPT
+       ================================================== -->
+
+  <script>
+
+    /* =========================
+       MACCHIA
+    ========================= */
+
+    const macchia =
+      document.querySelector(".macchia");
+
+    let mouseX =
+      window.innerWidth / 2;
+
+    let mouseY =
+      window.innerHeight / 2;
+
+    let macchiaX =
+      mouseX;
+
+    let macchiaY =
+      mouseY;
+
+
+    document.addEventListener(
+      "pointermove",
+      (event) => {
+
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+
+      }
+    );
+
+
+    function animaMacchia() {
+
+      macchiaX +=
+        (mouseX - macchiaX) * .075;
+
+      macchiaY +=
+        (mouseY - macchiaY) * .075;
+
+      macchia.style.left =
+        macchiaX + "px";
+
+      macchia.style.top =
+        macchiaY + "px";
+
+      requestAnimationFrame(
+        animaMacchia
+      );
+
+    }
+
+    animaMacchia();
+
+
+    /* =========================
+       CURSORE
+    ========================= */
+
+    const cursor =
+      document.querySelector(".cursor");
+
+
+    document.addEventListener(
+      "pointermove",
+      (event) => {
+
+        cursor.style.left =
+          event.clientX + "px";
+
+        cursor.style.top =
+          event.clientY + "px";
+
+      }
+    );
+
+
+    const interactiveElements =
+      document.querySelectorAll(
+        "a, .word, .floating-word, .ink-dot, .hero-slogan"
+      );
+
+
+    interactiveElements.forEach(
+      (element) => {
+
+        element.addEventListener(
+          "mouseenter",
+          () => {
+            cursor.classList.add("active");
+          }
+        );
+
+        element.addEventListener(
+          "mouseleave",
+          () => {
+            cursor.classList.remove("active");
+          }
+        );
+
+      }
+    );
+
+
+    /* =========================
+       TRANSIZIONE TRA PAGINE
+    ========================= */
+
+    const pageTransition =
+      document.getElementById("pageTransition");
+
+    const transitionName =
+      document.getElementById("transitionName");
+
+
+    let transitionRunning = false;
+
+
+    const pageLinks =
+      document.querySelectorAll(
+        'a[href$=".html"], a[href*=".html#"]'
+      );
+
+
+    pageLinks.forEach(
+      (link) => {
+
+        link.addEventListener(
+          "click",
+          (event) => {
+
+            const href =
+              link.getAttribute("href");
+
+
+            if (
+              !href ||
+              href.startsWith("#") ||
+              href.startsWith("http") ||
+              transitionRunning
+            ) {
+              return;
+            }
+
+
+            event.preventDefault();
+
+            transitionRunning = true;
+
+
+            const name =
+              link.dataset.name ||
+              "Greta Design Lab";
+
+
+            transitionName.textContent =
+              name;
+
+
+            pageTransition.classList.remove(
+              "leaving"
+            );
+
+            pageTransition.classList.add(
+              "active"
+            );
+
+
+            sessionStorage.setItem(
+              "gdl-transition",
+              "true"
+            );
+
+
+            setTimeout(
+              () => {
+
+                window.location.href =
+                  href;
+
+              },
+              800
+            );
+
+          }
+        );
+
+      }
+
+
+    );
+
+
+  </script>
+
 
 </body>
 </html>
