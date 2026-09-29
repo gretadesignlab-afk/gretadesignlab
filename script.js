@@ -282,6 +282,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       setTimeout(() => {
         transition.classList.remove("active");
-      }, 100);
+      }, 800);
     }
   });
