@@ -6,8 +6,11 @@
 
   <title>Greta Design Lab</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&display=swap" rel="stylesheet">
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
 
     * {
       box-sizing: border-box;
@@ -15,176 +18,408 @@
       padding: 0;
     }
 
-    body {
-      min-height: 100vh;
-      overflow: hidden;
-      background: #f3eee6;
-      color: #641426;
-      font-family: Arial, sans-serif;
+    :root {
+      --cream: #f3eee6;
+      --burgundy: #641426;
+      --black: #171313;
+      --pink: #cda7ad;
     }
 
-    /* MACCHIA */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--cream);
+      color: var(--burgundy);
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       MACCHIA INTERATTIVA
+       ========================= */
 
     .macchia {
       position: fixed;
-      width: 280px;
-      height: 230px;
+      width: 260px;
+      height: 220px;
       left: 0;
       top: 0;
+
       pointer-events: none;
       z-index: 0;
+
       transform: translate(-50%, -50%);
 
       background:
         radial-gradient(
           ellipse at center,
-          rgba(100, 20, 38, 0.38) 0%,
-          rgba(100, 20, 38, 0.25) 45%,
-          rgba(100, 20, 38, 0.08) 72%,
+          rgba(100, 20, 38, 0.25) 0%,
+          rgba(100, 20, 38, 0.16) 42%,
+          rgba(100, 20, 38, 0.06) 70%,
           rgba(100, 20, 38, 0) 100%
         );
 
-      border-radius: 48% 52% 43% 57% / 54% 42% 58% 46%;
+      border-radius: 50%;
 
-      filter: blur(8px);
-      opacity: 0.8;
+      filter: blur(12px);
     }
 
-    /* HERO */
+    /* =========================
+       NAVBAR
+       ========================= */
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 82px;
+
+      padding: 18px 42px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      z-index: 10;
+
+      background: rgba(243, 238, 230, 0.82);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-logo {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+
+      transition: transform 0.3s ease;
+    }
+
+    .nav-logo:hover {
+      transform: scale(1.05);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .nav-links a {
+      position: relative;
+
+      text-decoration: none;
+      color: var(--black);
+
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+
+      position: absolute;
+      left: 0;
+      bottom: -7px;
+
+      width: 0;
+      height: 1px;
+
+      background: var(--burgundy);
+
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--burgundy);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* =========================
+       HERO
+       ========================= */
 
     .hero {
       position: relative;
       z-index: 1;
 
-      width: 100%;
-      height: 100vh;
+      min-height: 100vh;
+
+      padding: 150px 9vw 100px;
 
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-
-      text-align: center;
-      padding: 40px;
     }
 
-    .logo {
-      width: min(330px, 55vw);
-      height: auto;
-      margin-bottom: 35px;
-
-      transition: transform 0.4s ease;
+    .hero-content {
+      max-width: 900px;
     }
 
-    .logo:hover {
-      transform: scale(1.025);
-    }
-
-    .title {
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: clamp(42px, 7vw, 82px);
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      line-height: 0.9;
-    }
-
-    .slogan {
-      margin-top: 22px;
-
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: clamp(20px, 3vw, 30px);
-      font-style: italic;
-
-      color: #171313;
-    }
-
-    .descriptor {
-      margin-top: 25px;
+    .eyebrow {
+      margin-bottom: 30px;
 
       font-size: 10px;
       letter-spacing: 0.28em;
-      color: #171313;
-      opacity: 0.7;
-    }
-
-    .number {
-      position: absolute;
-      top: 35px;
-      left: 40px;
-
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: 15px;
-      letter-spacing: 0.12em;
-    }
-
-    .note {
-      position: absolute;
-      right: 40px;
-      bottom: 35px;
-
-      font-size: 9px;
-      letter-spacing: 0.18em;
       text-transform: uppercase;
 
-      color: #171313;
+      color: var(--black);
       opacity: 0.65;
     }
 
-    @media (max-width: 600px) {
+    .hero-title {
+      max-width: 900px;
+
+      font-family: "Bodoni Moda", Georgia, serif;
+
+      font-size: clamp(55px, 8vw, 115px);
+
+      font-weight: 500;
+
+      line-height: 0.91;
+
+      letter-spacing: -0.035em;
+    }
+
+    .hero-title span {
+      color: var(--burgundy);
+      font-style: italic;
+    }
+
+    .hero-description {
+      max-width: 520px;
+
+      margin-top: 42px;
+
+      font-family: "Bodoni Moda", Georgia, serif;
+
+      font-size: clamp(18px, 2vw, 25px);
+
+      line-height: 1.45;
+
+      color: var(--black);
+    }
+
+    .hero-description em {
+      color: var(--burgundy);
+    }
+
+    .hero-meta {
+      margin-top: 45px;
+
+      font-size: 10px;
+      letter-spacing: 0.24em;
+
+      color: var(--black);
+      opacity: 0.65;
+    }
+
+    /* =========================
+       PICCOLI SEGNI
+       ========================= */
+
+    .detail {
+      position: absolute;
+
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: var(--burgundy);
+
+      opacity: 0.55;
+    }
+
+    .detail-one {
+      top: 27%;
+      right: 15%;
+    }
+
+    .detail-two {
+      top: 32%;
+      right: 13%;
+      width: 3px;
+      height: 3px;
+    }
+
+    .detail-three {
+      bottom: 19%;
+      left: 8%;
+      width: 4px;
+      height: 4px;
+    }
+
+    .detail-four {
+      bottom: 22%;
+      left: 10%;
+      width: 2px;
+      height: 2px;
+    }
+
+    /* =========================
+       FRASE EDITORIALE
+       ========================= */
+
+    .editorial-line {
+      position: absolute;
+
+      right: 8%;
+      bottom: 11%;
+
+      max-width: 240px;
+
+      font-family: "Bodoni Moda", Georgia, serif;
+
+      font-size: 14px;
+      line-height: 1.4;
+
+      font-style: italic;
+
+      color: var(--burgundy);
+
+      opacity: 0.75;
+    }
+
+    /* =========================
+       RESPONSIVE
+       ========================= */
+
+    @media (max-width: 700px) {
+
+      .navbar {
+        height: 70px;
+        padding: 14px 22px;
+      }
+
+      .nav-logo {
+        width: 40px;
+        height: 40px;
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+
+      .nav-links a {
+        font-size: 8px;
+        letter-spacing: 0.1em;
+      }
 
       .hero {
-        padding: 25px;
+        padding: 125px 25px 80px;
       }
 
-      .logo {
-        width: 260px;
-        margin-bottom: 25px;
+      .hero-title {
+        font-size: clamp(48px, 15vw, 80px);
       }
 
-      .number {
-        top: 25px;
-        left: 25px;
+      .hero-description {
+        font-size: 17px;
+        margin-top: 30px;
       }
 
-      .note {
-        right: 25px;
-        bottom: 25px;
+      .editorial-line {
+        display: none;
+      }
+
+      .detail-one,
+      .detail-two {
+        right: 8%;
       }
     }
+
   </style>
 </head>
 
 <body>
 
+  <!-- MACCHIA -->
+
   <div class="macchia"></div>
 
-  <main class="hero">
 
-    <div class="number">GDL / 01</div>
+  <!-- NAVBAR -->
 
-    <img
-      class="logo"
-      src="IMG-20260904-WA0024.jpg"
-      alt="Greta Design Lab logo"
-    >
+  <nav class="navbar">
 
-    <h1 class="title">
-      GRETA DESIGN LAB
-    </h1>
+    <a href="#home">
+      <img
+        class="nav-logo"
+        src="IMG-20260904-WA0041.jpg"
+        alt="Greta Design Lab"
+      >
+    </a>
 
-    <p class="slogan">
-      Anche la perfezione lascia una macchia.
-    </p>
+    <div class="nav-links">
 
-    <p class="descriptor">
-      GRAPHIC · CREATIVE · VISUAL DESIGN
-    </p>
+      <a href="#home">Home</a>
 
-    <div class="note">
-      laboratorio creativo / milano
+      <a href="#portfolio">Portfolio</a>
+
+      <a href="#chi-sono">Chi sono</a>
+
+      <a href="#contatti">Contatti</a>
+
     </div>
 
+  </nav>
+
+
+  <!-- HERO -->
+
+  <main id="home" class="hero">
+
+    <div class="hero-content">
+
+      <p class="eyebrow">
+        Greta Design Lab / Graphic & Creative Studio
+      </p>
+
+      <h1 class="hero-title">
+        Anche la perfezione<br>
+        lascia una <span>macchia.</span>
+      </h1>
+
+      <p class="hero-description">
+        Ogni mio progetto nasce dalla ricerca della precisione,
+        ma trova la propria identità in quella piccola
+        <em>imperfezione</em> che lo rende unico.
+      </p>
+
+      <p class="hero-meta">
+        GRAPHIC · CREATIVE · VISUAL DESIGN
+      </p>
+
+    </div>
+
+
+    <!-- PICCOLI SEGNI -->
+
+    <span class="detail detail-one"></span>
+    <span class="detail detail-two"></span>
+    <span class="detail detail-three"></span>
+    <span class="detail detail-four"></span>
+
+
+    <p class="editorial-line">
+      Prima del risultato,<br>
+      c'è tutto il resto.
+    </p>
+
   </main>
+
+
+  <!-- MACCHIA SCRIPT -->
 
   <script>
 
@@ -196,9 +431,11 @@
     let macchiaX = mouseX;
     let macchiaY = mouseY;
 
-    document.addEventListener("mousemove", (event) => {
+    document.addEventListener("pointermove", (event) => {
+
       mouseX = event.clientX;
       mouseY = event.clientY;
+
     });
 
     function animaMacchia() {
@@ -210,6 +447,7 @@
       macchia.style.top = macchiaY + "px";
 
       requestAnimationFrame(animaMacchia);
+
     }
 
     animaMacchia();
