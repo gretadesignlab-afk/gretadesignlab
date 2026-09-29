@@ -15,23 +15,881 @@
     rel="stylesheet"
   >
 
-  <link rel="stylesheet" href="style.css">
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cream: #f3eee6;
+      --burgundy: #641426;
+      --black: #171313;
+      --pink: #cda7ad;
+    }
+
+    html {
+      scroll-behavior: auto;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--cream);
+      color: var(--black);
+      font-family: "Inter", Arial, sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    .cursor {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      left: 0;
+      top: 0;
+      border-radius: 50%;
+      background: var(--burgundy);
+      pointer-events: none;
+      z-index: 2000;
+      transform: translate(-50%, -50%);
+      transition:
+        width .25s ease,
+        height .25s ease,
+        background .25s ease;
+    }
+
+    .cursor.active {
+      width: 28px;
+      height: 28px;
+      background: transparent;
+      border: 1px solid var(--burgundy);
+    }
+
+    .page-transition {
+      position: fixed;
+      inset: 0;
+      z-index: 1500;
+      pointer-events: none;
+      visibility: hidden;
+      overflow: hidden;
+    }
+
+    .ink-transition {
+      position: absolute;
+      width: 55vw;
+      height: 55vw;
+      max-width: 900px;
+      max-height: 900px;
+      border-radius:
+        57% 43% 48% 52% /
+        45% 58% 42% 55%;
+      background: var(--burgundy);
+      transform: scale(0);
+      opacity: .98;
+    }
+
+    .ink-transition.one {
+      left: -18%;
+      top: -20%;
+    }
+
+    .ink-transition.two {
+      right: -18%;
+      top: 12%;
+      width: 45vw;
+      height: 45vw;
+    }
+
+    .ink-transition.three {
+      left: 8%;
+      bottom: -28%;
+      width: 60vw;
+      height: 60vw;
+    }
+
+    .ink-transition.four {
+      right: 4%;
+      bottom: -20%;
+      width: 38vw;
+      height: 38vw;
+    }
+
+    .transition-name {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform:
+        translate(-50%, -50%)
+        translateY(20px);
+      color: var(--cream);
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+      font-size:
+        clamp(42px, 7vw, 95px);
+      white-space: nowrap;
+      opacity: 0;
+    }
+
+    .page-transition.active {
+      visibility: visible;
+      pointer-events: all;
+    }
+
+    .page-transition.active .ink-transition {
+      animation:
+        inkEnter .85s
+        cubic-bezier(.65, 0, .2, 1)
+        forwards;
+    }
+
+    .page-transition.active .transition-name {
+      animation:
+        nameEnter .45s
+        ease
+        .42s
+        forwards;
+    }
+
+    .page-transition.leaving .ink-transition {
+      animation:
+        inkLeave .75s
+        cubic-bezier(.65, 0, .2, 1)
+        forwards;
+    }
+
+    .page-transition.leaving .transition-name {
+      animation:
+        nameLeave .25s
+        ease
+        forwards;
+    }
+
+    @keyframes inkEnter {
+      0% {
+        transform: scale(0) rotate(0deg);
+      }
+
+      100% {
+        transform: scale(2.2) rotate(8deg);
+      }
+    }
+
+    @keyframes inkLeave {
+      0% {
+        transform: scale(2.2) rotate(8deg);
+      }
+
+      100% {
+        transform: scale(0) rotate(-5deg);
+      }
+    }
+
+    @keyframes nameEnter {
+      from {
+        opacity: 0;
+        transform:
+          translate(-50%, -50%)
+          translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform:
+          translate(-50%, -50%)
+          translateY(0);
+      }
+    }
+
+    @keyframes nameLeave {
+      to {
+        opacity: 0;
+      }
+    }
+
+    .macchia {
+      position: fixed;
+      width: 250px;
+      height: 200px;
+      left: 50%;
+      top: 50%;
+      pointer-events: none;
+      z-index: 1;
+      transform:
+        translate(-50%, -50%);
+      background:
+        radial-gradient(
+          ellipse at center,
+          rgba(100,20,38,.23) 0%,
+          rgba(100,20,38,.14) 42%,
+          rgba(100,20,38,.05) 70%,
+          rgba(100,20,38,0) 100%
+        );
+      border-radius: 50%;
+      filter: blur(12px);
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 92px;
+      padding: 18px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1000;
+      background:
+        rgba(243,238,230,.84);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-logo {
+      width: 86px;
+      height: 86px;
+      object-fit: contain;
+      transition:
+        transform .35s ease;
+    }
+
+    .nav-logo:hover {
+      transform:
+        rotate(-2deg)
+        scale(1.05);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 38px;
+    }
+
+    .nav-links a {
+      position: relative;
+      color: var(--black);
+      text-decoration: none;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      transition:
+        color .3s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 0;
+      height: 1px;
+      background: var(--burgundy);
+      transition:
+        width .3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--burgundy);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      padding:
+        150px
+        7vw
+        90px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      position: relative;
+      width: 100%;
+      max-width: 1450px;
+      margin: 0 auto;
+      z-index: 5;
+    }
+
+    .hero-label {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 38px;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--black);
+      opacity: .58;
+    }
+
+    .hero-label::before {
+      content: "";
+      width: 42px;
+      height: 1px;
+      background: var(--burgundy);
+    }
+
+    .hero-title {
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+      font-size:
+        clamp(72px, 11vw, 155px);
+      font-weight: 400;
+      line-height: .9;
+      letter-spacing: -.035em;
+      color: var(--burgundy);
+    }
+
+    .hero-title .word {
+      display: block;
+      width: fit-content;
+      transition:
+        transform .45s
+        cubic-bezier(.2,.8,.2,1),
+        color .3s ease;
+    }
+
+    .hero-title .design {
+      margin-left: 12vw;
+      margin-top: 12px;
+    }
+
+    .hero-title .lab {
+      margin-left: 25vw;
+      margin-top: 18px;
+      color: var(--black);
+    }
+
+    .hero-title .word:hover {
+      transform:
+        translateX(14px);
+    }
+
+    .hero-title .lab:hover {
+      color: var(--burgundy);
+    }
+
+    .hero-slogan {
+      margin-top: 62px;
+      margin-left: 46vw;
+      max-width: 380px;
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+      font-size:
+        clamp(19px, 2.2vw, 28px);
+      line-height: 1.35;
+      color: var(--black);
+      transition:
+        transform .5s ease;
+    }
+
+    .hero-slogan span {
+      color: var(--burgundy);
+      font-style: italic;
+    }
+
+    .hero-slogan:hover {
+      transform:
+        translateX(8px);
+    }
+
+    .floating-word {
+      position: absolute;
+      font-size: 9px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--burgundy);
+      opacity: .5;
+      transition:
+        transform .4s ease,
+        opacity .3s ease;
+    }
+
+    .floating-word:hover {
+      opacity: 1;
+      transform:
+        translateY(-8px)
+        rotate(-2deg);
+    }
+
+    .word-idea {
+      right: 10%;
+      top: 28%;
+    }
+
+    .word-forma {
+      right: 5%;
+      bottom: 25%;
+    }
+
+    .word-identita {
+      left: 5%;
+      bottom: 16%;
+    }
+
+    .construction-line {
+      position: absolute;
+      background: var(--burgundy);
+      opacity: .3;
+    }
+
+    .construction-horizontal {
+      width: 130px;
+      height: 1px;
+      right: 7%;
+      top: 30%;
+    }
+
+    .construction-vertical {
+      width: 1px;
+      height: 100px;
+      right: 12%;
+      top: 19%;
+    }
+
+    .ink-dot {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--burgundy);
+      opacity: .45;
+      transition:
+        transform .5s ease,
+        opacity .3s ease;
+    }
+
+    .ink-dot:hover {
+      transform: scale(2.5);
+      opacity: .8;
+    }
+
+    .ink-one {
+      right: 8%;
+      top: 31%;
+      width: 6px;
+      height: 6px;
+    }
+
+    .ink-two {
+      right: 10%;
+      top: 35%;
+      width: 3px;
+      height: 3px;
+    }
+
+    .ink-three {
+      left: 7%;
+      bottom: 18%;
+      width: 5px;
+      height: 5px;
+    }
+
+    .identity {
+      position: relative;
+      min-height: 100vh;
+      padding:
+        150px
+        7vw
+        130px;
+      overflow: hidden;
+    }
+
+    .identity-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 5;
+    }
+
+    .section-number {
+      font-size: 9px;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--burgundy);
+      opacity: .65;
+      margin-bottom: 30px;
+    }
+
+    .identity-title {
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+      font-size:
+        clamp(55px, 8vw, 105px);
+      font-weight: 400;
+      line-height: .9;
+      color: var(--black);
+    }
+
+    .identity-title span {
+      color: var(--burgundy);
+      font-style: italic;
+    }
+
+    .identity-intro {
+      max-width: 680px;
+      margin-top: 45px;
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+      font-size:
+        clamp(19px, 2.2vw, 28px);
+      line-height: 1.4;
+    }
+
+    .identity-intro em {
+      color: var(--burgundy);
+    }
+
+    .services {
+      margin-top: 120px;
+      border-top:
+        1px solid rgba(100,20,38,.25);
+    }
+
+    .service {
+      position: relative;
+      min-height: 135px;
+      padding:
+        30px 10px;
+      display: grid;
+      grid-template-columns:
+        90px
+        1fr
+        1fr;
+      align-items: center;
+      border-bottom:
+        1px solid rgba(100,20,38,.25);
+      text-decoration: none;
+      color: var(--black);
+      cursor: none;
+      transition:
+        padding .45s ease,
+        background .45s ease;
+    }
+
+    .service:hover {
+      padding-left: 35px;
+      padding-right: 45px;
+      background:
+        rgba(100,20,38,.045);
+    }
+
+    .service-number {
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+      font-size: 28px;
+      color: var(--burgundy);
+    }
+
+    .service-name {
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+      font-size:
+        clamp(28px, 4vw, 55px);
+      transition:
+        color .3s ease,
+        transform .45s ease;
+    }
+
+    .service:hover .service-name {
+      color: var(--burgundy);
+      transform:
+        translateX(12px);
+    }
+
+    .service-description {
+      max-width: 350px;
+      justify-self: end;
+      font-size: 11px;
+      line-height: 1.6;
+      opacity: .62;
+      transition:
+        opacity .3s ease;
+    }
+
+    .service:hover .service-description {
+      opacity: 1;
+    }
+
+    .service-arrow {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform:
+        translateY(-50%)
+        translateX(-10px);
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+      font-size: 25px;
+      color: var(--burgundy);
+      opacity: 0;
+      transition:
+        opacity .3s ease,
+        transform .4s ease;
+    }
+
+    .service:hover .service-arrow {
+      opacity: 1;
+      transform:
+        translateY(-50%)
+        translateX(0);
+    }
+
+    .home-contact {
+      min-height: 60vh;
+      padding:
+        150px 7vw;
+      background: var(--burgundy);
+      color: var(--cream);
+      display: flex;
+      align-items: center;
+    }
+
+    .home-contact-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .home-contact-title {
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+      font-size:
+        clamp(60px, 9vw, 125px);
+      line-height: .85;
+      font-weight: 400;
+    }
+
+    .home-contact-title span {
+      color: var(--pink);
+      font-style: italic;
+    }
+
+    .home-contact-text {
+      max-width: 550px;
+      margin-top: 45px;
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+      font-size: 25px;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 900px) {
+
+      .navbar {
+        padding:
+          15px 28px;
+      }
+
+      .nav-logo {
+        width: 68px;
+        height: 68px;
+      }
+
+      .nav-links {
+        gap: 23px;
+      }
+
+      .hero {
+        padding-left: 6vw;
+        padding-right: 6vw;
+      }
+
+      .hero-title {
+        font-size:
+          clamp(65px, 12vw, 110px);
+      }
+
+      .hero-title .design {
+        margin-left: 10vw;
+      }
+
+      .hero-title .lab {
+        margin-left: 20vw;
+      }
+
+      .hero-slogan {
+        margin-left: 38vw;
+      }
+
+      .identity {
+        padding-left: 6vw;
+        padding-right: 6vw;
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      body {
+        cursor: auto;
+      }
+
+      .cursor {
+        display: none;
+      }
+
+      .navbar {
+        height: 72px;
+        padding:
+          10px 18px;
+      }
+
+      .nav-logo {
+        width: 52px;
+        height: 52px;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .nav-links a {
+        font-size: 7px;
+        letter-spacing: .08em;
+      }
+
+      .hero {
+        min-height: 100vh;
+        padding:
+          115px 22px 70px;
+      }
+
+      .hero-label {
+        font-size: 7px;
+        letter-spacing: .18em;
+        margin-bottom: 30px;
+      }
+
+      .hero-title {
+        font-size:
+          clamp(54px, 17vw, 82px);
+        line-height: .88;
+      }
+
+      .hero-title .design {
+        margin-left: 7vw;
+        margin-top: 8px;
+      }
+
+      .hero-title .lab {
+        margin-left: 15vw;
+        margin-top: 13px;
+      }
+
+      .hero-slogan {
+        margin-top: 45px;
+        margin-left: 18vw;
+        font-size: 18px;
+      }
+
+      .floating-word {
+        font-size: 7px;
+      }
+
+      .word-idea {
+        right: 7%;
+        top: 24%;
+      }
+
+      .word-forma {
+        right: 6%;
+        bottom: 22%;
+      }
+
+      .word-identita {
+        left: 7%;
+        bottom: 13%;
+      }
+
+      .identity {
+        padding:
+          110px 22px 90px;
+      }
+
+      .identity-intro {
+        font-size: 20px;
+      }
+
+      .services {
+        margin-top: 75px;
+      }
+
+      .service {
+        min-height: 150px;
+        grid-template-columns:
+          48px 1fr;
+        padding:
+          25px 0;
+      }
+
+      .service-number {
+        font-size: 22px;
+      }
+
+      .service-name {
+        font-size: 31px;
+      }
+
+      .service-description {
+        grid-column: 2;
+        justify-self: start;
+        margin-top: 10px;
+        font-size: 10px;
+      }
+
+      .service-arrow {
+        right: 0;
+      }
+
+      .home-contact {
+        padding:
+          110px 22px;
+      }
+
+      .home-contact-title {
+        font-size:
+          clamp(52px, 15vw, 80px);
+      }
+
+    }
+
+  </style>
 
 </head>
 
 <body>
 
 
-  <!-- ==================================================
-       CURSORE
-       ================================================== -->
-
   <div class="cursor"></div>
 
-
-  <!-- ==================================================
-       TRANSIZIONE
-       ================================================== -->
 
   <div
     class="page-transition"
@@ -53,16 +911,8 @@
   </div>
 
 
-  <!-- ==================================================
-       MACCHIA
-       ================================================== -->
-
   <div class="macchia"></div>
 
-
-  <!-- ==================================================
-       NAVBAR
-       ================================================== -->
 
   <nav class="navbar">
 
@@ -126,23 +976,16 @@
   </nav>
 
 
-  <!-- ==================================================
-       HOME / HERO
-       ================================================== -->
-
   <main
     id="home"
     class="hero"
   >
 
-
     <div class="hero-inner">
-
 
       <div class="hero-label">
         Un laboratorio di idee
       </div>
-
 
       <h1 class="hero-title">
 
@@ -160,14 +1003,12 @@
 
       </h1>
 
-
       <p class="hero-slogan">
 
         Anche la perfezione lascia una
         <span>macchia.</span>
 
       </p>
-
 
     </div>
 
@@ -176,11 +1017,9 @@
       IDEA
     </span>
 
-
     <span class="floating-word word-forma">
       FORMA
     </span>
-
 
     <span class="floating-word word-identita">
       IDENTITÀ
@@ -188,28 +1027,26 @@
 
 
     <span class="construction-line construction-horizontal"></span>
+
     <span class="construction-line construction-vertical"></span>
 
+
     <span class="ink-dot ink-one"></span>
+
     <span class="ink-dot ink-two"></span>
+
     <span class="ink-dot ink-three"></span>
 
 
   </main>
 
 
-  <!-- ==================================================
-       DALL'IDEA ALL'IDENTITÀ
-       ================================================== -->
-
   <section
     class="identity"
     id="identity"
   >
 
-
     <div class="identity-inner">
-
 
       <div class="section-number">
         01 / Dall'idea all'identità
@@ -235,8 +1072,6 @@
 
       <div class="services">
 
-
-        <!-- BRAND IDENTITY -->
 
         <a
           class="service"
@@ -265,8 +1100,6 @@
         </a>
 
 
-        <!-- SOCIAL DESIGN -->
-
         <a
           class="service"
           href="portfolio.html#portfolio-social"
@@ -294,8 +1127,6 @@
         </a>
 
 
-        <!-- GRAPHIC DESIGN -->
-
         <a
           class="service"
           href="portfolio.html#portfolio-graphic"
@@ -321,8 +1152,6 @@
 
         </a>
 
-
-        <!-- CREATIVE DESIGN -->
 
         <a
           class="service"
@@ -357,22 +1186,18 @@
   </section>
 
 
-  <!-- ==================================================
-       HOME — CHIUSURA
-       ================================================== -->
+  <section class="home-contact">
 
-  <section class="contact">
+    <div class="home-contact-inner">
 
-    <div class="contact-inner">
-
-      <h2 class="contact-title">
+      <h2 class="home-contact-title">
 
         <span>Un'idea?</span><br>
         Parliamone.
 
       </h2>
 
-      <p class="contact-text">
+      <p class="home-contact-text">
 
         Hai un progetto in mente?
         Scrivimi e vediamo insieme
@@ -385,15 +1210,7 @@
   </section>
 
 
-  <!-- ==================================================
-       JAVASCRIPT
-       ================================================== -->
-
   <script>
-
-    /* =========================
-       MACCHIA
-    ========================= */
 
     const macchia =
       document.querySelector(".macchia");
@@ -445,10 +1262,6 @@
     animaMacchia();
 
 
-    /* =========================
-       CURSORE
-    ========================= */
-
     const cursor =
       document.querySelector(".cursor");
 
@@ -494,15 +1307,15 @@
     );
 
 
-    /* =========================
-       TRANSIZIONE TRA PAGINE
-    ========================= */
-
     const pageTransition =
-      document.getElementById("pageTransition");
+      document.getElementById(
+        "pageTransition"
+      );
 
     const transitionName =
-      document.getElementById("transitionName");
+      document.getElementById(
+        "transitionName"
+      );
 
 
     let transitionRunning = false;
@@ -527,7 +1340,6 @@
 
             if (
               !href ||
-              href.startsWith("#") ||
               href.startsWith("http") ||
               transitionRunning
             ) {
@@ -540,13 +1352,9 @@
             transitionRunning = true;
 
 
-            const name =
+            transitionName.textContent =
               link.dataset.name ||
               "Greta Design Lab";
-
-
-            transitionName.textContent =
-              name;
 
 
             pageTransition.classList.remove(
@@ -579,12 +1387,9 @@
 
       }
 
-
     );
 
-
   </script>
-
 
 </body>
 </html>
