@@ -158,7 +158,7 @@ a {
 
 
 
-.transition-label {
+.transition-name {
   position: absolute;
   inset: 0;
   display: flex;
@@ -172,7 +172,7 @@ a {
   z-index: 2;
 }
 
-.page-transition.active .transition-label {
+.page-transition.active .transition-name {
   animation: labelIn 0.35s ease 0.35s forwards;
 }
 
