@@ -112,57 +112,51 @@ a {
   opacity: 1;
   visibility: visible;
 }
-
-.ink-blob {
+.ink-transition {
   position: absolute;
+  width: 55vw;
+  height: 55vw;
+  max-width: 900px;
+  max-height: 900px;
+  border-radius:
+    57% 43% 48% 52% /
+    45% 58% 42% 55%;
   background: var(--burgundy);
-  border-radius: 50%;
   transform: scale(0);
+  opacity: .98;
 }
 
-.ink-blob-1 {
-  width: 65vw;
-  height: 65vw;
-  top: -30vw;
-  left: -20vw;
+.ink-transition.one {
+  left: -18%;
+  top: -20%;
 }
 
-.ink-blob-2 {
-  width: 70vw;
-  height: 70vw;
-  right: -30vw;
-  bottom: -30vw;
-}
-
-.ink-blob-3 {
+.ink-transition.two {
+  right: -18%;
+  top: 12%;
   width: 45vw;
   height: 45vw;
-  left: 25%;
-  bottom: -25vw;
 }
 
-.ink-blob-4 {
-  width: 40vw;
-  height: 40vw;
-  right: 20%;
-  top: -25vw;
+.ink-transition.three {
+  left: 8%;
+  bottom: -28%;
+  width: 60vw;
+  height: 60vw;
 }
 
-.page-transition.active .ink-blob {
+.ink-transition.four {
+  right: 4%;
+  bottom: -20%;
+  width: 38vw;
+  height: 38vw;
+}
+
+.page-transition.active .ink-transition {
   animation: inkIn 0.75s cubic-bezier(.77, 0, .18, 1) forwards;
 }
 
-.page-transition.active .ink-blob-2 {
-  animation-delay: 0.04s;
-}
 
-.page-transition.active .ink-blob-3 {
-  animation-delay: 0.08s;
-}
-
-.page-transition.active .ink-blob-4 {
-  animation-delay: 0.12s;
-}
 
 .transition-label {
   position: absolute;
@@ -203,10 +197,9 @@ a {
   }
 }
 
-.page-transition.revealing .ink-blob {
+.page-transition.revealing .ink-transition {
   animation: inkOut .75s cubic-bezier(.65, 0, .2, 1) forwards;
 }
-
 
 /* =========================
    NAVBAR
