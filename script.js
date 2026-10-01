@@ -189,22 +189,24 @@ document.addEventListener("DOMContentLoaded", () => {
     "gdl-transition"
   );
 
-  if (comingFromPage && transition) {
+ if (comingFromPage && transition) {
 
-    sessionStorage.removeItem("gdl-transition");
+  sessionStorage.removeItem("gdl-transition");
 
-    transition.classList.add("active");
+  transition.classList.add("active");
 
-    setTimeout(() => {
-      transition.classList.remove("active");
-    }, 800);
+  setTimeout(() => {
+    transition.classList.remove("active");
+    transition.classList.add("revealing");
+  }, 800);
 
-    setTimeout(() => {
-      transition.style.opacity = "0";
-      transition.style.visibility = "hidden";
-    }, 850);
+  setTimeout(() => {
+    transition.classList.remove("revealing");
+    transition.style.opacity = "0";
+    transition.style.visibility = "hidden";
+  }, 1550);
 
-  }
+}
 
 
   /* =========================
