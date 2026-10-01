@@ -174,9 +174,19 @@ a {
 
 .page-transition.revealing .transition-name {
   opacity: 1;
-  animation: none;
+  animation: labelOut 0.65s ease forwards;
 }
+@keyframes labelOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0);
+  }
 
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(-20px);
+  }
+}
 
 @keyframes inkIn {
   to {
