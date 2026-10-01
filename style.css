@@ -176,15 +176,16 @@ a {
   opacity: 1;
   animation: labelOut 0.65s ease forwards;
 }
+
 @keyframes labelOut {
   from {
     opacity: 1;
-    transform: translate(-50%, -50%) translateY(0);
+    transform: translateY(0);
   }
 
   to {
     opacity: 0;
-    transform: translate(-50%, -50%) translateY(-20px);
+    transform: translateY(-20px);
   }
 }
 
