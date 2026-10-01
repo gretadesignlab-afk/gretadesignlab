@@ -111,34 +111,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   });
 
-
   /* =========================
      TRANSIZIONE TRA PAGINE
   ========================= */
 
   const transition = document.querySelector(".page-transition");
-
-  function goToPage(url, label) {
-
-    if (!transition) {
-      window.location.href = url;
-      return;
-    }
-
-    const labelElement = transition.querySelector(".transition-label");
-
-    if (labelElement && label) {
-      labelElement.textContent = label;
-    }
-
-    transition.classList.add("active");
-
-    sessionStorage.setItem("gdl-transition", "true");
-
-    setTimeout(() => {
-      window.location.href = url;
-    }, 800);
-  }
 
   const pageLinks = document.querySelectorAll(
     'a[href$=".html"], a[href*=".html#"]'
@@ -155,6 +132,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       e.preventDefault();
+
+      if (!transition) {
+        window.location.href = href;
+        return;
+      }
 
       let label = "GRETA DESIGN LAB";
 
@@ -174,7 +156,23 @@ document.addEventListener("DOMContentLoaded", () => {
         label = "HOME";
       }
 
-      goToPage(href, label);
+      const transitionName =
+        transition.querySelector(".transition-name");
+
+      if (transitionName) {
+        transitionName.textContent = label;
+      }
+
+      transition.classList.add("active");
+
+      sessionStorage.setItem(
+        "gdl-transition",
+        "true"
+      );
+
+      setTimeout(() => {
+        window.location.href = href;
+      }, 800);
 
     });
 
@@ -182,32 +180,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =========================
-     ANIMAZIONE DI ENTRATA
+     ENTRATA NELLA NUOVA PAGINA
   ========================= */
 
-  const comingFromPage = sessionStorage.getItem(
-    "gdl-transition"
-  );
+  const comingFromPage =
+    sessionStorage.getItem("gdl-transition");
 
- if (comingFromPage && transition) {
+  if (comingFromPage && transition) {
 
-  sessionStorage.removeItem("gdl-transition");
+    sessionStorage.removeItem("gdl-transition");
 
-  transition.classList.add("active");
+    transition.style.opacity = "1";
+    transition.style.visibility = "visible";
 
-  setTimeout(() => {
-    transition.classList.remove("active");
     transition.classList.add("revealing");
-  }, 800);
 
-  setTimeout(() => {
-    transition.classList.remove("revealing");
-    transition.style.opacity = "0";
-    transition.style.visibility = "hidden";
-  }, 1550);
+    setTimeout(() => {
 
-}
+      transition.classList.remove("revealing");
 
+      transition.style.opacity = "0";
+      transition.style.visibility = "hidden";
+
+    }, 800);
+
+  }
 
   /* =========================
      SCROLL REVEAL
