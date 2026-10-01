@@ -140,15 +140,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 800);
   }
   document.querySelectorAll('a[href$=".html"], a[href*=".html#"]').forEach(link => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
 
-      const url = this.getAttribute("href");
-      const label = this.dataset.name || "";
+    const url = this.getAttribute("href");
+    const label = this.dataset.name || "";
 
-      goToPage(url, label);
-    });
+    goToPage(url, label);
   });
+});
 
   const pageLinks = document.querySelectorAll(
     'a[href$=".html"], a[href*=".html#"]'
@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       transition.style.opacity = "0";
       transition.style.visibility = "hidden";
-    }, 750);
+    }, 850);
 
   }
 
