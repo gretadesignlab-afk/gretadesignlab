@@ -190,6 +190,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     sessionStorage.removeItem("gdl-transition");
 
+    const transitionName =
+      transition.querySelector(".transition-name");
+
+    if (transitionName) {
+      transitionName.style.opacity = "1";
+      transitionName.style.transform = "translateY(0)";
+    }
+
     transition.style.opacity = "1";
     transition.style.visibility = "visible";
 
@@ -197,12 +205,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(() => {
 
+      if (transitionName) {
+        transitionName.style.opacity = "0";
+        transitionName.style.transform = "translateY(-20px)";
+      }
+
       transition.classList.remove("revealing");
 
       transition.style.opacity = "0";
       transition.style.visibility = "hidden";
 
-    }, 800);
+    }, 750);
 
   }
 
