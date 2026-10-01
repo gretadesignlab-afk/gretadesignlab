@@ -1390,6 +1390,43 @@
     );
 
   </script>
+    <script>
+    const incomingTransition =
+      sessionStorage.getItem("gdl-transition");
+
+    if (incomingTransition) {
+
+      sessionStorage.removeItem("gdl-transition");
+
+      const pageTransition =
+        document.getElementById("pageTransition");
+
+      const transitionName =
+        document.getElementById("transitionName");
+
+      if (pageTransition) {
+
+        if (transitionName) {
+          transitionName.textContent = "HOME";
+          transitionName.style.opacity = "1";
+        }
+
+        pageTransition.style.visibility = "visible";
+        pageTransition.style.opacity = "1";
+
+        pageTransition.classList.add("leaving");
+
+        setTimeout(() => {
+
+          pageTransition.classList.remove("leaving");
+
+          pageTransition.style.opacity = "0";
+          pageTransition.style.visibility = "hidden";
+
+        }, 800);
+      }
+    }
+  </script>
 
 </body>
 </html>
