@@ -193,6 +193,19 @@ a {
     opacity: 1;
   }
 }
+@keyframes inkOut {
+  0% {
+    transform: scale(2.2) rotate(8deg);
+  }
+
+  100% {
+    transform: scale(0) rotate(-5deg);
+  }
+}
+
+.page-transition.revealing .ink-blob {
+  animation: inkOut .75s cubic-bezier(.65, 0, .2, 1) forwards;
+}
 
 
 /* =========================
