@@ -171,6 +171,9 @@ a {
   opacity: 0;
   z-index: 2;
 }
+.page-transition.active .transition-name {
+  animation: labelIn 0.35s ease 0.35s forwards;
+}
 
 .page-transition.revealing .transition-name {
   opacity: 1;
