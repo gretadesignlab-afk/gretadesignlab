@@ -39,37 +39,38 @@
 
 
     /* =========================
-       NAVBAR
+       NAV
     ========================= */
 
     .navbar {
       position: fixed;
       top: 0;
       left: 0;
+
       width: 100%;
-      height: 78px;
+      height: 82px;
+
+      padding: 10px 18px;
 
       display: flex;
       align-items: center;
       justify-content: space-between;
 
-      padding: 12px 18px;
-
       z-index: 100;
-      background: rgba(244, 239, 231, .88);
-      backdrop-filter: blur(12px);
+
+      mix-blend-mode: multiply;
     }
 
     .nav-logo {
-      width: 68px;
-      height: 68px;
+      width: 76px;
+      height: 76px;
       object-fit: contain;
     }
 
-    .nav-menu {
+    .menu {
       font-size: 9px;
-      letter-spacing: .16em;
       text-transform: uppercase;
+      letter-spacing: .18em;
       text-decoration: none;
       color: var(--black);
     }
@@ -80,45 +81,51 @@
     ========================= */
 
     .hero {
-      min-height: 100svh;
-
-      padding:
-        125px
-        22px
-        70px;
+      height: 100svh;
+      min-height: 650px;
 
       position: relative;
 
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-
       overflow: hidden;
+
+      display: flex;
+      align-items: center;
+
+      padding: 90px 18px 30px;
     }
 
-    .hero-label {
+    .hero-small {
+      position: absolute;
+
+      top: 120px;
+      left: 20px;
+
       font-size: 8px;
       letter-spacing: .2em;
       text-transform: uppercase;
 
-      margin-bottom: 32px;
-
-      opacity: .65;
+      opacity: .55;
     }
 
     .hero-title {
+      position: relative;
+      z-index: 5;
+
       font-family: "DM Serif Display", Georgia, serif;
 
-      font-size: clamp(64px, 19vw, 105px);
-      line-height: .83;
-      letter-spacing: -.045em;
+      font-size: 21vw;
+      line-height: .72;
 
-      position: relative;
-      z-index: 2;
+      letter-spacing: -.06em;
+
+      width: 100%;
     }
 
-    .hero-title div {
+    .hero-title span {
       display: block;
+
+      transition:
+        transform .7s cubic-bezier(.2,.8,.2,1);
     }
 
     .hero-title .greta {
@@ -126,54 +133,45 @@
     }
 
     .hero-title .design {
-      color: var(--burgundy);
       margin-left: 7vw;
+      color: var(--burgundy);
     }
 
     .hero-title .lab {
-      margin-left: 16vw;
-    }
-
-    .hero-subtitle {
-      margin-top: 48px;
-      margin-left: 18vw;
-
-      max-width: 260px;
-
-      font-family: "DM Serif Display", Georgia, serif;
-      font-size: 22px;
-      line-height: 1.15;
+      margin-left: 17vw;
     }
 
 
     /* =========================
-       FLOATING WORDS
+       INTERACTIVE WORDS
     ========================= */
 
     .floating-word {
       position: absolute;
 
+      z-index: 8;
+
       font-size: 8px;
-      letter-spacing: .18em;
+      letter-spacing: .2em;
       text-transform: uppercase;
 
       transition:
-        transform .5s cubic-bezier(.2,.8,.2,1),
+        transform .7s cubic-bezier(.2,.8,.2,1),
         opacity .4s ease;
     }
 
     .idea {
-      top: 31%;
-      right: 7%;
+      top: 34%;
+      right: 8%;
     }
 
     .forma {
-      bottom: 19%;
-      right: 9%;
+      bottom: 25%;
+      right: 7%;
     }
 
     .identita {
-      bottom: 10%;
+      bottom: 13%;
       left: 8%;
     }
 
@@ -185,68 +183,133 @@
     .macchia {
       position: absolute;
 
-      width: 190px;
-      height: 160px;
+      width: 260px;
+      height: 220px;
 
-      border-radius:
-        53% 47% 61% 39% /
-        45% 52% 48% 55%;
+      right: -110px;
+      top: 27%;
 
       background: var(--pink);
 
-      opacity: .45;
+      opacity: .48;
 
-      filter: blur(1px);
+      border-radius:
+        57% 43% 48% 52% /
+        45% 58% 42% 55%;
 
       transform:
-        rotate(-12deg);
+        rotate(-18deg);
 
-      right: -75px;
-      top: 23%;
-
-      z-index: 1;
+      z-index: 2;
 
       transition:
-        transform .8s cubic-bezier(.2,.8,.2,1);
+        transform 1s cubic-bezier(.2,.8,.2,1),
+        border-radius 1s ease;
+    }
+
+    .hero:active .macchia {
+      transform:
+        translateX(-30px)
+        rotate(-5deg)
+        scale(1.15);
     }
 
 
     /* =========================
-       IDENTITY
+       SCROLL INDICATOR
     ========================= */
 
-    .identity {
+    .scroll {
+      position: absolute;
+
+      bottom: 24px;
+      left: 20px;
+
+      font-size: 7px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+
+      opacity: .45;
+
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .scroll-line {
+      width: 32px;
+      height: 1px;
+
+      background: var(--black);
+
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% {
+        transform: scaleX(.4);
+        transform-origin: left;
+      }
+
+      50% {
+        transform: scaleX(1);
+      }
+    }
+
+
+    /* =========================
+       MANIFESTO
+    ========================= */
+
+    .manifesto {
       min-height: 100svh;
 
-      padding: 100px 22px;
+      padding: 120px 20px;
+
+      position: relative;
 
       display: flex;
       flex-direction: column;
       justify-content: center;
 
-      position: relative;
+      overflow: hidden;
     }
 
-    .section-label {
+    .manifesto-label {
       font-size: 8px;
-      letter-spacing: .18em;
+      letter-spacing: .2em;
       text-transform: uppercase;
 
-      opacity: .55;
+      opacity: .5;
 
-      margin-bottom: 35px;
+      margin-bottom: 55px;
     }
 
-    .identity-text {
+    .manifesto-text {
       font-family: "DM Serif Display", Georgia, serif;
 
-      font-size: clamp(32px, 9vw, 48px);
-      line-height: 1.03;
+      font-size: 11vw;
+      line-height: .98;
+
+      letter-spacing: -.03em;
     }
 
-    .identity-text em {
+    .manifesto-text span {
       color: var(--burgundy);
-      font-style: italic;
+
+      transition:
+        transform .5s ease;
+    }
+
+    .manifesto-note {
+      margin-top: 55px;
+
+      width: 75%;
+
+      font-size: 11px;
+      line-height: 1.55;
+
+      opacity: .65;
     }
 
 
@@ -255,47 +318,74 @@
     ========================= */
 
     .services {
-      padding: 100px 22px 120px;
+      min-height: 100svh;
+
+      padding: 110px 20px;
+
+      background: var(--black);
+      color: var(--cream);
+
+      position: relative;
     }
 
-    .services-title {
-      font-family: "DM Serif Display", Georgia, serif;
-      font-size: 48px;
-      line-height: .9;
+    .services-label {
+      font-size: 8px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+
+      opacity: .5;
 
       margin-bottom: 70px;
     }
 
     .service {
-      padding: 28px 0;
+      position: relative;
 
-      border-top: 1px solid rgba(17,17,17,.25);
+      padding: 27px 0;
 
-      display: grid;
-      grid-template-columns: 35px 1fr 25px;
+      border-top: 1px solid rgba(244,239,231,.25);
+
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-
-      transition:
-        transform .4s ease;
     }
 
     .service:last-child {
-      border-bottom: 1px solid rgba(17,17,17,.25);
+      border-bottom: 1px solid rgba(244,239,231,.25);
     }
 
     .service-number {
-      font-size: 9px;
+      font-size: 8px;
       opacity: .5;
+      width: 30px;
     }
 
     .service-name {
+      flex: 1;
+
       font-family: "DM Serif Display", Georgia, serif;
-      font-size: 27px;
+
+      font-size: 29px;
+
+      transition:
+        transform .45s cubic-bezier(.2,.8,.2,1),
+        color .3s ease;
     }
 
     .service-arrow {
       font-size: 18px;
-      text-align: right;
+
+      transition:
+        transform .45s ease;
+    }
+
+    .service:active .service-name {
+      transform: translateX(10px);
+      color: var(--pink);
+    }
+
+    .service:active .service-arrow {
+      transform: translateX(7px) rotate(-45deg);
     }
 
 
@@ -304,9 +394,9 @@
     ========================= */
 
     .contact {
-      min-height: 75svh;
+      min-height: 100svh;
 
-      padding: 110px 22px;
+      padding: 110px 20px;
 
       background: var(--burgundy);
       color: var(--cream);
@@ -318,28 +408,56 @@
 
     .contact-label {
       font-size: 8px;
-      letter-spacing: .18em;
+      letter-spacing: .2em;
       text-transform: uppercase;
 
       opacity: .65;
 
-      margin-bottom: 35px;
+      margin-bottom: 45px;
     }
 
     .contact-title {
       font-family: "DM Serif Display", Georgia, serif;
 
-      font-size: clamp(58px, 16vw, 90px);
-      line-height: .85;
+      font-size: 18vw;
+      line-height: .8;
+
+      letter-spacing: -.05em;
+    }
+
+    .contact-title em {
+      display: block;
+      margin-left: 16vw;
     }
 
     .contact-text {
-      margin-top: 45px;
+      width: 75%;
 
-      font-size: 12px;
-      line-height: 1.6;
+      margin-top: 55px;
 
-      max-width: 270px;
+      font-size: 11px;
+      line-height: 1.55;
+
+      opacity: .75;
+    }
+
+
+    /* =========================
+       SCROLL REVEAL
+    ========================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+
+      transition:
+        opacity .8s ease,
+        transform .8s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
   </style>
@@ -349,7 +467,7 @@
 <body>
 
 
-  <!-- NAVBAR -->
+  <!-- NAV -->
 
   <header class="navbar">
 
@@ -361,7 +479,7 @@
       >
     </a>
 
-    <a href="portfolio.html" class="nav-menu">
+    <a href="portfolio.html" class="menu">
       Portfolio
     </a>
 
@@ -371,153 +489,283 @@
 
   <!-- HERO -->
 
-  <main>
+  <section class="hero">
 
-    <section class="hero">
-
-      <div class="hero-label">
-        Un laboratorio di idee
-      </div>
-
-      <h1 class="hero-title">
-
-        <div class="greta">GRETA</div>
-
-        <div class="design">DESIGN</div>
-
-        <div class="lab">LAB.</div>
-
-      </h1>
+    <div class="hero-small">
+      Un laboratorio di idee
+    </div>
 
 
-      <p class="hero-subtitle">
-        Anche la perfezione lascia una macchia.
-      </p>
+    <h1 class="hero-title">
 
-
-      <span class="floating-word idea">
-        IDEA
+      <span class="greta">
+        GRETA
       </span>
 
-      <span class="floating-word forma">
-        FORMA
+      <span class="design">
+        DESIGN
       </span>
 
-      <span class="floating-word identita">
-        IDENTITÀ
+      <span class="lab">
+        LAB.
       </span>
 
-
-      <div class="macchia"></div>
-
-    </section>
+    </h1>
 
 
+    <span class="floating-word idea">
+      IDEA
+    </span>
 
-    <!-- IDENTITY -->
+    <span class="floating-word forma">
+      FORMA
+    </span>
 
-    <section class="identity">
-
-      <div class="section-label">
-        01 — Identità
-      </div>
-
-      <p class="identity-text">
-        Ogni progetto nasce dalla ricerca della
-        <em>precisione</em>,
-        ma trova la propria identità in quella piccola
-        <em>imperfezione</em>
-        che lo rende unico.
-      </p>
-
-    </section>
+    <span class="floating-word identita">
+      IDENTITÀ
+    </span>
 
 
-
-    <!-- SERVICES -->
-
-    <section class="services">
-
-      <h2 class="services-title">
-        Cosa faccio.
-      </h2>
+    <div class="macchia"></div>
 
 
-      <div class="service">
+    <div class="scroll">
 
-        <span class="service-number">
-          01
-        </span>
+      <span class="scroll-line"></span>
 
-        <span class="service-name">
-          Brand Identity
-        </span>
+      scrolla
 
-        <span class="service-arrow">
-          ↗
-        </span>
+    </div>
 
-      </div>
-
-
-      <div class="service">
-
-        <span class="service-number">
-          02
-        </span>
-
-        <span class="service-name">
-          Social Design
-        </span>
-
-        <span class="service-arrow">
-          ↗
-        </span>
-
-      </div>
-
-
-      <div class="service">
-
-        <span class="service-number">
-          03
-        </span>
-
-        <span class="service-name">
-          Visual Design
-        </span>
-
-        <span class="service-arrow">
-          ↗
-        </span>
-
-      </div>
-
-    </section>
+  </section>
 
 
 
-    <!-- CONTACT -->
+  <!-- MANIFESTO -->
 
-    <section class="contact">
+  <section class="manifesto">
 
-      <div class="contact-label">
-        Hai un'idea?
-      </div>
+    <div class="manifesto-label">
+      01 — Manifesto
+    </div>
 
-      <h2 class="contact-title">
-        Parliamone.
-      </h2>
 
-      <p class="contact-text">
-        Un progetto, una collaborazione,
-        o semplicemente qualcosa che vuoi
-        trasformare in qualcosa di visivo.
-      </p>
+    <div class="manifesto-text reveal">
 
-    </section>
+      La perfezione
+      <span>lascia</span>
+      una macchia.
 
-  </main>
+    </div>
+
+
+    <p class="manifesto-note reveal">
+
+      Ogni progetto nasce dalla ricerca della
+      precisione, ma trova la propria identità
+      in quella piccola imperfezione che lo
+      rende unico.
+
+    </p>
+
+  </section>
+
+
+
+  <!-- SERVICES -->
+
+  <section class="services">
+
+    <div class="services-label">
+      02 — Cosa faccio
+    </div>
+
+
+    <div class="service reveal">
+
+      <span class="service-number">
+        01
+      </span>
+
+      <span class="service-name">
+        Brand Identity
+      </span>
+
+      <span class="service-arrow">
+        ↗
+      </span>
+
+    </div>
+
+
+    <div class="service reveal">
+
+      <span class="service-number">
+        02
+      </span>
+
+      <span class="service-name">
+        Social Design
+      </span>
+
+      <span class="service-arrow">
+        ↗
+      </span>
+
+    </div>
+
+
+    <div class="service reveal">
+
+      <span class="service-number">
+        03
+      </span>
+
+      <span class="service-name">
+        Visual Design
+      </span>
+
+      <span class="service-arrow">
+        ↗
+      </span>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- CONTACT -->
+
+  <section class="contact">
+
+    <div class="contact-label">
+      03 — Contatti
+    </div>
+
+
+    <h2 class="contact-title">
+
+      Parliamone
+      <em>insieme.</em>
+
+    </h2>
+
+
+    <p class="contact-text">
+
+      Un progetto, una collaborazione,
+      o semplicemente un'idea da trasformare
+      in qualcosa di visivo.
+
+    </p>
+
+  </section>
+
+
+
+  <script>
+
+    /* =========================
+       SCROLL REVEAL
+    ========================= */
+
+    const reveals =
+      document.querySelectorAll(".reveal");
+
+    const observer =
+      new IntersectionObserver(
+        entries => {
+
+          entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add("visible");
+
+            }
+
+          });
+
+        },
+        {
+          threshold: .2
+        }
+      );
+
+
+    reveals.forEach(element => {
+
+      observer.observe(element);
+
+    });
+
+
+
+    /* =========================
+       SCROLL INTERACTION
+    ========================= */
+
+    const hero =
+      document.querySelector(".hero");
+
+    const macchia =
+      document.querySelector(".macchia");
+
+    const words =
+      document.querySelectorAll(".floating-word");
+
+    window.addEventListener(
+      "scroll",
+      () => {
+
+        const scroll =
+          window.scrollY;
+
+        const heroHeight =
+          hero.offsetHeight;
+
+        if (scroll < heroHeight) {
+
+          const progress =
+            scroll / heroHeight;
+
+
+          macchia.style.transform =
+            `
+            translateY(${progress * 90}px)
+            rotate(${-18 + progress * 25}deg)
+            scale(${1 + progress * .15})
+            `;
+
+
+          words.forEach(
+            (word, index) => {
+
+              const direction =
+                index % 2 === 0 ? 1 : -1;
+
+              word.style.transform =
+                `
+                translate(
+                  ${progress * 18 * direction}px,
+                  ${progress * -35}px
+                )
+                rotate(${progress * 8 * direction}deg)
+                `;
+
+              word.style.opacity =
+                1 - progress * .5;
+
+            }
+          );
+
+        }
+
+      }
+    );
+
+  </script>
 
 
 </body>
