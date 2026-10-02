@@ -2489,4 +2489,617 @@
         <p class="service-description">
 
           Poster, materiali digitali,
-          composizioni e dire
+          composizione visiva pensate per dare forma alle idee e trasformarle in qualcosa di concreto.
+
+        </p>
+
+      </article>
+
+
+
+      <!-- SERVICE 04 -->
+
+      <article
+        class="service"
+        data-service
+      >
+
+        <span class="service-number">
+          04
+        </span>
+
+        <span class="service-name">
+          Art Direction
+        </span>
+
+        <span class="service-arrow">
+          ↗
+        </span>
+
+        <p class="service-description">
+
+          Concept, stile e direzione creativa
+          per costruire progetti coerenti,
+          riconoscibili e con carattere.
+
+        </p>
+
+      </article>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         PORTFOLIO
+    ================================================== -->
+
+    <section class="portfolio-section">
+
+      <div class="portfolio-header">
+
+        <span class="section-label">
+          03 — Portfolio
+        </span>
+
+        <h2>
+          Alcune cose<br>
+          che ho fatto.
+        </h2>
+
+      </div>
+
+      <div class="portfolio-intro">
+
+        <p>
+          Ogni progetto nasce da un'idea,
+          prende forma attraverso la ricerca
+          e trova la propria identità nei dettagli.
+        </p>
+
+        <a href="portfolio.html" class="portfolio-link">
+          <span>Esplora il portfolio</span>
+          <span>↗</span>
+        </a>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         CONTACT
+    ================================================== -->
+
+    <section class="contact-section">
+
+      <span class="section-label">
+        04 — Contatti
+      </span>
+
+      <h2>
+        Facciamo<br>
+        qualcosa insieme.
+      </h2>
+
+      <a
+        href="contatti.html"
+        class="contact-link"
+      >
+        Contattami ↗
+      </a>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         FOOTER
+    ================================================== -->
+
+    <footer class="mobile-footer">
+
+      <div class="footer-logo">
+        GDL
+      </div>
+
+      <p>
+        Anche la perfezione<br>
+        lascia una macchia.
+      </p>
+
+      <span>
+        © Greta Design Lab
+      </span>
+
+    </footer>
+
+
+
+  </main>
+
+
+
+  <!-- ==================================================
+       PAGE TRANSITION
+  ================================================== -->
+
+  <div
+    class="page-transition"
+    id="pageTransition"
+  >
+
+    <div class="ink-transition one"></div>
+    <div class="ink-transition two"></div>
+    <div class="ink-transition three"></div>
+    <div class="ink-transition four"></div>
+
+    <div
+      class="transition-name"
+      id="transitionName"
+    >
+      Portfolio
+    </div>
+
+  </div>
+
+
+
+  <!-- ==================================================
+       JAVASCRIPT
+  ================================================== -->
+
+  <script>
+
+    /* ================================================
+       MENU
+    ================================================ */
+
+    const menuButton =
+      document.getElementById("menuButton");
+
+    const menuOverlay =
+      document.getElementById("menuOverlay");
+
+    const menuClose =
+      document.getElementById("menuClose");
+
+    if (menuButton && menuOverlay) {
+
+      menuButton.addEventListener("click", () => {
+
+        menuOverlay.classList.add("open");
+
+        document.body.classList.add("menu-open");
+
+      });
+
+    }
+
+
+    if (menuClose && menuOverlay) {
+
+      menuClose.addEventListener("click", () => {
+
+        menuOverlay.classList.remove("open");
+
+        document.body.classList.remove("menu-open");
+
+      });
+
+    }
+
+
+    /* chiudi menu quando clicco un link */
+
+    document
+      .querySelectorAll(".menu-overlay a")
+      .forEach(link => {
+
+        link.addEventListener("click", () => {
+
+          menuOverlay.classList.remove("open");
+
+          document.body.classList.remove("menu-open");
+
+        });
+
+      });
+
+
+
+    /* ================================================
+       SERVICES — TAP / OPEN
+    ================================================ */
+
+    document
+      .querySelectorAll("[data-service]")
+      .forEach(service => {
+
+        service.addEventListener("click", () => {
+
+          document
+            .querySelectorAll("[data-service]")
+            .forEach(item => {
+
+              if (item !== service) {
+                item.classList.remove("is-open");
+              }
+
+            });
+
+          service.classList.toggle("is-open");
+
+        });
+
+      });
+
+
+
+    /* ================================================
+       SCROLL REVEAL
+    ================================================ */
+
+    const revealElements =
+      document.querySelectorAll(
+        ".services-header, .service, .portfolio-section, .contact-section"
+      );
+
+
+    const revealObserver =
+      new IntersectionObserver(
+
+        entries => {
+
+          entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add("visible");
+
+            }
+
+          });
+
+        },
+
+        {
+          threshold: 0.12
+        }
+
+      );
+
+
+    revealElements.forEach(element => {
+
+      revealObserver.observe(element);
+
+    });
+
+
+
+    /* ================================================
+       KINETIC WORDS
+    ================================================ */
+
+    const kineticWords =
+      document.querySelectorAll(".kinetic-word");
+
+
+    window.addEventListener(
+      "scroll",
+      () => {
+
+        const scrollY = window.scrollY;
+
+        kineticWords.forEach((word, index) => {
+
+          const direction =
+            index % 2 === 0 ? 1 : -1;
+
+          const movement =
+            scrollY * 0.045 * direction;
+
+          word.style.transform =
+            `translateX(${movement}px)`;
+
+        });
+
+      },
+      { passive: true }
+    );
+
+
+
+    /* ================================================
+       TOUCH / INK
+    ================================================ */
+
+    let lastTouch = 0;
+
+    document.addEventListener(
+      "touchstart",
+      event => {
+
+        const now = Date.now();
+
+        if (now - lastTouch < 250) return;
+
+        lastTouch = now;
+
+        const touch = event.touches[0];
+
+        if (!touch) return;
+
+        const mark =
+          document.createElement("span");
+
+        mark.className = "touch-mark";
+
+        mark.style.left =
+          `${touch.clientX}px`;
+
+        mark.style.top =
+          `${touch.clientY}px`;
+
+        document.body.appendChild(mark);
+
+        setTimeout(() => {
+
+          mark.remove();
+
+        }, 900);
+
+      },
+      { passive: true }
+    );
+
+
+
+    /* ================================================
+       SECRET G — TAP LOGO
+    ================================================ */
+
+    const logo =
+      document.querySelector(".footer-logo");
+
+    let logoTaps = 0;
+
+    if (logo) {
+
+      logo.addEventListener("click", () => {
+
+        logoTaps++;
+
+        if (logoTaps >= 5) {
+
+          document.body.classList.add("secret-g");
+
+          setTimeout(() => {
+
+            document.body.classList.remove("secret-g");
+
+          }, 1800);
+
+          logoTaps = 0;
+
+        }
+
+      });
+
+    }
+
+
+
+    /* ================================================
+       PAGE TRANSITIONS
+    ================================================ */
+
+    const transition =
+      document.getElementById("pageTransition");
+
+
+    const transitionLinks =
+      document.querySelectorAll(
+        'a[href$=".html"], a[href*=".html#"]'
+      );
+
+
+    transitionLinks.forEach(link => {
+
+      link.addEventListener("click", event => {
+
+        const href =
+          link.getAttribute("href");
+
+        if (
+          !href ||
+          href.startsWith("http") ||
+          href.startsWith("#")
+        ) {
+          return;
+        }
+
+        event.preventDefault();
+
+        if (!transition) {
+
+          window.location.href = href;
+
+          return;
+
+        }
+
+
+        let label =
+          "GRETA DESIGN LAB";
+
+
+        if (href.includes("portfolio")) {
+          label = "PORTFOLIO";
+        }
+
+        if (href.includes("chi-sono")) {
+          label = "CHI SONO";
+        }
+
+        if (href.includes("contatti")) {
+          label = "CONTATTI";
+        }
+
+        if (href.includes("index")) {
+          label = "HOME";
+        }
+
+
+        const transitionName =
+          document.getElementById("transitionName");
+
+
+        if (transitionName) {
+          transitionName.textContent = label;
+        }
+
+
+        transition.classList.add("active");
+
+        sessionStorage.setItem(
+          "gdl-transition",
+          "true"
+        );
+
+
+        setTimeout(() => {
+
+          window.location.href = href;
+
+        }, 800);
+
+      });
+
+    });
+
+
+
+    /* ================================================
+       INCOMING TRANSITION
+    ================================================ */
+
+    const comingFromPage =
+      sessionStorage.getItem(
+        "gdl-transition"
+      );
+
+
+    if (comingFromPage && transition) {
+
+      sessionStorage.removeItem(
+        "gdl-transition"
+      );
+
+
+      const transitionName =
+        document.getElementById(
+          "transitionName"
+        );
+
+
+      if (transitionName) {
+
+        transitionName.style.opacity = "1";
+
+        transitionName.style.transform =
+          "translateY(0)";
+
+      }
+
+
+      transition.style.opacity = "1";
+
+      transition.style.visibility =
+        "visible";
+
+      transition.classList.add(
+        "revealing"
+      );
+
+
+      setTimeout(() => {
+
+        if (transitionName) {
+
+          transitionName.style.opacity = "0";
+
+          transitionName.style.transform =
+            "translateY(-20px)";
+
+        }
+
+
+        transition.classList.remove(
+          "revealing"
+        );
+
+        transition.style.opacity = "0";
+
+        transition.style.visibility =
+          "hidden";
+
+      }, 750);
+
+    }
+
+
+
+    /* ================================================
+       NO RULES — SMALL EASTER EGG
+    ================================================ */
+
+    let secretSequence = "";
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        secretSequence +=
+          event.key.toLowerCase();
+
+        if (
+          secretSequence.includes("gdl")
+        ) {
+
+          document.body.classList.add(
+            "gdl-secret"
+          );
+
+          setTimeout(() => {
+
+            document.body.classList.remove(
+              "gdl-secret"
+            );
+
+          }, 1600);
+
+          secretSequence = "";
+
+        }
+
+
+        if (
+          secretSequence.length > 12
+        ) {
+
+          secretSequence =
+            secretSequence.slice(-3);
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+
+</html>
