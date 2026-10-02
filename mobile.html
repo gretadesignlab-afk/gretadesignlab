@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Greta Design Lab</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+
+    :root {
+      --burgundy: #7d2635;
+      --cream: #f4efe7;
+      --black: #111111;
+      --pink: #d9a6ae;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--black);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+    }
+
+
+    /* =========================
+       NAVBAR
+    ========================= */
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 78px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 12px 18px;
+
+      z-index: 100;
+      background: rgba(244, 239, 231, .88);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-logo {
+      width: 68px;
+      height: 68px;
+      object-fit: contain;
+    }
+
+    .nav-menu {
+      font-size: 9px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+    }
+
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 100svh;
+
+      padding:
+        125px
+        22px
+        70px;
+
+      position: relative;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      overflow: hidden;
+    }
+
+    .hero-label {
+      font-size: 8px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+
+      margin-bottom: 32px;
+
+      opacity: .65;
+    }
+
+    .hero-title {
+      font-family: "DM Serif Display", Georgia, serif;
+
+      font-size: clamp(64px, 19vw, 105px);
+      line-height: .83;
+      letter-spacing: -.045em;
+
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title div {
+      display: block;
+    }
+
+    .hero-title .greta {
+      color: var(--burgundy);
+    }
+
+    .hero-title .design {
+      color: var(--burgundy);
+      margin-left: 7vw;
+    }
+
+    .hero-title .lab {
+      margin-left: 16vw;
+    }
+
+    .hero-subtitle {
+      margin-top: 48px;
+      margin-left: 18vw;
+
+      max-width: 260px;
+
+      font-family: "DM Serif Display", Georgia, serif;
+      font-size: 22px;
+      line-height: 1.15;
+    }
+
+
+    /* =========================
+       FLOATING WORDS
+    ========================= */
+
+    .floating-word {
+      position: absolute;
+
+      font-size: 8px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+
+      transition:
+        transform .5s cubic-bezier(.2,.8,.2,1),
+        opacity .4s ease;
+    }
+
+    .idea {
+      top: 31%;
+      right: 7%;
+    }
+
+    .forma {
+      bottom: 19%;
+      right: 9%;
+    }
+
+    .identita {
+      bottom: 10%;
+      left: 8%;
+    }
+
+
+    /* =========================
+       MACCHIA
+    ========================= */
+
+    .macchia {
+      position: absolute;
+
+      width: 190px;
+      height: 160px;
+
+      border-radius:
+        53% 47% 61% 39% /
+        45% 52% 48% 55%;
+
+      background: var(--pink);
+
+      opacity: .45;
+
+      filter: blur(1px);
+
+      transform:
+        rotate(-12deg);
+
+      right: -75px;
+      top: 23%;
+
+      z-index: 1;
+
+      transition:
+        transform .8s cubic-bezier(.2,.8,.2,1);
+    }
+
+
+    /* =========================
+       IDENTITY
+    ========================= */
+
+    .identity {
+      min-height: 100svh;
+
+      padding: 100px 22px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      position: relative;
+    }
+
+    .section-label {
+      font-size: 8px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+
+      opacity: .55;
+
+      margin-bottom: 35px;
+    }
+
+    .identity-text {
+      font-family: "DM Serif Display", Georgia, serif;
+
+      font-size: clamp(32px, 9vw, 48px);
+      line-height: 1.03;
+    }
+
+    .identity-text em {
+      color: var(--burgundy);
+      font-style: italic;
+    }
+
+
+    /* =========================
+       SERVICES
+    ========================= */
+
+    .services {
+      padding: 100px 22px 120px;
+    }
+
+    .services-title {
+      font-family: "DM Serif Display", Georgia, serif;
+      font-size: 48px;
+      line-height: .9;
+
+      margin-bottom: 70px;
+    }
+
+    .service {
+      padding: 28px 0;
+
+      border-top: 1px solid rgba(17,17,17,.25);
+
+      display: grid;
+      grid-template-columns: 35px 1fr 25px;
+      align-items: center;
+
+      transition:
+        transform .4s ease;
+    }
+
+    .service:last-child {
+      border-bottom: 1px solid rgba(17,17,17,.25);
+    }
+
+    .service-number {
+      font-size: 9px;
+      opacity: .5;
+    }
+
+    .service-name {
+      font-family: "DM Serif Display", Georgia, serif;
+      font-size: 27px;
+    }
+
+    .service-arrow {
+      font-size: 18px;
+      text-align: right;
+    }
+
+
+    /* =========================
+       CONTACT
+    ========================= */
+
+    .contact {
+      min-height: 75svh;
+
+      padding: 110px 22px;
+
+      background: var(--burgundy);
+      color: var(--cream);
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .contact-label {
+      font-size: 8px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+
+      opacity: .65;
+
+      margin-bottom: 35px;
+    }
+
+    .contact-title {
+      font-family: "DM Serif Display", Georgia, serif;
+
+      font-size: clamp(58px, 16vw, 90px);
+      line-height: .85;
+    }
+
+    .contact-text {
+      margin-top: 45px;
+
+      font-size: 12px;
+      line-height: 1.6;
+
+      max-width: 270px;
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- NAVBAR -->
+
+  <header class="navbar">
+
+    <a href="index.html">
+      <img
+        src="IMG-20260904-WA0041.jpg"
+        alt="Greta Design Lab"
+        class="nav-logo"
+      >
+    </a>
+
+    <a href="portfolio.html" class="nav-menu">
+      Portfolio
+    </a>
+
+  </header>
+
+
+
+  <!-- HERO -->
+
+  <main>
+
+    <section class="hero">
+
+      <div class="hero-label">
+        Un laboratorio di idee
+      </div>
+
+      <h1 class="hero-title">
+
+        <div class="greta">GRETA</div>
+
+        <div class="design">DESIGN</div>
+
+        <div class="lab">LAB.</div>
+
+      </h1>
+
+
+      <p class="hero-subtitle">
+        Anche la perfezione lascia una macchia.
+      </p>
+
+
+      <span class="floating-word idea">
+        IDEA
+      </span>
+
+      <span class="floating-word forma">
+        FORMA
+      </span>
+
+      <span class="floating-word identita">
+        IDENTITÀ
+      </span>
+
+
+      <div class="macchia"></div>
+
+    </section>
+
+
+
+    <!-- IDENTITY -->
+
+    <section class="identity">
+
+      <div class="section-label">
+        01 — Identità
+      </div>
+
+      <p class="identity-text">
+        Ogni progetto nasce dalla ricerca della
+        <em>precisione</em>,
+        ma trova la propria identità in quella piccola
+        <em>imperfezione</em>
+        che lo rende unico.
+      </p>
+
+    </section>
+
+
+
+    <!-- SERVICES -->
+
+    <section class="services">
+
+      <h2 class="services-title">
+        Cosa faccio.
+      </h2>
+
+
+      <div class="service">
+
+        <span class="service-number">
+          01
+        </span>
+
+        <span class="service-name">
+          Brand Identity
+        </span>
+
+        <span class="service-arrow">
+          ↗
+        </span>
+
+      </div>
+
+
+      <div class="service">
+
+        <span class="service-number">
+          02
+        </span>
+
+        <span class="service-name">
+          Social Design
+        </span>
+
+        <span class="service-arrow">
+          ↗
+        </span>
+
+      </div>
+
+
+      <div class="service">
+
+        <span class="service-number">
+          03
+        </span>
+
+        <span class="service-name">
+          Visual Design
+        </span>
+
+        <span class="service-arrow">
+          ↗
+        </span>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- CONTACT -->
+
+    <section class="contact">
+
+      <div class="contact-label">
+        Hai un'idea?
+      </div>
+
+      <h2 class="contact-title">
+        Parliamone.
+      </h2>
+
+      <p class="contact-text">
+        Un progetto, una collaborazione,
+        o semplicemente qualcosa che vuoi
+        trasformare in qualcosa di visivo.
+      </p>
+
+    </section>
+
+  </main>
+
+
+</body>
+</html>
