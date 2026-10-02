@@ -10,7 +10,62 @@
 
   <title>Portfolio — Greta Design Lab</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap"
+  rel="stylesheet"
+>
+
 <style>
+
+  /* ==================================================
+   BASE MOBILE PORTFOLIO
+================================================== */
+
+:root {
+  --burgundy: #7d2635;
+  --burgundy-dark: #641e2b;
+  --cream: #f4efe7;
+  --black: #111111;
+  --pink: #d9a6ae;
+  --line: rgba(17,17,17,.22);
+
+  --serif: "DM Serif Display", Georgia, serif;
+  --sans: "Inter", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--cream);
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--black);
+
+  font-family: var(--sans);
+
+  overflow-x: hidden;
+
+  -webkit-font-smoothing: antialiased;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font-family: inherit;
+}
   /* ==================================================
    MOBILE PORTFOLIO
 ================================================== */
