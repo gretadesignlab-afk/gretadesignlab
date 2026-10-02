@@ -2712,31 +2712,27 @@
     /* ================================================
        SERVICES — TAP / OPEN
     ================================================ */
+document
+  .querySelectorAll("[data-service]")
+  .forEach(service => {
 
-    document
-      .querySelectorAll("[data-service]")
-      .forEach(service => {
+    service.addEventListener("click", () => {
 
-        service.addEventListener("click", () => {
+      document
+        .querySelectorAll("[data-service]")
+        .forEach(item => {
 
-          document
-            .querySelectorAll("[data-service]")
-            .forEach(item => {
-
-              if (item !== service) {
-                item.classList.remove("is-open");
-              }
-
-            });
-
-          service.classList.toggle("is-open");
+          if (item !== service) {
+            item.classList.remove("active");
+          }
 
         });
 
-      });
+      service.classList.toggle("active");
 
+    });
 
-
+  });
     /* ================================================
        SCROLL REVEAL
     ================================================ */
