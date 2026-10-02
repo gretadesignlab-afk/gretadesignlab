@@ -2,698 +2,2793 @@
 <html lang="it">
 
 <head>
+
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta
+    name="theme-color"
+    content="#f4efe7"
   >
 
   <title>Portfolio — Greta Design Lab</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link
-  href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap"
-  rel="stylesheet"
->
-
-<style>
-
-  /* ==================================================
-   BASE MOBILE PORTFOLIO
-================================================== */
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-:root {
-  --burgundy: #7d2635;
-  --burgundy-dark: #641e2b;
-  --cream: #f4efe7;
-  --black: #111111;
-  --pink: #d9a6ae;
-  --line: rgba(17,17,17,.22);
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
 
-  --serif: "DM Serif Display", Georgia, serif;
-  --sans: "Inter", Arial, sans-serif;
-}
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+  <style>
 
-html {
-  background: var(--cream);
-  scroll-behavior: smooth;
-}
+    /* ==================================================
+       VARIABLES
+    ================================================== */
 
-body {
-  background: var(--cream);
-  color: var(--black);
+    :root {
+      --burgundy: #7d2635;
+      --burgundy-dark: #641e2b;
 
-  font-family: var(--sans);
+      --cream: #f4efe7;
 
-  overflow-x: hidden;
+      --black: #111111;
 
-  -webkit-font-smoothing: antialiased;
-}
+      --pink: #d9a6ae;
 
-a,
-button {
-  -webkit-tap-highlight-color: transparent;
-}
+      --line: rgba(17,17,17,.20);
 
-button {
-  font-family: inherit;
-}
+      --serif:
+        "DM Serif Display",
+        Georgia,
+        serif;
 
- /* ==================================================
-   NAVBAR
-================================================== */
+      --sans:
+        "Inter",
+        Arial,
+        sans-serif;
+    }
 
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 82px;
 
-  padding: 8px 17px;
+    /* ==================================================
+       RESET
+    ================================================== */
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  z-index: 800;
+    html {
+      background: var(--cream);
+      scroll-behavior: smooth;
+    }
 
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(244,239,231,.94),
-      rgba(244,239,231,.65),
-      transparent
-    );
-}
+    body {
+      background: var(--cream);
+      color: var(--black);
 
-.logo {
-  width: 92px;
-  height: 92px;
+      font-family: var(--sans);
 
-  object-fit: contain;
+      overflow-x: hidden;
 
-  transition:
-    transform .55s
-    cubic-bezier(.2,.8,.2,1);
-}
+      -webkit-font-smoothing: antialiased;
+    }
 
-.logo:active {
-  transform:
-    rotate(-12deg)
-    scale(1.08);
-}
+    body.menu-open {
+      overflow: hidden;
+    }
 
+    a,
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
 
-/* ==================================================
-   MENU BUTTON
-================================================== */
+    button {
+      font-family: inherit;
+    }
 
-.menu-button {
-  width: 46px;
-  height: 46px;
 
-  border: 1px solid var(--black);
+    /* ==================================================
+       NOISE
+    ================================================== */
 
-  background:
-    rgba(244,239,231,.75);
+    body::before {
+      content: "";
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+      position: fixed;
+      inset: 0;
 
-  gap: 5px;
+      pointer-events: none;
 
-  padding: 0 11px;
+      z-index: 1900;
 
-  position: relative;
-  z-index: 900;
+      opacity: .025;
 
-  cursor: pointer;
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+    }
 
-  transition:
-    transform .45s
-    cubic-bezier(.2,.8,.2,1),
-    background .3s ease;
-}
 
-.menu-button span {
-  display: block;
+    /* ==================================================
+       INTRO
+    ================================================== */
 
-  width: 100%;
-  height: 1px;
+    .intro {
+      position: fixed;
+      inset: 0;
 
-  background: var(--black);
+      z-index: 3000;
 
-  transition:
-    transform .45s
-    cubic-bezier(.2,.8,.2,1),
-    opacity .25s ease;
-}
+      background: var(--burgundy);
+      color: var(--cream);
 
-.menu-button.active {
-  background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-  transform: rotate(90deg);
-}
+      pointer-events: none;
 
-.menu-button.active span:first-child {
-  transform:
-    translateY(3px)
-    rotate(45deg);
-}
+      animation:
+        introOut 1s
+        cubic-bezier(.77,0,.18,1)
+        1.05s
+        forwards;
+    }
 
-.menu-button.active span:last-child {
-  transform:
-    translateY(-3px)
-    rotate(-45deg);
-}
+    .intro-name {
+      font-family: var(--serif);
 
+      font-size: 23vw;
 
-/* ==================================================
-   MENU OVERLAY
-================================================== */
+      line-height: .75;
 
-.menu-overlay {
-  position: fixed;
-  inset: 0;
+      letter-spacing: -.07em;
 
-  z-index: 700;
+      animation:
+        introName .8s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
+    }
 
-  background: var(--burgundy);
-  color: var(--cream);
+    @keyframes introName {
 
-  padding: 120px 18px 28px;
+      0% {
+        opacity: 0;
+        transform:
+          translateY(25px)
+          scale(.92);
+      }
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+      45% {
+        opacity: 1;
+      }
 
-  clip-path: inset(0 0 100% 0);
+      100% {
+        opacity: 1;
+        transform:
+          translateY(0)
+          scale(1);
+      }
 
-  transition:
-    clip-path .75s
-    cubic-bezier(.77,0,.18,1);
-}
+    }
 
-.menu-overlay.open {
-  clip-path: inset(0);
-}
+    @keyframes introOut {
 
-.menu-meta {
-  font-size: 8px;
+      0% {
+        clip-path: inset(0);
+      }
 
-  letter-spacing: .2em;
-  text-transform: uppercase;
+      100% {
+        clip-path: inset(0 0 100% 0);
+      }
 
-  opacity: .55;
-}
+    }
 
-.menu-links {
-  display: flex;
-  flex-direction: column;
 
-  gap: 10px;
-}
+    /* ==================================================
+       NAVBAR
+    ================================================== */
 
-.menu-link {
-  color: var(--cream);
+    .navbar {
+      position: fixed;
 
-  text-decoration: none;
+      top: 0;
+      left: 0;
 
-  font-family: var(--serif);
+      width: 100%;
+      height: 82px;
 
-  font-size: 18vw;
-  line-height: .72;
+      padding: 8px 17px;
 
-  letter-spacing: -.06em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-  transform: translateX(-30px);
+      z-index: 800;
 
-  opacity: 0;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(244,239,231,.94),
+          rgba(244,239,231,.65),
+          transparent
+        );
+    }
 
-  transition:
-    transform .6s
-    cubic-bezier(.2,.8,.2,1),
-    opacity .45s ease,
-    color .25s ease;
-}
+    .logo {
+      width: 92px;
+      height: 92px;
 
-.menu-overlay.open .menu-link {
-  transform: translateX(0);
-  opacity: 1;
-}
+      object-fit: contain;
 
-.menu-overlay.open .menu-link:nth-child(1) {
-  transition-delay: .08s;
-}
+      transition:
+        transform .55s
+        cubic-bezier(.2,.8,.2,1);
+    }
 
-.menu-overlay.open .menu-link:nth-child(2) {
-  transition-delay: .13s;
-}
+    .logo:active {
+      transform:
+        rotate(-12deg)
+        scale(1.08);
+    }
 
-.menu-overlay.open .menu-link:nth-child(3) {
-  transition-delay: .18s;
-}
 
-.menu-overlay.open .menu-link:nth-child(4) {
-  transition-delay: .23s;
-}
+    /* ==================================================
+       MENU BUTTON
+    ================================================== */
 
-.menu-link:active {
-  color: var(--pink);
+    .menu-button {
+      width: 46px;
+      height: 46px;
 
-  transform:
-    translateX(14px)
-    skewX(-3deg);
-}
+      border: 1px solid var(--black);
 
-.menu-footer {
-  display: flex;
+      background:
+        rgba(244,239,231,.75);
 
-  justify-content: space-between;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
-  font-size: 8px;
+      gap: 5px;
 
-  letter-spacing: .16em;
+      padding: 0 11px;
 
-  text-transform: uppercase;
+      position: relative;
 
-  opacity: .5;
-}
+      z-index: 900;
 
+      cursor: pointer;
 
-/* ==================================================
-   PAGE TRANSITION
-================================================== */
+      transition:
+        transform .45s
+        cubic-bezier(.2,.8,.2,1),
+        background .3s ease;
+    }
 
-.page-transition {
-  position: fixed;
-  inset: 0;
+    .menu-button span {
+      display: block;
 
-  z-index: 3000;
+      width: 100%;
+      height: 1px;
 
-  pointer-events: none;
+      background: var(--black);
 
-  background: var(--burgundy);
-  color: var(--cream);
+      transition:
+        transform .45s
+        cubic-bezier(.2,.8,.2,1),
+        opacity .25s ease;
+    }
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    .menu-button.active {
+      background: var(--cream);
 
-  opacity: 0;
-  visibility: hidden;
+      transform: rotate(90deg);
+    }
 
-  clip-path: inset(100% 0 0 0);
+    .menu-button.active span:first-child {
+      transform:
+        translateY(3px)
+        rotate(45deg);
+    }
 
-  transition:
-    opacity .1s ease,
-    visibility .1s ease,
-    clip-path .75s
-    cubic-bezier(.77,0,.18,1);
-}
+    .menu-button.active span:last-child {
+      transform:
+        translateY(-3px)
+        rotate(-45deg);
+    }
 
-.page-transition.active {
-  opacity: 1;
-  visibility: visible;
 
-  clip-path: inset(0);
-}
+    /* ==================================================
+       MENU OVERLAY
+       NON CAMBIARE
+    ================================================== */
 
-.page-transition.revealing {
-  opacity: 1;
-  visibility: visible;
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
 
-  clip-path: inset(0 0 100% 0);
-}
+      z-index: 700;
 
-.transition-name {
-  font-family: var(--serif);
+      background: var(--burgundy);
+      color: var(--cream);
 
-  font-size: 18vw;
-  line-height: .75;
+      padding: 120px 18px 28px;
 
-  color: var(--cream);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
-  text-align: center;
+      clip-path:
+        inset(0 0 100% 0);
 
-  opacity: 0;
+      transition:
+        clip-path .75s
+        cubic-bezier(.77,0,.18,1);
+    }
 
-  transform: translateY(20px);
+    .menu-overlay.open {
+      clip-path: inset(0);
+    }
 
-  transition:
-    opacity .3s ease,
-    transform .5s
-    cubic-bezier(.2,.8,.2,1);
-}
+    .menu-meta {
+      font-size: 8px;
 
-.page-transition.active .transition-name {
-  opacity: 1;
+      letter-spacing: .2em;
 
-  transform: translateY(0);
-} 
-  
-  /* ==================================================
-   MOBILE PORTFOLIO
-================================================== */
+      text-transform: uppercase;
 
-.portfolio-mobile {
-  position: relative;
-  overflow: hidden;
-}
+      opacity: .55;
+    }
 
+    .menu-links {
+      display: flex;
 
-/* ==================================================
-   PORTFOLIO HERO
-================================================== */
+      flex-direction: column;
 
-.portfolio-hero {
-  min-height: 76svh;
+      gap: 18px;
+    }
 
-  padding: 110px 17px 55px;
+    .menu-link {
+      color: var(--cream);
 
-  position: relative;
+      text-decoration: none;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+      font-family: var(--serif);
 
-  overflow: hidden;
-}
+      font-size: 18vw;
 
-.portfolio-hero::before {
-  content: "";
+      line-height: .72;
 
-  position: absolute;
+      letter-spacing: -.06em;
 
-  width: 210px;
-  height: 155px;
+      transform: translateX(-30px);
 
-  right: -95px;
-  top: 115px;
+      opacity: 0;
 
-  background: var(--pink);
+      transition:
+        transform .6s
+        cubic-bezier(.2,.8,.2,1),
+        opacity .45s ease,
+        color .25s ease;
+    }
 
-  border-radius:
-    57% 43% 49% 51% /
-    44% 59% 41% 56%;
+    .menu-overlay.open .menu-link {
+      transform: translateX(0);
 
-  opacity: .42;
+      opacity: 1;
+    }
 
-  transform: rotate(-13deg);
+    .menu-overlay.open .menu-link:nth-child(1) {
+      transition-delay: .08s;
+    }
 
-  z-index: 0;
-}
+    .menu-overlay.open .menu-link:nth-child(2) {
+      transition-delay: .13s;
+    }
 
-  .portfolio-hero::after {
-  content: "";
+    .menu-overlay.open .menu-link:nth-child(3) {
+      transition-delay: .18s;
+    }
 
-  position: absolute;
+    .menu-overlay.open .menu-link:nth-child(4) {
+      transition-delay: .23s;
+    }
 
-  width: 90px;
-  height: 1px;
+    .menu-link:active {
+      color: var(--pink);
 
-  left: 17px;
-  top: 42%;
+      transform:
+        translateX(14px)
+        skewX(-3deg);
+    }
 
-  background: var(--line);
+    .menu-footer {
+      display: flex;
 
-  transform: rotate(-2deg);
+      justify-content: space-between;
 
-  z-index: 1;
-}
+      font-size: 8px;
 
-.portfolio-hero .section-label {
-  display: block;
+      letter-spacing: .16em;
 
-  margin-bottom: 22px;
+      text-transform: uppercase;
 
-  font-size: 8px;
-  letter-spacing: .2em;
-  text-transform: uppercase;
+      opacity: .5;
+    }
 
-  opacity: .45;
-}
 
-.portfolio-title {
-  position: relative;
-  z-index: 2;
+    /* ==================================================
+       PORTFOLIO HERO
+    ================================================== */
 
-  font-family: var(--serif);
+    .portfolio-hero {
+      min-height: 91svh;
 
-  font-size: 21vw;
-  line-height: .76;
+      padding:
+        125px
+        17px
+        65px;
 
-  letter-spacing: -.065em;
+      position: relative;
 
-  font-weight: 400;
-}
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
-.portfolio-title span {
-  display: block;
+      overflow: hidden;
+    }
 
-  color: var(--burgundy);
+    .hero-top {
+      display: flex;
 
-  margin-left: 10vw;
+      justify-content: space-between;
 
-  font-style: italic;
-}
+      align-items: flex-start;
+    }
 
-.portfolio-description {
-  position: relative;
-  z-index: 2;
+    .hero-index {
+      font-size: 8px;
 
-  width: 76%;
+      letter-spacing: .2em;
 
-  margin: 32px 0 0 auto;
+      text-transform: uppercase;
 
-  font-size: 11px;
-  line-height: 1.55;
+      opacity: .45;
+    }
 
-  opacity: .62;
-}
+    .hero-note {
+      width: 38%;
 
+      font-size: 8px;
 
-/* ==================================================
-   PORTFOLIO INDEX
-================================================== */
+      line-height: 1.5;
 
-.portfolio-index {
-  padding: 55px 17px 45px;
-}
+      text-align: right;
 
-.index-intro {
-  display: flex;
+      opacity: .55;
+    }
 
-  justify-content: space-between;
-  align-items: flex-start;
+    .portfolio-hero-title {
+      position: relative;
 
-  margin-bottom: 32px;
-}
+      z-index: 3;
 
-.index-intro > span {
-  font-size: 8px;
+      font-family: var(--serif);
 
-  letter-spacing: .2em;
+      font-size: 19vw;
 
-  opacity: .45;
-}
+      line-height: .78;
 
-.index-intro p {
-  width: 48%;
+      letter-spacing: -.065em;
+    }
 
-  margin: 0;
+    .portfolio-hero-title span {
+      display: block;
 
-  font-size: 10px;
-  line-height: 1.45;
+      color: var(--burgundy);
 
-  opacity: .62;
-}
+      will-change: transform;
 
-.portfolio-index-list {
-  border-top: 1px solid var(--line);
-}
+      transition:
+        transform .7s
+        cubic-bezier(.2,.8,.2,1);
+    }
 
-.portfolio-index-item {
-  display: grid;
+    .portfolio-hero-title span:nth-child(2) {
+      margin-left: 9vw;
 
-  grid-template-columns:
-    30px 1fr 22px;
+      color: var(--black);
+    }
 
-  align-items: center;
+    .portfolio-hero.is-active
+    .portfolio-hero-title span:first-child {
+      transform:
+        translateX(4vw)
+        rotate(-1deg);
+    }
 
-  min-height: 72px;
+    .portfolio-hero.is-active
+    .portfolio-hero-title span:nth-child(2) {
+      transform:
+        translateX(-3vw)
+        rotate(.7deg);
+    }
 
-  border-bottom: 1px solid var(--line);
+    .hero-bottom {
+      position: relative;
 
-  color: var(--black);
+      z-index: 4;
 
-  text-decoration: none;
+      width: 82%;
 
-  transition:
-    color .3s ease,
-    transform .45s
-    cubic-bezier(.2,.8,.2,1);
-}
+      margin-left: auto;
+    }
 
-.index-number {
-  font-size: 8px;
+    .hero-bottom p {
+      font-family: var(--serif);
 
-  opacity: .42;
-}
+      font-size: 19px;
 
-.index-name {
-  font-family: var(--serif);
+      line-height: 1.05;
+    }
 
-  font-size: 25px;
+    .hero-bottom em {
+      color: var(--burgundy);
 
-  line-height: 1;
-}
+      font-style: italic;
+    }
 
-.index-arrow {
-  font-size: 17px;
+    .hero-scroll {
+      margin-top: 25px;
 
-  transition:
-    transform .4s
-    cubic-bezier(.2,.8,.2,1);
-}
+      display: flex;
 
-.portfolio-index-item:active {
-  color: var(--burgundy);
+      align-items: center;
 
-  transform: translateX(5px);
-}
+      gap: 10px;
 
-.portfolio-index-item:active .index-arrow {
-  transform:
-    translate(3px,-3px);
-}
+      font-size: 7px;
 
+      letter-spacing: .18em;
 
-/* ==================================================
-   CATEGORY SECTIONS
-================================================== */
+      text-transform: uppercase;
 
-.portfolio-category-section {
-  min-height: 72svh;
+      opacity: .45;
+    }
 
-  padding: 75px 17px 70px;
+    .hero-scroll-line {
+      width: 42px;
 
-  position: relative;
+      height: 1px;
 
-  overflow: hidden;
-}
+      background: var(--black);
+    }
 
-.category-meta {
-  display: flex;
+    .hero-mark {
+      position: absolute;
 
-  justify-content: space-between;
+      width: 150px;
+      height: 120px;
 
-  margin-bottom: 42px;
+      right: -65px;
+      top: 45%;
 
-  font-size: 8px;
+      background: var(--pink);
 
-  letter-spacing: .18em;
+      opacity: .48;
 
-  text-transform: uppercase;
+      border-radius:
+        57% 43% 51% 49% /
+        43% 58% 42% 57%;
 
-  opacity: .45;
-}
+      transform:
+        rotate(-8deg);
 
-.portfolio-category-section h2 {
-  width: 95%;
+      transition:
+        transform .8s
+        cubic-bezier(.2,.8,.2,1),
+        border-radius .8s ease;
+    }
 
-  margin: 0;
+    .portfolio-hero.is-active
+    .hero-mark {
+      transform:
+        translateX(-12px)
+        rotate(7deg)
+        scale(1.08);
 
-  font-family: var(--serif);
+      border-radius:
+        42% 58% 47% 53% /
+        57% 42% 58% 43%;
+    }
 
-  font-size: 14vw;
+    .hero-line {
+      position: absolute;
 
-  line-height: .8;
+      width: 105px;
+      height: 1px;
 
-  letter-spacing: -.055em;
+      background: var(--line);
 
-  font-weight: 400;
-}
+      pointer-events: none;
+    }
 
-.portfolio-category-section h2 em {
-  display: block;
+    .hero-line.one {
+      top: 36%;
+      left: -20px;
+    }
 
-  margin-left: 9vw;
+    .hero-line.two {
+      right: 7%;
+      top: 27%;
+    }
 
-  color: var(--burgundy);
+    .hero-line.three {
+      left: 10%;
+      bottom: 20%;
+    }
 
-  font-style: italic;
-}
 
-.portfolio-category-section > p {
-  width: 78%;
+    /* ==================================================
+       INTRO TEXT
+    ================================================== */
 
-  margin: 45px 0 0 auto;
+    .portfolio-statement {
+      padding:
+        35px
+        17px
+        70px;
 
-  font-size: 11px;
+      position: relative;
+    }
 
-  line-height: 1.55;
+    .statement-number {
+      font-size: 8px;
 
-  opacity: .62;
-}
+      letter-spacing: .2em;
 
-.category-projects {
-  margin-top: 55px;
-}
+      text-transform: uppercase;
 
+      opacity: .45;
 
-/* ==================================================
-   FOOTER
-================================================== */
+      margin-bottom: 35px;
+    }
 
-.mobile-footer {
-  padding: 75px 17px 40px;
+    .statement-title {
+      font-family: var(--serif);
 
-  background: var(--burgundy);
+      font-size: 12vw;
 
-  color: var(--cream);
+      line-height: .86;
 
-  text-align: center;
-}
+      letter-spacing: -.05em;
+    }
 
-.mobile-footer > span {
-  display: block;
+    .statement-title em {
+      color: var(--burgundy);
 
-  font-family: var(--serif);
+      font-style: italic;
+    }
 
-  font-size: 25vw;
+    .statement-copy {
+      width: 77%;
 
-  line-height: .75;
+      margin:
+        35px
+        0
+        0
+        auto;
 
-  letter-spacing: -.08em;
-}
+      font-size: 10px;
 
-.mobile-footer p {
-  margin: 35px auto 0;
+      line-height: 1.55;
 
-  width: 75%;
+      opacity: .62;
+    }
 
-  font-size: 10px;
 
-  line-height: 1.5;
+    /* ==================================================
+       CATEGORY INDEX
+    ================================================== */
 
-  opacity: .7;
-}
-</style>
+    .category-index {
+      padding:
+        35px
+        17px
+        65px;
+
+      position: relative;
+    }
+
+    .category-header {
+      display: flex;
+
+      align-items: flex-end;
+
+      justify-content: space-between;
+
+      margin-bottom: 30px;
+    }
+
+    .category-header h2 {
+      font-family: var(--serif);
+
+      font-size: 13vw;
+
+      line-height: .8;
+
+      letter-spacing: -.055em;
+    }
+
+    .category-header span {
+      font-size: 7px;
+
+      letter-spacing: .18em;
+
+      text-transform: uppercase;
+
+      opacity: .45;
+
+      padding-bottom: 4px;
+    }
+
+    .category-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .category {
+      width: 100%;
+
+      min-height: 100px;
+
+      padding: 19px 0;
+
+      display: grid;
+
+      grid-template-columns:
+        28px 1fr 22px;
+
+      gap: 8px;
+
+      align-items: center;
+
+      border-bottom: 1px solid var(--line);
+
+      color: var(--black);
+
+      text-decoration: none;
+
+      position: relative;
+
+      overflow: hidden;
+
+      transition:
+        padding .45s
+        cubic-bezier(.2,.8,.2,1);
+    }
+
+    .category::before {
+      content: "";
+
+      position: absolute;
+
+      width: 80px;
+      height: 60px;
+
+      right: 35px;
+      top: 20px;
+
+      background: var(--pink);
+
+      opacity: 0;
+
+      border-radius:
+        50% 40% 55% 45%;
+
+      transform:
+        scale(.3)
+        rotate(-12deg);
+
+      transition:
+        opacity .35s ease,
+        transform .5s
+        cubic-bezier(.2,.8,.2,1);
+    }
+
+    .category:active {
+      padding-left: 8px;
+    }
+
+    .category:active::before {
+      opacity: .45;
+
+      transform:
+        scale(1)
+        rotate(8deg);
+    }
+
+    .category-number {
+      font-size: 8px;
+
+      color: var(--burgundy);
+
+      opacity: .8;
+    }
+
+    .category-info {
+      position: relative;
+
+      z-index: 2;
+    }
+
+    .category-label {
+      font-size: 7px;
+
+      letter-spacing: .18em;
+
+      text-transform: uppercase;
+
+      opacity: .45;
+
+      margin-bottom: 7px;
+    }
+
+    .category-title {
+      font-family: var(--serif);
+
+      font-size: 27px;
+
+      line-height: .9;
+
+      letter-spacing: -.03em;
+    }
+
+    .category-arrow {
+      position: relative;
+
+      z-index: 2;
+
+      font-size: 19px;
+
+      transition:
+        transform .35s
+        cubic-bezier(.2,.8,.2,1);
+    }
+
+    .category:active .category-arrow {
+      transform:
+        translate(4px,-4px);
+    }
+
+
+    /* ==================================================
+       PROJECT SECTION
+    ================================================== */
+
+    .project-section {
+      padding:
+        60px
+        17px
+        75px;
+
+      position: relative;
+
+      overflow: hidden;
+
+      border-top:
+        1px solid
+        var(--line);
+    }
+
+    .project-head {
+      display: grid;
+
+      grid-template-columns:
+        50px 1fr;
+
+      gap: 10px;
+
+      margin-bottom: 27px;
+    }
+
+    .project-number {
+      font-family: var(--serif);
+
+      font-size: 43px;
+
+      line-height: .8;
+
+      color: var(--burgundy);
+
+      letter-spacing: -.04em;
+    }
+
+    .project-category {
+      font-size: 7px;
+
+      letter-spacing: .18em;
+
+      text-transform: uppercase;
+
+      opacity: .48;
+
+      padding-top: 5px;
+    }
+
+    .project-title {
+      font-family: var(--serif);
+
+      font-size: 14vw;
+
+      line-height: .79;
+
+      letter-spacing: -.06em;
+
+      margin-bottom: 20px;
+    }
+
+    .project-title em {
+      color: var(--burgundy);
+
+      font-style: italic;
+    }
+
+    .project-intro {
+      width: 84%;
+
+      margin-left: auto;
+
+      font-size: 10px;
+
+      line-height: 1.55;
+
+      opacity: .65;
+
+      margin-bottom: 28px;
+    }
+
+
+    /* ==================================================
+       PROJECT MEDIA
+       QUESTI SONO GLI SPAZI PER I TUOI PROGETTI
+    ================================================== */
+
+    .project-gallery {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 8px;
+
+      margin-top: 25px;
+    }
+
+    .project-media {
+      position: relative;
+
+      overflow: hidden;
+
+      background:
+        rgba(125,38,53,.055);
+
+      border:
+        1px solid
+        rgba(17,17,17,.12);
+
+      min-height: 180px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      transition:
+        transform .55s
+        cubic-bezier(.2,.8,.2,1);
+    }
+
+    .project-media.featured {
+      grid-column: 1 / -1;
+
+      min-height: 275px;
+    }
+
+    .project-media:active {
+      transform:
+        scale(.985)
+        rotate(-.5deg);
+    }
+
+    .project-media::before {
+      content: "";
+
+      position: absolute;
+
+      width: 75px;
+      height: 52px;
+
+      background: var(--pink);
+
+      opacity: .24;
+
+      border-radius:
+        58% 42% 48% 52% /
+        45% 56% 44% 55%;
+
+      transform:
+        rotate(-14deg);
+    }
+
+    .media-placeholder {
+      position: relative;
+
+      z-index: 2;
+
+      text-align: center;
+
+      font-size: 7px;
+
+      letter-spacing: .17em;
+
+      text-transform: uppercase;
+
+      opacity: .42;
+    }
+
+    .media-placeholder strong {
+      display: block;
+
+      font-family: var(--serif);
+
+      font-size: 25px;
+
+      line-height: 1;
+
+      letter-spacing: -.03em;
+
+      text-transform: none;
+
+      margin-bottom: 7px;
+
+      color: var(--burgundy);
+
+      opacity: .8;
+    }
+
+    /*
+      QUANDO AVRAI LE IMMAGINI:
+
+      elimina il contenuto del div
+      e sostituiscilo con:
+
+      <img
+        src="NOME-FILE.jpg"
+        alt="Descrizione progetto"
+      >
+
+      Il CSS qui sotto le sistema automaticamente.
+    */
+
+    .project-media img {
+      width: 100%;
+      height: 100%;
+
+      min-height: inherit;
+
+      display: block;
+
+      object-fit: cover;
+    }
+
+
+    /* ==================================================
+       PROJECT DETAILS
+    ================================================== */
+
+    .project-details {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 25px;
+
+      margin-top: 28px;
+
+      padding-top: 20px;
+
+      border-top:
+        1px solid
+        var(--line);
+    }
+
+    .detail-label {
+      display: block;
+
+      font-size: 7px;
+
+      letter-spacing: .16em;
+
+      text-transform: uppercase;
+
+      opacity: .42;
+
+      margin-bottom: 7px;
+    }
+
+    .detail-value {
+      font-family: var(--serif);
+
+      font-size: 17px;
+
+      line-height: 1;
+    }
+
+
+    /* ==================================================
+       PROJECT 01
+    ================================================== */
+
+    .project-brand {
+      background:
+        linear-gradient(
+          180deg,
+          var(--cream) 0%,
+          rgba(125,38,53,.035) 100%
+        );
+    }
+
+
+    /* ==================================================
+       PROJECT 02
+    ================================================== */
+
+    .project-social {
+      background: var(--cream);
+    }
+
+    .project-social .project-media::before {
+      background: var(--burgundy);
+    }
+
+
+    /* ==================================================
+       PROJECT 03
+    ================================================== */
+
+    .project-graphic {
+      background:
+        rgba(17,17,17,.018);
+    }
+
+    .project-graphic .project-media {
+      min-height: 210px;
+    }
+
+
+    /* ==================================================
+       PROJECT 04
+    ================================================== */
+
+    .project-creative {
+      background: var(--burgundy);
+
+      color: var(--cream);
+    }
+
+    .project-creative .project-number,
+    .project-creative .project-title em {
+      color: var(--pink);
+    }
+
+    .project-creative .project-category,
+    .project-creative .project-intro {
+      opacity: .62;
+    }
+
+    .project-creative .project-details {
+      border-color:
+        rgba(244,239,231,.28);
+    }
+
+    .project-creative .detail-label {
+      opacity: .5;
+    }
+
+    .project-creative .project-media {
+      background:
+        rgba(244,239,231,.08);
+
+      border-color:
+        rgba(244,239,231,.22);
+    }
+
+    .project-creative .media-placeholder {
+      color: var(--cream);
+    }
+
+    .project-creative .media-placeholder strong {
+      color: var(--pink);
+    }
+
+
+    /* ==================================================
+       PROJECT CTA
+    ================================================== */
+
+    .project-cta {
+      margin-top: 35px;
+
+      padding:
+        17px
+        0;
+
+      border-top:
+        1px solid
+        var(--line);
+
+      border-bottom:
+        1px solid
+        var(--line);
+
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      text-decoration: none;
+
+      color: inherit;
+
+      font-size: 8px;
+
+      letter-spacing: .17em;
+
+      text-transform: uppercase;
+    }
+
+    .project-cta span:last-child {
+      font-size: 18px;
+
+      transition:
+        transform .35s
+        cubic-bezier(.2,.8,.2,1);
+    }
+
+    .project-cta:active span:last-child {
+      transform:
+        translate(5px,-5px);
+    }
+
+
+    /* ==================================================
+       CLOSING
+    ================================================== */
+
+    .portfolio-closing {
+      min-height: 76svh;
+
+      padding:
+        85px
+        17px
+        70px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+    .closing-label {
+      font-size: 8px;
+
+      letter-spacing: .2em;
+
+      text-transform: uppercase;
+
+      opacity: .45;
+
+      margin-bottom: 40px;
+    }
+
+    .closing-title {
+      position: relative;
+
+      z-index: 2;
+
+      font-family: var(--serif);
+
+      font-size: 15vw;
+
+      line-height: .8;
+
+      letter-spacing: -.06em;
+    }
+
+    .closing-title em {
+      color: var(--burgundy);
+
+      font-style: italic;
+    }
+
+    .closing-copy {
+      width: 78%;
+
+      margin:
+        38px
+        0
+        0
+        auto;
+
+      font-size: 10px;
+
+      line-height: 1.55;
+
+      opacity: .62;
+    }
+
+    .closing-ink {
+      position: absolute;
+
+      width: 210px;
+      height: 155px;
+
+      right: -100px;
+      bottom: -20px;
+
+      background: var(--pink);
+
+      opacity: .38;
+
+      border-radius:
+        57% 43% 51% 49% /
+        43% 58% 42% 57%;
+
+      transform:
+        rotate(-10deg);
+
+      transition:
+        transform .9s
+        cubic-bezier(.2,.8,.2,1);
+    }
+
+    .portfolio-closing.active
+    .closing-ink {
+      transform:
+        translateX(-18px)
+        rotate(8deg)
+        scale(1.08);
+    }
+
+
+    /* ==================================================
+       CONTACT STRIP
+    ================================================== */
+
+    .contact-strip {
+      background: var(--burgundy);
+
+      color: var(--cream);
+
+      padding:
+        45px
+        17px
+        50px;
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+    .contact-strip::after {
+      content: "G";
+
+      position: absolute;
+
+      right: -14vw;
+      bottom: -16vw;
+
+      font-family: var(--serif);
+
+      font-size: 75vw;
+
+      line-height: .7;
+
+      color:
+        rgba(244,239,231,.055);
+
+      pointer-events: none;
+    }
+
+    .contact-strip-label {
+      position: relative;
+
+      z-index: 2;
+
+      font-size: 7px;
+
+      letter-spacing: .2em;
+
+      text-transform: uppercase;
+
+      opacity: .5;
+
+      margin-bottom: 25px;
+    }
+
+    .contact-strip h2 {
+      position: relative;
+
+      z-index: 2;
+
+      font-family: var(--serif);
+
+      font-size: 15vw;
+
+      line-height: .78;
+
+      letter-spacing: -.06em;
+
+      margin-bottom: 35px;
+    }
+
+    .contact-button {
+      position: relative;
+
+      z-index: 2;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      color: var(--cream);
+
+      text-decoration: none;
+
+      padding:
+        17px
+        0;
+
+      border-top:
+        1px solid
+        rgba(244,239,231,.35);
+
+      border-bottom:
+        1px solid
+        rgba(244,239,231,.35);
+
+      font-size: 8px;
+
+      letter-spacing: .18em;
+
+      text-transform: uppercase;
+    }
+
+    .contact-button span:last-child {
+      font-size: 19px;
+    }
+
+
+    /* ==================================================
+       FOOTER
+    ================================================== */
+
+    .footer {
+      background: var(--burgundy);
+
+      color: var(--cream);
+
+      padding:
+        25px
+        17px
+        45px;
+
+      border-top:
+        1px solid
+        rgba(244,239,231,.2);
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: flex-end;
+    }
+
+    .footer-brand {
+      font-family: var(--serif);
+
+      font-size: 19px;
+
+      line-height: .85;
+    }
+
+    .footer-note {
+      width: 45%;
+
+      font-family: var(--serif);
+
+      font-size: 12px;
+
+      line-height: .95;
+
+      text-align: right;
+    }
+
+    .footer-copy {
+      position: absolute;
+
+      left: 17px;
+
+      margin-top: 55px;
+
+      font-family: var(--sans);
+
+      font-size: 6px;
+
+      letter-spacing: .16em;
+
+      text-transform: uppercase;
+
+      opacity: .38;
+    }
+
+
+    /* ==================================================
+       TOUCH MARK
+    ================================================== */
+
+    .touch-mark {
+      position: fixed;
+
+      width: 12px;
+      height: 12px;
+
+      border-radius:
+        50% 45% 55% 40%;
+
+      background: var(--burgundy);
+
+      pointer-events: none;
+
+      z-index: 1800;
+
+      transform:
+        translate(-50%,-50%)
+        scale(0);
+
+      animation:
+        touchExpand .75s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
+    }
+
+    @keyframes touchExpand {
+
+      0% {
+        transform:
+          translate(-50%,-50%)
+          scale(0);
+
+        opacity: .6;
+      }
+
+      65% {
+        transform:
+          translate(-50%,-50%)
+          scale(4.5);
+
+        opacity: .16;
+      }
+
+      100% {
+        transform:
+          translate(-50%,-50%)
+          scale(7);
+
+        opacity: 0;
+      }
+
+    }
+
+
+    /* ==================================================
+       SCROLL REVEAL
+    ================================================== */
+
+    .reveal {
+      opacity: 0;
+
+      transform:
+        translateY(35px);
+
+      transition:
+        opacity .8s ease,
+        transform .8s
+        cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+
+      transform:
+        translateY(0);
+    }
+
+
+    /* ==================================================
+       PAGE TRANSITION
+    ================================================== */
+
+    .page-transition {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 4000;
+
+      pointer-events: none;
+
+      background: var(--burgundy);
+
+      color: var(--cream);
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      opacity: 0;
+      visibility: hidden;
+
+      clip-path:
+        inset(100% 0 0 0);
+
+      transition:
+        opacity .1s ease,
+        visibility .1s ease,
+        clip-path .75s
+        cubic-bezier(.77,0,.18,1);
+    }
+
+    .page-transition.active {
+      opacity: 1;
+
+      visibility: visible;
+
+      clip-path:
+        inset(0);
+    }
+
+    .page-transition.revealing {
+      opacity: 1;
+
+      visibility: visible;
+
+      clip-path:
+        inset(0 0 100% 0);
+    }
+
+    .transition-name {
+      font-family: var(--serif);
+
+      font-size: 18vw;
+
+      line-height: .75;
+
+      color: var(--cream);
+
+      text-align: center;
+
+      opacity: 0;
+
+      transform:
+        translateY(20px);
+
+      transition:
+        opacity .3s ease,
+        transform .5s
+        cubic-bezier(.2,.8,.2,1);
+    }
+
+    .page-transition.active
+    .transition-name {
+      opacity: 1;
+
+      transform:
+        translateY(0);
+    }
+
+
+    /* ==================================================
+       REDUCED MOTION
+    ================================================== */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+
+        animation-duration:
+          .01ms !important;
+
+        animation-iteration-count:
+          1 !important;
+
+        transition-duration:
+          .01ms !important;
+
+        scroll-behavior:
+          auto !important;
+      }
+
+    }
+
+  </style>
 
 </head>
 
+
 <body>
+
+
+  <!-- ==================================================
+       INTRO
+  ================================================== -->
+
+  <div class="intro">
+
+    <div class="intro-name">
+      GDL.
+    </div>
+
+  </div>
+
+
+  <!-- ==================================================
+       NAVBAR
+  ================================================== -->
+
+  <header class="navbar">
+
+    <a href="mobile.html">
+
+      <img
+        src="IMG-20260904-WA0041.jpg"
+        alt="Greta Design Lab"
+        class="logo"
+      >
+
+    </a>
+
+
+    <button
+      class="menu-button"
+      id="menuButton"
+      aria-label="Apri menu"
+      aria-expanded="false"
+      type="button"
+    >
+
+      <span></span>
+      <span></span>
+
+    </button>
+
+  </header>
+
+
+  <!-- ==================================================
+       MENU
+  ================================================== -->
+
+  <nav
+    class="menu-overlay"
+    id="menuOverlay"
+    aria-hidden="true"
+  >
+
+    <div class="menu-meta">
+      Greta Design Lab — menu
+    </div>
+
+
+    <div class="menu-links">
+
+      <a
+        href="mobile.html"
+        class="menu-link page-link"
+        data-label="Home"
+      >
+        Home
+      </a>
+
+      <a
+        href="mobile-portfolio.html"
+        class="menu-link page-link"
+        data-label="Portfolio"
+      >
+        Portfolio
+      </a>
+
+      <a
+        href="mobile-chi-sono.html"
+        class="menu-link page-link"
+        data-label="Chi sono"
+      >
+        Chi sono
+      </a>
+
+      <a
+        href="mobile-contatti.html"
+        class="menu-link page-link"
+        data-label="Contatti"
+      >
+        Contatti
+      </a>
+
+    </div>
+
+
+    <div class="menu-footer">
+
+      <span>GDL</span>
+
+      <span>2026</span>
+
+    </div>
+
+  </nav>
+
+
+  <!-- ==================================================
+       MAIN
+  ================================================== -->
+
+  <main>
+
+
+    <!-- ==================================================
+         HERO
+    ================================================== -->
+
+    <section
+      class="portfolio-hero"
+      id="portfolioHero"
+    >
+
+      <div class="hero-top">
+
+        <span class="hero-index">
+          00 — Portfolio
+        </span>
+
+        <span class="hero-note">
+          idee, identità,
+          esperimenti.
+        </span>
+
+      </div>
+
+
+      <h1 class="portfolio-hero-title">
+
+        <span>
+          IL MIO
+        </span>
+
+        <span>
+          PORTFOLIO.
+        </span>
+
+      </h1>
+
+
+      <div class="hero-bottom">
+
+        <p>
+          Idee, esperimenti e progetti
+          trasformati in <em>immagini.</em>
+        </p>
+
+        <div class="hero-scroll">
+
+          <span class="hero-scroll-line"></span>
+
+          <span>
+            scorri per esplorare
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="hero-mark"></div>
+
+      <div class="hero-line one"></div>
+      <div class="hero-line two"></div>
+      <div class="hero-line three"></div>
+
+    </section>
+
+
+    <!-- ==================================================
+         STATEMENT
+    ================================================== -->
+
+    <section class="portfolio-statement reveal">
+
+      <div class="statement-number">
+        01 — Metodo
+      </div>
+
+      <h2 class="statement-title">
+
+        Ogni progetto
+        <em>parte da un'idea.</em>
+
+      </h2>
+
+      <p class="statement-copy">
+
+        Poi arrivano ricerca,
+        forma e identità.
+        Qui raccolgo alcuni
+        dei progetti che hanno
+        costruito il mio percorso.
+
+      </p>
+
+    </section>
+
+
+    <!-- ==================================================
+         CATEGORY INDEX
+    ================================================== -->
+
+    <section class="category-index">
+
+      <div class="category-header reveal">
+
+        <h2>
+          Esplora.
+        </h2>
+
+        <span>
+          02 — categorie
+        </span>
+
+      </div>
+
+
+      <div class="category-list">
+
+
+        <a
+          href="#brand"
+          class="category reveal"
+        >
+
+          <span class="category-number">
+            01
+          </span>
+
+          <div class="category-info">
+
+            <p class="category-label">
+              Brand Identity
+            </p>
+
+            <h3 class="category-title">
+              Identità che
+              prendono forma.
+            </h3>
+
+          </div>
+
+          <span class="category-arrow">
+            ↗
+          </span>
+
+        </a>
+
+
+        <a
+          href="#social"
+          class="category reveal"
+        >
+
+          <span class="category-number">
+            02
+          </span>
+
+          <div class="category-info">
+
+            <p class="category-label">
+              Social Design
+            </p>
+
+            <h3 class="category-title">
+              Idee pensate
+              per farsi vedere.
+            </h3>
+
+          </div>
+
+          <span class="category-arrow">
+            ↗
+          </span>
+
+        </a>
+
+
+        <a
+          href="#graphic"
+          class="category reveal"
+        >
+
+          <span class="category-number">
+            03
+          </span>
+
+          <div class="category-info">
+
+            <p class="category-label">
+              Graphic Design
+            </p>
+
+            <h3 class="category-title">
+              Quando l'idea
+              diventa materia.
+            </h3>
+
+          </div>
+
+          <span class="category-arrow">
+            ↗
+          </span>
+
+        </a>
+
+
+        <a
+          href="#creative"
+          class="category reveal"
+        >
+
+          <span class="category-number">
+            04
+          </span>
+
+          <div class="category-info">
+
+            <p class="category-label">
+              Creative Design
+            </p>
+
+            <h3 class="category-title">
+              Fuori
+              dagli schemi.
+            </h3>
+
+          </div>
+
+          <span class="category-arrow">
+            ↗
+          </span>
+
+        </a>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         BRAND IDENTITY
+         QUI INSERIRAI I TUOI PROGETTI
+    ================================================== -->
+
+    <section
+      class="project-section project-brand"
+      id="brand"
+    >
+
+      <div class="project-head reveal">
+
+        <span class="project-number">
+          01
+        </span>
+
+        <span class="project-category">
+          Brand Identity
+        </span>
+
+      </div>
+
+
+      <h2 class="project-title reveal">
+
+        Identità che
+        <em>prendono forma.</em>
+
+      </h2>
+
+
+      <p class="project-intro reveal">
+
+        Sistemi visivi costruiti
+        attorno alla personalità
+        di un progetto.
+
+      </p>
+
+
+      <!-- PROGETTI BRAND -->
+
+      <div class="project-gallery">
+
+        <!-- PROGETTO 01 -->
+
+        <div class="project-media featured reveal">
+
+          <div class="media-placeholder">
+
+            <strong>
+              progetto
+            </strong>
+
+            immagine principale
+
+          </div>
+
+        </div>
+
+
+        <!-- PROGETTO 02 -->
+
+        <div class="project-media reveal">
+
+          <div class="media-placeholder">
+
+            <strong>
+              +01
+            </strong>
+
+            immagine
+
+          </div>
+
+        </div>
+
+
+        <!-- PROGETTO 03 -->
+
+        <div class="project-media reveal">
+
+          <div class="media-placeholder">
+
+            <strong>
+              +02
+            </strong>
+
+            immagine
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="project-details reveal">
+
+        <div>
+
+          <span class="detail-label">
+            Focus
+          </span>
+
+          <span class="detail-value">
+            Identità
+          </span>
+
+        </div>
+
+        <div>
+
+          <span class="detail-label">
+            Elementi
+          </span>
+
+          <span class="detail-value">
+            Logo / Type / Color
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         SOCIAL DESIGN
+    ================================================== -->
+
+    <section
+      class="project-section project-social"
+      id="social"
+    >
+
+      <div class="project-head reveal">
+
+        <span class="project-number">
+          02
+        </span>
+
+        <span class="project-category">
+          Social Design
+        </span>
+
+      </div>
+
+
+      <h2 class="project-title reveal">
+
+        Idee pensate
+        <em>per farsi vedere.</em>
+
+      </h2>
+
+
+      <p class="project-intro reveal">
+
+        Visual e contenuti
+        progettati per creare
+        una comunicazione
+        riconoscibile.
+
+      </p>
+
+
+      <div class="project-gallery">
+
+        <div class="project-media featured reveal">
+
+          <div class="media-placeholder">
+
+            <strong>
+              progetto
+            </strong>
+
+            immagine principale
+
+          </div>
+
+        </div>
+
+
+        <div class="project-media reveal">
+
+          <div class="media-placeholder">
+
+            <strong>
+              +01
+            </strong>
+
+            social
+
+          </div>
+
+        </div>
+
+
+        <div class="project-media reveal">
+
+          <div class="media-placeholder">
+
+            <strong>
+              +02
+            </strong>
+
+            social
+
+          </div>
+
+        </div>
+
+
+        <div class="project-media reveal">
+
+          <div class="media-placeholder">
+
+            <strong>
+              +03
+            </strong>
+
+            social
+
+          </div>
+
+        </div>
+
+
+        <div class="project-media reveal">
+
+          <div class="media-placeholder">
+
+            <strong>
+              +04
+            </strong>
+
+            social
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="project-details reveal">
+
+        <div>
+
+          <span class="detail-label">
+            Focus
+          </span>
+
+          <span class="detail-value">
+            Comunicazione
+          </span>
+
+        </div>
+
+        <div>
+
+          <span class="detail-label">
+            Formati
+          </span>
+
+          <span class="detail-value">
+            Post / Story / Reel
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         GRAPHIC DESIGN
+    ================================================== -->
+
+    <section
+      class="project-section project-graphic"
+      id="graphic"
+    >
+
+      <div class="project-head reveal">
+
+        <span class="project-number">
+          03
+        </span>
+
+        <span class="project-category">
+          Graphic Design
+        </span>
+
+      </div>
+
+
+      <h2 class="project-title reveal">
+
+        Quando l'idea
+        <em>diventa materia.</em>
+
+      </h2>
+
+
+      <p class="project-intro reveal">
+
+        Progetti editoriali,
+        stampati e materiali
+        pensati per essere
+        guardati, letti e vissuti.
+
+      </p>
+
+
+      <div class="project-gallery">
+
+        <div class="project-media featured reveal">
+
+          <div class="media-placeholder">
+
+            <strong>
+              progetto
+            </strong>
+
+            immagine principale
+
+          </div>
+
+        </div>
+
+
+        <div class="project-media reveal">
+
+          <div class="media-placeholder">
+
+            <strong>
+              +01
+            </strong>
+
+            editoriale
+
+          </div>
+
+        </div>
+
+
+        <div class="project-media reveal">
+
+          <div class="media-placeholder">
+
+            <strong>
+              +02
+            </strong>
+
+            stampa
+
+          </div>
+
+        </div>
+
+
+        <div class="project-media reveal">
+
+          <div class="media-placeholder">
+
+            <strong>
+              +03
+            </strong>
+
+            materiale
+
+          </div>
+
+        </div>
+
+
+        <div class="project-media reveal">
+
+          <div class="media-placeholder">
+
+            <strong>
+              +04
+            </strong>
+
+            dettaglio
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="project-details reveal">
+
+        <div>
+
+          <span class="detail-label">
+            Focus
+          </span>
+
+          <span class="detail-value">
+            Composizione
+          </span>
+
+        </div>
+
+        <div>
+
+          <span class="detail-label">
+            Output
+          </span>
+
+          <span class="detail-value">
+            Print / Editorial
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         CREATIVE DESIGN
+    ================================================== -->
+
+    <section
+      class="project-section project-creative"
+      id="creative"
+    >
+
+      <div class="project-head reveal">
+
+        <span class="project-number">
+          04
+        </span>
+
+        <span class="project-category">
+          Creative Design
+        </span>
+
+      </div>
+
+
+      <h2 class="project-title reveal">
+
+        Fuori
+        <em>dagli schemi.</em>
+
+      </h2>
+
+
+      <p class="project-intro reveal">
+
+        Esperimenti, idee e
+        progetti che nascono
+        dalla voglia di provare
+        qualcosa di diverso.
+
+      </p>
+
+
+      <div class="project-gallery">
+
+        <div class="project-media featured reveal">
+
+          <div class="media-placeholder">
+
+            <strong>
+              progetto
+            </strong>
+
+            immagine principale
+
+          </div>
+
+        </div>
+
+
+        <div class="project-media reveal">
+
+          <div class="media-placeholder">
+
+            <strong>
+              +01
+            </strong>
+
+            esperimento
+
+          </div>
+
+        </div>
+
+
+        <div class="project-media reveal">
+
+          <div class="media-placeholder">
+
+            <strong>
+              +02
+            </strong>
+
+            concept
+
+          </div>
+
+        </div>
+
+
+        <div class="project-media reveal">
+
+          <div class="media-placeholder">
+
+            <strong>
+              +03
+            </strong>
+
+            progetto
+
+          </div>
+
+        </div>
+
+
+        <div class="project-media reveal">
+
+          <div class="media-placeholder">
+
+            <strong>
+              +04
+            </strong>
+
+            idea
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="project-details reveal">
+
+        <div>
+
+          <span class="detail-label">
+            Focus
+          </span>
+
+          <span class="detail-value">
+            Sperimentazione
+          </span>
+
+        </div>
+
+        <div>
+
+          <span class="detail-label">
+            Regola
+          </span>
+
+          <span class="detail-value">
+            Nessuna, quasi.
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         CLOSING
+    ================================================== -->
+
+    <section
+      class="portfolio-closing reveal"
+      id="closing"
+    >
+
+      <span class="closing-label">
+        05 — Fine / inizio
+      </span>
+
+
+      <h2 class="closing-title">
+
+        La tua
+        <em>idea.</em><br>
+
+        Il mio modo
+        di darle <em>forma.</em>
+
+      </h2>
+
+
+      <p class="closing-copy">
+
+        Perché un progetto non
+        deve solo essere bello.
+        Deve avere qualcosa
+        da dire.
+
+      </p>
+
+
+      <div class="closing-ink"></div>
+
+    </section>
+
+
+    <!-- ==================================================
+         CONTACT
+    ================================================== -->
+
+    <section class="contact-strip">
+
+      <div class="contact-strip-label">
+        Greta Design Lab
+      </div>
+
+
+      <h2>
+        Facciamo<br>
+        qualcosa<br>
+        insieme.
+      </h2>
+
+
+      <a
+        href="mailto:greta.design.lab@gmail.com"
+        class="contact-button"
+      >
+
+        <span>
+          Contattami
+        </span>
+
+        <span>
+          ↗
+        </span>
+
+      </a>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- ==================================================
+       FOOTER
+  ================================================== -->
+
+  <footer class="footer">
+
+    <div class="footer-brand">
+
+      Greta<br>
+      Design<br>
+      Lab.
+
+    </div>
+
+
+    <div class="footer-note">
+
+      Anche la<br>
+      perfezione<br>
+      lascia una macchia.
+
+    </div>
+
+
+    <span class="footer-copy">
+      Greta Design Lab — 2026
+    </span>
+
+  </footer>
+
 
   <!-- ==================================================
        PAGE TRANSITION
@@ -703,11 +2798,6 @@ button {
     class="page-transition"
     id="pageTransition"
   >
-
-    <div class="ink-transition one"></div>
-    <div class="ink-transition two"></div>
-    <div class="ink-transition three"></div>
-    <div class="ink-transition four"></div>
 
     <div
       class="transition-name"
@@ -720,334 +2810,603 @@ button {
 
 
   <!-- ==================================================
-       NAVBAR
+       JAVASCRIPT
   ================================================== -->
 
-  <header class="navbar">
+  <script>
 
-    <a
-      href="mobile.html"
-      class="nav-logo"
-    ><img
-  src="IMG-20260904-WA0041.jpg"
-  alt="Greta Design Lab"
-  class="logo"
->
-    </a>
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
 
-    <button
-      class="menu-toggle"
-      id="menuToggle"
-      type="button"
-      aria-label="Apri menu"
-    >
-      <span></span>
-      <span></span>
-    </button>
 
-  </header>
+        /* ==================================================
+           ELEMENTI
+        ================================================== */
 
+        const body =
+          document.body;
 
-  <!-- ==================================================
-       MENU
-  ================================================== -->
+        const menuButton =
+          document.getElementById(
+            "menuButton"
+          );
 
-  <div
-    class="mobile-menu"
-    id="mobileMenu"
-  >
+        const menuOverlay =
+          document.getElementById(
+            "menuOverlay"
+          );
 
-    <nav class="mobile-menu-links">
+        const pageLinks =
+          document.querySelectorAll(
+            ".page-link"
+          );
 
-      <a href="mobile.html">
-        Home
-      </a>
+        const transition =
+          document.getElementById(
+            "pageTransition"
+          );
 
-      <a
-        href="mobile-portfolio.html"
-        class="active"
-      >
-        Portfolio
-      </a>
+        const transitionName =
+          document.getElementById(
+            "transitionName"
+          );
 
-      <a href="mobile-chi-sono.html">
-        Chi sono
-      </a>
+        const portfolioHero =
+          document.getElementById(
+            "portfolioHero"
+          );
 
-      <a href="mobile-contatti.html">
-        Contatti
-      </a>
+        const closing =
+          document.getElementById(
+            "closing"
+          );
 
-    </nav>
 
-  </div>
+        /* ==================================================
+           MENU
+        ================================================== */
 
+        function openMenu() {
 
-  <!-- ==================================================
-       PORTFOLIO
-  ================================================== -->
+          if (
+            !menuButton ||
+            !menuOverlay
+          ) return;
 
-  <main class="portfolio-mobile">
+          menuButton.classList.add(
+            "active"
+          );
 
+          menuButton.setAttribute(
+            "aria-expanded",
+            "true"
+          );
 
-    <!-- HERO -->
+          menuButton.setAttribute(
+            "aria-label",
+            "Chiudi menu"
+          );
 
-    <section class="portfolio-hero">
+          menuOverlay.classList.add(
+            "open"
+          );
 
-      <span class="section-label">
-        GRETA DESIGN LAB
-      </span>
+          menuOverlay.setAttribute(
+            "aria-hidden",
+            "false"
+          );
 
-      <h1 class="portfolio-title">
-        I miei
-        <span>lavori.</span>
-      </h1>
+          body.classList.add(
+            "menu-open"
+          );
 
-      <p class="portfolio-description">
-        Un insieme di progetti, esperimenti e idee
-        nate lungo il percorso.
-      </p>
+        }
 
-    </section>
 
+        function closeMenu() {
 
-    <!-- INDEX -->
+          if (
+            !menuButton ||
+            !menuOverlay
+          ) return;
 
-    <section class="portfolio-index">
+          menuButton.classList.remove(
+            "active"
+          );
 
-      <div class="index-intro">
+          menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+          );
 
-        <span>INDEX</span>
+          menuButton.setAttribute(
+            "aria-label",
+            "Apri menu"
+          );
 
-        <p>
-          Quattro modi diversi
-          di dare forma a un'idea.
-        </p>
+          menuOverlay.classList.remove(
+            "open"
+          );
 
-      </div>
+          menuOverlay.setAttribute(
+            "aria-hidden",
+            "true"
+          );
 
+          body.classList.remove(
+            "menu-open"
+          );
 
-      <nav class="portfolio-index-list">
+        }
 
-        <a
-          href="#brand"
-          class="portfolio-index-item"
-        >
-          <span class="index-number">01</span>
 
-          <span class="index-name">
-            Brand Identity
-          </span>
+        if (menuButton) {
 
-          <span class="index-arrow">
-            ↗
-          </span>
-        </a>
+          menuButton.addEventListener(
+            "click",
+            () => {
 
+              const isOpen =
+                menuButton.classList.contains(
+                  "active"
+                );
 
-        <a
-          href="#social"
-          class="portfolio-index-item"
-        >
-          <span class="index-number">02</span>
+              if (isOpen) {
 
-          <span class="index-name">
-            Social Design
-          </span>
+                closeMenu();
 
-          <span class="index-arrow">
-            ↗
-          </span>
-        </a>
+              } else {
 
+                openMenu();
 
-        <a
-          href="#graphic"
-          class="portfolio-index-item"
-        >
-          <span class="index-number">03</span>
+              }
 
-          <span class="index-name">
-            Graphic Design
-          </span>
+            }
+          );
 
-          <span class="index-arrow">
-            ↗
-          </span>
-        </a>
+        }
 
 
-        <a
-          href="#creative"
-          class="portfolio-index-item"
-        >
-          <span class="index-number">04</span>
+        /* ==================================================
+           TOUCH MARK
+        ================================================== */
 
-          <span class="index-name">
-            Creative Design
-          </span>
+        function createTouchMark(
+          x,
+          y
+        ) {
 
-          <span class="index-arrow">
-            ↗
-          </span>
-        </a>
+          const mark =
+            document.createElement(
+              "span"
+            );
 
-      </nav>
+          mark.className =
+            "touch-mark";
 
-    </section>
+          mark.style.left =
+            `${x}px`;
 
+          mark.style.top =
+            `${y}px`;
 
-    <!-- ==================================================
-         BRAND IDENTITY
-    ================================================== -->
+          body.appendChild(
+            mark
+          );
 
-    <section
-      class="portfolio-category-section"
-      id="brand"
-    >
+          setTimeout(
+            () => {
+              mark.remove();
+            },
+            800
+          );
 
-      <div class="category-meta">
-        <span>01</span>
-        <span>BRAND IDENTITY</span>
-      </div>
+        }
 
-      <h2>
-        Identità che
-        <em>prendono forma.</em>
-      </h2>
 
-      <p>
-        Progetti costruiti attraverso logo,
-        colori, tipografia e linguaggio visivo.
-      </p>
+        document.addEventListener(
+          "touchstart",
+          (event) => {
 
-      <div class="category-projects">
+            const touch =
+              event.touches[0];
 
-        <!-- PROGETTI QUI -->
+            if (!touch) return;
 
-      </div>
+            if (
+              event.target.closest(
+                ".menu-button"
+              ) ||
+              event.target.closest(
+                ".menu-overlay"
+              )
+            ) {
+              return;
+            }
 
-    </section>
+            createTouchMark(
+              touch.clientX,
+              touch.clientY
+            );
 
+          },
+          {
+            passive: true
+          }
+        );
 
-    <!-- ==================================================
-         SOCIAL DESIGN
-    ================================================== -->
 
-    <section
-      class="portfolio-category-section"
-      id="social"
-    >
+        /* ==================================================
+           HERO INTERACTION
+        ================================================== */
 
-      <div class="category-meta">
-        <span>02</span>
-        <span>SOCIAL DESIGN</span>
-      </div>
+        function updateHero() {
 
-      <h2>
-        Idee pensate
-        <em>per farsi vedere.</em>
-      </h2>
+          if (!portfolioHero)
+            return;
 
-      <p>
-        Grafiche, contenuti e sistemi visivi
-        pensati per comunicare attraverso i social.
-      </p>
+          const scroll =
+            window.scrollY || 0;
 
-      <div class="category-projects">
+          const viewport =
+            window.innerHeight || 1;
 
-        <!-- PROGETTI QUI -->
+          const progress =
+            Math.min(
+              scroll / viewport,
+              1
+            );
 
-      </div>
+          if (
+            progress > .08
+          ) {
 
-    </section>
+            portfolioHero.classList.add(
+              "is-active"
+            );
 
+          } else {
 
-    <!-- ==================================================
-         GRAPHIC DESIGN
-    ================================================== -->
+            portfolioHero.classList.remove(
+              "is-active"
+            );
 
-    <section
-      class="portfolio-category-section"
-      id="graphic"
-    >
+          }
 
-      <div class="category-meta">
-        <span>03</span>
-        <span>GRAPHIC DESIGN</span>
-      </div>
+        }
 
-      <h2>
-        Quando l'idea
-        <em>diventa materia.</em>
-      </h2>
 
-      <p>
-        Brochure, inviti, locandine, guest book
-        e altri progetti dedicati alla comunicazione grafica.
-      </p>
+        window.addEventListener(
+          "scroll",
+          updateHero,
+          {
+            passive: true
+          }
+        );
 
-      <div class="category-projects">
+        updateHero();
 
-        <!-- PROGETTI QUI -->
 
-      </div>
+        /* ==================================================
+           SCROLL REVEAL
+        ================================================== */
 
-    </section>
+        const revealElements =
+          document.querySelectorAll(
+            ".reveal"
+          );
 
 
-    <!-- ==================================================
-         CREATIVE DESIGN
-    ================================================== -->
+        if (
+          "IntersectionObserver"
+          in window
+        ) {
 
-    <section
-      class="portfolio-category-section"
-      id="creative"
-    >
+          const observer =
+            new IntersectionObserver(
+              (
+                entries
+              ) => {
 
-      <div class="category-meta">
-        <span>04</span>
-        <span>CREATIVE DESIGN</span>
-      </div>
+                entries.forEach(
+                  (
+                    entry
+                  ) => {
 
-      <h2>
-        Progetti che
-        <em>non seguono regole.</em>
-      </h2>
+                    if (
+                      entry.isIntersecting
+                    ) {
 
-      <p>
-        Idee, esperimenti e progetti personalizzati
-        nati dalla voglia di trovare nuovi modi per creare.
-      </p>
+                      entry.target.classList.add(
+                        "visible"
+                      );
 
-      <div class="category-projects">
+                      observer.unobserve(
+                        entry.target
+                      );
 
-        <!-- PROGETTI QUI -->
+                    }
 
-      </div>
+                  }
+                );
 
-    </section>
+              },
+              {
+                threshold: .12,
 
+                rootMargin:
+                  "0px 0px -8% 0px"
+              }
+            );
 
-    <!-- ==================================================
-         FOOTER
-    ================================================== -->
 
-    <footer class="mobile-footer">
+          revealElements.forEach(
+            (
+              element
+            ) => {
 
-      <span>GDL.</span>
+              observer.observe(
+                element
+              );
 
-      <p>
-        Anche la perfezione lascia una macchia.
-      </p>
+            }
+          );
 
-    </footer>
+        } else {
 
+          revealElements.forEach(
+            (
+              element
+            ) => {
 
-  </main>
+              element.classList.add(
+                "visible"
+              );
 
+            }
+          );
 
-  <script src="mobile.js"></script>
+        }
+
+
+        /* ==================================================
+           CLOSING INK
+        ================================================== */
+
+        if (closing) {
+
+          const closingObserver =
+            new IntersectionObserver(
+              (
+                entries
+              ) => {
+
+                entries.forEach(
+                  (
+                    entry
+                  ) => {
+
+                    if (
+                      entry.isIntersecting
+                    ) {
+
+                      closing.classList.add(
+                        "active"
+                      );
+
+                    }
+
+                  }
+                );
+
+              },
+              {
+                threshold: .35
+              }
+            );
+
+          closingObserver.observe(
+            closing
+          );
+
+        }
+
+
+        /* ==================================================
+           PAGE TRANSITIONS
+        ================================================== */
+
+        function startPageTransition(
+          href,
+          label
+        ) {
+
+          if (!transition) {
+
+            window.location.href =
+              href;
+
+            return;
+
+          }
+
+
+          if (transitionName) {
+
+            transitionName.textContent =
+              label;
+
+          }
+
+
+          transition.classList.remove(
+            "revealing"
+          );
+
+          transition.classList.add(
+            "active"
+          );
+
+
+          sessionStorage.setItem(
+            "gdl-transition",
+            "true"
+          );
+
+
+          setTimeout(
+            () => {
+
+              window.location.href =
+                href;
+
+            },
+            800
+          );
+
+        }
+
+
+        pageLinks.forEach(
+          (
+            link
+          ) => {
+
+            link.addEventListener(
+              "click",
+              (
+                event
+              ) => {
+
+                const href =
+                  link.getAttribute(
+                    "href"
+                  );
+
+                if (
+                  !href ||
+                  href.startsWith("#")
+                ) {
+                  return;
+                }
+
+                event.preventDefault();
+
+                closeMenu();
+
+                const label =
+                  link.dataset.label ||
+                  "GRETA DESIGN LAB";
+
+                startPageTransition(
+                  href,
+                  label
+                );
+
+              }
+            );
+
+          }
+        );
+
+
+        /* ==================================================
+           INCOMING TRANSITION
+        ================================================== */
+
+        const comingFromPage =
+          sessionStorage.getItem(
+            "gdl-transition"
+          );
+
+
+        if (
+          comingFromPage &&
+          transition
+        ) {
+
+          sessionStorage.removeItem(
+            "gdl-transition"
+          );
+
+
+          transition.style.opacity =
+            "1";
+
+          transition.style.visibility =
+            "visible";
+
+          transition.classList.add(
+            "active"
+          );
+
+
+          setTimeout(
+            () => {
+
+              transition.classList.remove(
+                "active"
+              );
+
+              transition.classList.add(
+                "revealing"
+              );
+
+            },
+            80
+          );
+
+
+          setTimeout(
+            () => {
+
+              transition.classList.remove(
+                "revealing"
+              );
+
+              transition.style.opacity =
+                "0";
+
+              transition.style.visibility =
+                "hidden";
+
+            },
+            850
+          );
+
+        }
+
+
+        /* ==================================================
+           ESC
+        ================================================== */
+
+        document.addEventListener(
+          "keydown",
+          (
+            event
+          ) => {
+
+            if (
+              event.key ===
+              "Escape"
+            ) {
+
+              closeMenu();
+
+            }
+
+          }
+        );
+
+
+      }
+    );
+
+  </script>
+
 
 </body>
+
 </html>
