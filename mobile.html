@@ -2773,38 +2773,163 @@ document
 
     });
 
-
-
     /* ================================================
-       KINETIC WORDS
-    ================================================ */
+   MOBILE MOTION SYSTEM
+================================================ */
 
-    const kineticWords =
-      document.querySelectorAll(".kinetic-word");
+const heroLines =
+  document.querySelectorAll(".hero-line");
+
+const heroWords =
+  document.querySelectorAll(".hero-word");
+
+const heroInk =
+  document.querySelector(".hero-ink");
+
+const kineticWords =
+  document.querySelectorAll(".kinetic-word");
+
+let ticking = false;
 
 
-    window.addEventListener(
-      "scroll",
-      () => {
+function updateMobileMotion() {
 
-        const scrollY = window.scrollY;
+  const scrollY = window.scrollY;
+  const vh = window.innerHeight;
 
-        kineticWords.forEach((word, index) => {
+  /* -----------------------------------------------
+     GRETA / DESIGN / LAB
+  ----------------------------------------------- */
 
-          const direction =
-            index % 2 === 0 ? 1 : -1;
+  const lineBase = [
+    -0.02,
+    0.03,
+    -0.02
+  ];
 
-          const movement =
-            scrollY * 0.045 * direction;
+  heroLines.forEach((line, index) => {
 
-          word.style.transform =
-            `translateX(${movement}px)`;
+    const direction =
+      index === 1 ? -1 : 1;
 
-        });
+    const movement =
+      scrollY * 0.045 * direction;
 
-      },
-      { passive: true }
-    );
+    const base =
+      window.innerWidth * lineBase[index];
+
+    line.style.transform =
+      `translate3d(${base + movement}px, 0, 0)`;
+
+  });
+
+
+  /* -----------------------------------------------
+     IDEA / FORMA / IDENTITÀ
+  ----------------------------------------------- */
+
+  heroWords.forEach((word, index) => {
+
+    const direction =
+      index % 2 === 0 ? 1 : -1;
+
+    const x =
+      scrollY * 0.08 * direction;
+
+    const y =
+      Math.sin(scrollY * 0.008 + index) * 5;
+
+    const rotation =
+      Math.sin(scrollY * 0.006 + index) * 2;
+
+    word.style.transform =
+      `translate3d(${x}px, ${y}px, 0) rotate(${rotation}deg)`;
+
+  });
+
+
+  /* -----------------------------------------------
+     MACCHIA
+  ----------------------------------------------- */
+
+  if (heroInk) {
+
+    const inkMove =
+      scrollY * -0.035;
+
+    const inkRotate =
+      Math.sin(scrollY * 0.004) * 4;
+
+    const inkScale =
+      1 + Math.min(scrollY / vh, 1) * 0.08;
+
+    heroInk.style.transform =
+      `translate3d(0, ${inkMove}px, 0)
+       rotate(${inkRotate}deg)
+       scale(${inkScale})`;
+
+    heroInk.style.borderRadius =
+      `${55 + Math.sin(scrollY * .006) * 5}%
+       ${45 - Math.sin(scrollY * .006) * 5}%
+       ${50 + Math.cos(scrollY * .005) * 7}%
+       ${50 - Math.cos(scrollY * .005) * 7}% /
+       ${45 + Math.sin(scrollY * .004) * 5}%
+       ${55 - Math.sin(scrollY * .004) * 5}%
+       ${43 + Math.cos(scrollY * .006) * 6}%
+       ${57 - Math.cos(scrollY * .006) * 6}%`;
+
+  }
+
+
+  /* -----------------------------------------------
+     ENORMI PAROLE DI SFONDO
+  ----------------------------------------------- */
+
+  kineticWords.forEach((word, index) => {
+
+    const direction =
+      index % 2 === 0 ? 1 : -1;
+
+    const movement =
+      scrollY * 0.12 * direction;
+
+    const rotation =
+      Math.sin(scrollY * 0.003 + index) * 1.5;
+
+    word.style.transform =
+      `translate3d(${movement}px, 0, 0)
+       rotate(${rotation}deg)`;
+
+  });
+
+
+  ticking = false;
+
+}
+
+
+window.addEventListener(
+  "scroll",
+  () => {
+
+    if (!ticking) {
+
+      window.requestAnimationFrame(
+        updateMobileMotion
+      );
+
+      ticking = true;
+
+    }
+
+  },
+  { passive: true }
+);
+
+
+/* posizione iniziale */
+
+updateMobileMotion();
 
 
 
