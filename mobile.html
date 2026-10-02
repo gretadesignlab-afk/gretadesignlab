@@ -757,31 +757,159 @@
        NON TOCCARE
     ================================================== */
 
-    .tiny-trigger {
-      display: inline-block;
+.tiny-trigger {
+  display: inline-block;
 
-      margin-top: 35px;
+  margin-top: 35px;
 
-      font-size: 7px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
+  font-size: 6px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
 
-      color: var(--black);
-      opacity: .28;
+  color: var(--black);
+  opacity: .12;
 
-      border: 0;
-      background: none;
+  border: 0;
+  background: none;
 
-      padding: 8px;
+  padding: 8px;
 
-      cursor: pointer;
+  cursor: pointer;
 
-      transition:
-        opacity .25s ease,
-        color .25s ease,
-        transform .35s
-        cubic-bezier(.2,.8,.2,1);
-    }
+  transition:
+    opacity .35s ease,
+    color .35s ease,
+    transform .35s
+    cubic-bezier(.2,.8,.2,1);
+}
+
+.tiny-trigger:active {
+  opacity: .65;
+  color: var(--burgundy);
+  transform: translateX(3px);
+}
+
+    .manifesto.egg-break .slice-word {
+  animation:
+    manifestoBreak .55s
+    cubic-bezier(.2,.8,.2,1);
+}
+
+.manifesto.egg-break .manifesto-line:nth-child(1) {
+  animation:
+    manifestoLineBreak .55s
+    cubic-bezier(.2,.8,.2,1);
+}
+
+.manifesto.egg-break .manifesto-line:nth-child(3) {
+  animation:
+    manifestoLineBreakReverse .55s
+    cubic-bezier(.2,.8,.2,1);
+}
+
+.manifesto.egg-break::after {
+  content: "";
+  position: absolute;
+
+  width: 24px;
+  height: 17px;
+
+  left: 47%;
+  top: 42%;
+
+  background: var(--burgundy);
+
+  opacity: 0;
+
+  border-radius:
+    58% 42% 51% 49% /
+    45% 57% 43% 55%;
+
+  animation:
+    eggInk .7s
+    cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes manifestoBreak {
+
+  0%,
+  100% {
+    transform:
+      translateX(0)
+      skewX(0);
+  }
+
+  35% {
+    transform:
+      translateX(-7px)
+      skewX(-2deg);
+  }
+
+  65% {
+    transform:
+      translateX(9px)
+      skewX(1deg);
+  }
+
+}
+
+@keyframes manifestoLineBreak {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  45% {
+    transform: translateX(6px);
+  }
+
+  70% {
+    transform: translateX(-3px);
+  }
+
+}
+
+@keyframes manifestoLineBreakReverse {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  45% {
+    transform: translateX(-7px);
+  }
+
+  70% {
+    transform: translateX(4px);
+  }
+
+}
+
+@keyframes eggInk {
+
+  0% {
+    opacity: 0;
+    transform: scale(.2) rotate(-12deg);
+  }
+
+  30% {
+    opacity: .55;
+    transform: scale(1.3) rotate(8deg);
+  }
+
+  70% {
+    opacity: .3;
+    transform: scale(1) rotate(-4deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(.5) rotate(0);
+  }
+
+}
 
     .tiny-trigger:active {
       opacity: 1;
@@ -898,9 +1026,8 @@
     ================================================== */
 
     .services {
-      padding: 90px 17px 110px;
-      position: relative;
-    }
+  padding: 45px 17px 70px;
+}
 
     .services-header {
       display: flex;
@@ -1072,7 +1199,7 @@
     .portfolio-section {
       min-height: 78svh;
 
-      padding: 105px 17px 95px;
+      padding: 65px 17px 65px;
 
       position: relative;
 
@@ -2521,26 +2648,38 @@ if (heroTitle) {
 
       }
 
+const manifesto =
+  document.querySelector(".manifesto");
 
-      if (logoEggTrigger) {
+if (logoEggTrigger && manifesto) {
 
-        logoEggTrigger.addEventListener(
-          "click",
-          openLogoEgg
+  logoEggTrigger.addEventListener(
+    "click",
+    () => {
+
+      manifesto.classList.remove(
+        "egg-break"
+      );
+
+      void manifesto.offsetWidth;
+
+      manifesto.classList.add(
+        "egg-break"
+      );
+
+      setTimeout(() => {
+
+        manifesto.classList.remove(
+          "egg-break"
         );
 
-      }
+      }, 750);
 
+    }
+  );
 
-      if (logoEggClose) {
-
-        logoEggClose.addEventListener(
-          "click",
-          closeLogoEgg
-        );
-
-      }
-
+}
+    
 
       /* ==================================================
          PAGE TRANSITIONS
