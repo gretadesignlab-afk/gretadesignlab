@@ -377,14 +377,17 @@ button {
 ================================================== */
 
 .portfolio-hero {
-  min-height: 72svh;
-  padding: 120px 17px 65px;
+  min-height: 76svh;
+
+  padding: 110px 17px 55px;
+
+  position: relative;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 
-  position: relative;
+  overflow: hidden;
 }
 
 .portfolio-hero::before {
@@ -392,21 +395,41 @@ button {
 
   position: absolute;
 
-  width: 180px;
-  height: 130px;
+  width: 210px;
+  height: 155px;
 
-  right: -70px;
-  top: 155px;
+  right: -95px;
+  top: 115px;
 
   background: var(--pink);
 
   border-radius:
-    58% 42% 51% 49% /
-    45% 57% 43% 55%;
+    57% 43% 49% 51% /
+    44% 59% 41% 56%;
 
-  opacity: .38;
+  opacity: .42;
 
-  transform: rotate(-12deg);
+  transform: rotate(-13deg);
+
+  z-index: 0;
+}
+
+  .portfolio-hero::after {
+  content: "";
+
+  position: absolute;
+
+  width: 90px;
+  height: 1px;
+
+  left: 17px;
+  top: 42%;
+
+  background: var(--line);
+
+  transform: rotate(-2deg);
+
+  z-index: 1;
 }
 
 .portfolio-hero .section-label {
@@ -422,16 +445,17 @@ button {
 }
 
 .portfolio-title {
+  position: relative;
+  z-index: 2;
+
   font-family: var(--serif);
 
-  font-size: 20vw;
+  font-size: 21vw;
   line-height: .76;
 
   letter-spacing: -.065em;
 
   font-weight: 400;
-
-  position: relative;
 }
 
 .portfolio-title span {
@@ -439,13 +463,18 @@ button {
 
   color: var(--burgundy);
 
-  margin-left: 13vw;
+  margin-left: 10vw;
+
+  font-style: italic;
 }
 
 .portfolio-description {
-  width: 78%;
+  position: relative;
+  z-index: 2;
 
-  margin: 35px 0 0 auto;
+  width: 76%;
+
+  margin: 32px 0 0 auto;
 
   font-size: 11px;
   line-height: 1.55;
