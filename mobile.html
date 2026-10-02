@@ -1,24 +1,38 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Greta Design Lab</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
 
   <style>
 
     :root {
+
       --burgundy: #7d2635;
       --cream: #f4efe7;
       --black: #111111;
       --pink: #d9a6ae;
+      --blue: #b8c9d8;
+
     }
+
 
     * {
       box-sizing: border-box;
@@ -26,472 +40,1393 @@
       padding: 0;
     }
 
+
     html {
       scroll-behavior: smooth;
     }
 
+
     body {
+
       background: var(--cream);
+
       color: var(--black);
+
       font-family: "Inter", sans-serif;
+
       overflow-x: hidden;
+
+      cursor: default;
+
     }
 
 
-    /* =========================
-       NAV
-    ========================= */
+    body.menu-open {
+      overflow: hidden;
+    }
+
+
+
+    /* ==================================================
+       NOISE
+    ================================================== */
+
+    body::before {
+
+      content: "";
+
+      position: fixed;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      z-index: 999;
+
+      opacity: .035;
+
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+
+    }
+
+
+
+    /* ==================================================
+       NAVBAR
+    ================================================== */
 
     .navbar {
+
       position: fixed;
+
       top: 0;
       left: 0;
 
       width: 100%;
-      height: 82px;
 
-      padding: 10px 18px;
+      height: 74px;
+
+      padding: 10px 17px;
 
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
 
-      z-index: 100;
+      z-index: 200;
 
-      mix-blend-mode: multiply;
     }
 
-    .nav-logo {
-      width: 76px;
-      height: 76px;
+
+    .logo {
+
+      width: 72px;
+      height: 72px;
+
       object-fit: contain;
+
+      transition:
+        transform .5s cubic-bezier(.2,.8,.2,1);
+
     }
 
-    .menu {
-      font-size: 9px;
+
+    .logo:active {
+
+      transform:
+        rotate(-15deg)
+        scale(1.15);
+
+    }
+
+
+    /* HAMBURGER */
+
+    .menu-button {
+
+      width: 47px;
+      height: 47px;
+
+      border: 1px solid var(--black);
+
+      border-radius: 50%;
+
+      background: var(--cream);
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 5px;
+
+      position: relative;
+
+      z-index: 310;
+
+      transition:
+        background .35s ease,
+        transform .45s cubic-bezier(.2,.8,.2,1);
+
+    }
+
+
+    .menu-button span {
+
+      width: 17px;
+      height: 1px;
+
+      background: var(--black);
+
+      transition:
+        transform .35s ease,
+        opacity .25s ease;
+
+    }
+
+
+    .menu-button.active {
+
+      background: var(--cream);
+
+      transform: rotate(90deg);
+
+    }
+
+
+    .menu-button.active span:first-child {
+
+      transform:
+        translateY(3px)
+        rotate(45deg);
+
+    }
+
+
+    .menu-button.active span:last-child {
+
+      transform:
+        translateY(-3px)
+        rotate(-45deg);
+
+    }
+
+
+
+    /* ==================================================
+       FULLSCREEN MENU
+    ================================================== */
+
+    .menu-overlay {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 250;
+
+      background: var(--burgundy);
+
+      color: var(--cream);
+
+      transform: translateY(-100%);
+
+      transition:
+        transform .75s cubic-bezier(.77,0,.18,1);
+
+      padding: 115px 20px 30px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: space-between;
+
+    }
+
+
+    .menu-overlay.open {
+
+      transform: translateY(0);
+
+    }
+
+
+    .menu-small {
+
+      font-size: 8px;
+
+      letter-spacing: .2em;
+
       text-transform: uppercase;
-      letter-spacing: .18em;
-      text-decoration: none;
-      color: var(--black);
+
+      opacity: .6;
+
     }
 
 
-    /* =========================
+    .menu-links {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 4px;
+
+    }
+
+
+    .menu-link {
+
+      color: var(--cream);
+
+      text-decoration: none;
+
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+
+      font-size: 18vw;
+
+      line-height: .73;
+
+      letter-spacing: -.055em;
+
+      transition:
+        transform .4s ease,
+        color .3s ease;
+
+    }
+
+
+    .menu-link:active {
+
+      transform:
+        translateX(15px)
+        skewX(-5deg);
+
+      color: var(--pink);
+
+    }
+
+
+    .menu-bottom {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      font-size: 8px;
+
+      letter-spacing: .12em;
+
+      text-transform: uppercase;
+
+      opacity: .55;
+
+    }
+
+
+
+    /* ==================================================
        HERO
-    ========================= */
+    ================================================== */
 
     .hero {
+
       height: 100svh;
+
       min-height: 650px;
 
       position: relative;
 
       overflow: hidden;
 
+      padding:
+        100px
+        15px
+        25px;
+
       display: flex;
+
       align-items: center;
 
-      padding: 90px 18px 30px;
     }
 
-    .hero-small {
+
+    .hero-label {
+
       position: absolute;
 
-      top: 120px;
-      left: 20px;
+      top: 102px;
+      left: 18px;
 
       font-size: 8px;
+
       letter-spacing: .2em;
+
       text-transform: uppercase;
 
       opacity: .55;
+
     }
+
 
     .hero-title {
+
       position: relative;
-      z-index: 5;
-
-      font-family: "DM Serif Display", Georgia, serif;
-
-      font-size: 21vw;
-      line-height: .72;
-
-      letter-spacing: -.06em;
-
-      width: 100%;
-    }
-
-    .hero-title span {
-      display: block;
-
-      transition:
-        transform .7s cubic-bezier(.2,.8,.2,1);
-    }
-
-    .hero-title .greta {
-      color: var(--burgundy);
-    }
-
-    .hero-title .design {
-      margin-left: 7vw;
-      color: var(--burgundy);
-    }
-
-    .hero-title .lab {
-      margin-left: 17vw;
-    }
-
-
-    /* =========================
-       INTERACTIVE WORDS
-    ========================= */
-
-    .floating-word {
-      position: absolute;
 
       z-index: 8;
 
-      font-size: 8px;
-      letter-spacing: .2em;
-      text-transform: uppercase;
+      width: 100%;
+
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+
+      font-size: 22vw;
+
+      line-height: .64;
+
+      letter-spacing: -.07em;
+
+      transform:
+        skewX(var(--title-skew, 0deg));
 
       transition:
-        transform .7s cubic-bezier(.2,.8,.2,1),
-        opacity .4s ease;
-    }
+        transform .15s linear;
 
-    .idea {
-      top: 34%;
-      right: 8%;
-    }
-
-    .forma {
-      bottom: 25%;
-      right: 7%;
-    }
-
-    .identita {
-      bottom: 13%;
-      left: 8%;
     }
 
 
-    /* =========================
-       MACCHIA
-    ========================= */
+    .hero-title span {
 
-    .macchia {
+      display: block;
+
+      width: max-content;
+
+      will-change: transform;
+
+    }
+
+
+    .hero-title .greta {
+
+      color: var(--burgundy);
+
+      transform:
+        translateX(-3vw);
+
+    }
+
+
+    .hero-title .design {
+
+      color: var(--burgundy);
+
+      margin-left: 3vw;
+
+      transform:
+        translateX(10vw);
+
+    }
+
+
+    .hero-title .lab {
+
+      margin-left: 20vw;
+
+      transform:
+        translateX(-4vw);
+
+    }
+
+
+
+    /* ==================================================
+       HERO WORDS
+    ================================================== */
+
+    .hero-word {
+
       position: absolute;
 
-      width: 260px;
-      height: 220px;
+      z-index: 12;
 
-      right: -110px;
-      top: 27%;
+      font-size: 8px;
 
-      background: var(--pink);
+      letter-spacing: .2em;
 
-      opacity: .48;
+      text-transform: uppercase;
+
+      pointer-events: none;
+
+      transition:
+        transform .12s linear;
+
+    }
+
+
+    .word-idea {
+
+      top: 31%;
+      right: 8%;
+
+    }
+
+
+    .word-forma {
+
+      top: 48%;
+      left: 5%;
+
+    }
+
+
+    .word-identita {
+
+      bottom: 18%;
+      right: 8%;
+
+    }
+
+
+
+    /* ==================================================
+       MACCHIA HERO
+    ================================================== */
+
+    .hero-blob {
+
+      position: absolute;
+
+      z-index: 2;
+
+      width: 285px;
+
+      height: 230px;
+
+      right: -130px;
+
+      top: 25%;
+
+      background:
+        var(--pink);
+
+      opacity: .65;
 
       border-radius:
-        57% 43% 48% 52% /
-        45% 58% 42% 55%;
+        64% 36% 47% 53% /
+        40% 58% 42% 60%;
 
       transform:
         rotate(-18deg);
 
-      z-index: 2;
+      filter:
+        blur(.3px);
 
-      transition:
-        transform 1s cubic-bezier(.2,.8,.2,1),
-        border-radius 1s ease;
-    }
+      will-change:
+        transform,
+        border-radius;
 
-    .hero:active .macchia {
-      transform:
-        translateX(-30px)
-        rotate(-5deg)
-        scale(1.15);
     }
 
 
-    /* =========================
-       SCROLL INDICATOR
-    ========================= */
+    .hero-blob::after {
 
-    .scroll {
+      content: "";
+
       position: absolute;
 
-      bottom: 24px;
-      left: 20px;
+      width: 120px;
+      height: 90px;
 
-      font-size: 7px;
-      letter-spacing: .2em;
-      text-transform: uppercase;
+      background: var(--blue);
+
+      opacity: .7;
+
+      border-radius:
+        50% 50% 40% 60%;
+
+      left: -55px;
+      bottom: -15px;
+
+      transform:
+        rotate(25deg);
+
+    }
+
+
+
+    /* ==================================================
+       HERO CIRCLE
+    ================================================== */
+
+    .hero-circle {
+
+      position: absolute;
+
+      width: 110px;
+      height: 110px;
+
+      border: 1px solid var(--black);
+
+      border-radius: 50%;
+
+      right: 5%;
+      top: 17%;
+
+      z-index: 1;
 
       opacity: .45;
 
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      transition:
+        transform .15s linear;
+
     }
 
-    .scroll-line {
-      width: 32px;
+
+    .hero-circle::after {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 12px;
+
+      border:
+        1px solid var(--black);
+
+      border-radius: 50%;
+
+    }
+
+
+
+    /* ==================================================
+       SCROLL LABEL
+    ================================================== */
+
+    .scroll-mark {
+
+      position: absolute;
+
+      bottom: 23px;
+      left: 18px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      font-size: 7px;
+
+      letter-spacing: .2em;
+
+      text-transform: uppercase;
+
+      opacity: .5;
+
+    }
+
+
+    .scroll-mark i {
+
+      display: block;
+
+      width: 34px;
+
       height: 1px;
 
       background: var(--black);
 
-      animation: pulse 1.8s ease-in-out infinite;
+      animation:
+        scrollPulse 1.4s ease-in-out infinite;
+
     }
 
-    @keyframes pulse {
+
+    @keyframes scrollPulse {
+
       0%,100% {
-        transform: scaleX(.4);
+        transform: scaleX(.2);
         transform-origin: left;
       }
 
       50% {
         transform: scaleX(1);
       }
+
     }
 
 
-    /* =========================
-       MANIFESTO
-    ========================= */
 
-    .manifesto {
-      min-height: 100svh;
+    /* ==================================================
+       MOVING BAND
+    ================================================== */
 
-      padding: 120px 20px;
+    .moving-band {
 
-      position: relative;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      width: 100%;
 
       overflow: hidden;
-    }
-
-    .manifesto-label {
-      font-size: 8px;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-
-      opacity: .5;
-
-      margin-bottom: 55px;
-    }
-
-    .manifesto-text {
-      font-family: "DM Serif Display", Georgia, serif;
-
-      font-size: 11vw;
-      line-height: .98;
-
-      letter-spacing: -.03em;
-    }
-
-    .manifesto-text span {
-      color: var(--burgundy);
-
-      transition:
-        transform .5s ease;
-    }
-
-    .manifesto-note {
-      margin-top: 55px;
-
-      width: 75%;
-
-      font-size: 11px;
-      line-height: 1.55;
-
-      opacity: .65;
-    }
-
-
-    /* =========================
-       SERVICES
-    ========================= */
-
-    .services {
-      min-height: 100svh;
-
-      padding: 110px 20px;
 
       background: var(--black);
+
       color: var(--cream);
 
+      padding: 12px 0;
+
+      transform:
+        rotate(-2deg)
+        scale(1.08);
+
+      margin:
+        -12px 0
+        0;
+
       position: relative;
+
+      z-index: 20;
+
     }
 
-    .services-label {
+
+    .band-track {
+
+      display: flex;
+
+      width: max-content;
+
+      animation:
+        marquee 13s linear infinite;
+
+    }
+
+
+    .band-track span {
+
+      white-space: nowrap;
+
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+
+      font-size: 20px;
+
+      padding-right: 25px;
+
+    }
+
+
+    @keyframes marquee {
+
+      to {
+        transform: translateX(-50%);
+      }
+
+    }
+
+
+
+    /* ==================================================
+       MANIFESTO
+    ================================================== */
+
+    .manifesto {
+
+      min-height: 105svh;
+
+      padding:
+        115px
+        18px
+        80px;
+
+      position: relative;
+
+      overflow: hidden;
+
+    }
+
+
+    .section-index {
+
       font-size: 8px;
+
       letter-spacing: .2em;
+
       text-transform: uppercase;
 
       opacity: .5;
 
-      margin-bottom: 70px;
+      margin-bottom: 50px;
+
     }
 
-    .service {
-      position: relative;
 
-      padding: 27px 0;
+    .manifesto-title {
 
-      border-top: 1px solid rgba(244,239,231,.25);
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+
+      font-size: 15vw;
+
+      line-height: .84;
+
+      letter-spacing: -.055em;
+
+    }
+
+
+    .manifesto-title .line {
+
+      display: block;
+
+      transition:
+        transform .7s cubic-bezier(.2,.8,.2,1);
+
+    }
+
+
+    .manifesto-title .line:nth-child(2) {
+
+      color: var(--burgundy);
+
+      margin-left: 11vw;
+
+    }
+
+
+    .manifesto-title .line:nth-child(3) {
+
+      margin-left: 3vw;
+
+    }
+
+
+    .manifesto-copy {
+
+      width: 78%;
+
+      margin:
+        60px
+        0
+        0
+        auto;
+
+      font-size: 11px;
+
+      line-height: 1.55;
+
+      opacity: .7;
+
+    }
+
+
+    .manifesto-stamp {
+
+      position: absolute;
+
+      width: 105px;
+      height: 105px;
+
+      border:
+        1px solid var(--burgundy);
+
+      border-radius: 50%;
+
+      right: -30px;
+      bottom: 70px;
 
       display: flex;
-      justify-content: space-between;
+
       align-items: center;
-    }
-
-    .service:last-child {
-      border-bottom: 1px solid rgba(244,239,231,.25);
-    }
-
-    .service-number {
-      font-size: 8px;
-      opacity: .5;
-      width: 30px;
-    }
-
-    .service-name {
-      flex: 1;
-
-      font-family: "DM Serif Display", Georgia, serif;
-
-      font-size: 29px;
-
-      transition:
-        transform .45s cubic-bezier(.2,.8,.2,1),
-        color .3s ease;
-    }
-
-    .service-arrow {
-      font-size: 18px;
-
-      transition:
-        transform .45s ease;
-    }
-
-    .service:active .service-name {
-      transform: translateX(10px);
-      color: var(--pink);
-    }
-
-    .service:active .service-arrow {
-      transform: translateX(7px) rotate(-45deg);
-    }
-
-
-    /* =========================
-       CONTACT
-    ========================= */
-
-    .contact {
-      min-height: 100svh;
-
-      padding: 110px 20px;
-
-      background: var(--burgundy);
-      color: var(--cream);
-
-      display: flex;
-      flex-direction: column;
       justify-content: center;
-    }
 
-    .contact-label {
-      font-size: 8px;
-      letter-spacing: .2em;
+      font-size: 7px;
+
+      letter-spacing: .15em;
+
       text-transform: uppercase;
 
-      opacity: .65;
+      color: var(--burgundy);
 
-      margin-bottom: 45px;
+      transform:
+        rotate(14deg);
+
+      transition:
+        transform .15s linear;
+
     }
 
-    .contact-title {
-      font-family: "DM Serif Display", Georgia, serif;
+
+
+    /* ==================================================
+       SERVICES
+    ================================================== */
+
+    .services {
+
+      background: var(--black);
+
+      color: var(--cream);
+
+      padding:
+        95px
+        18px
+        110px;
+
+      position: relative;
+
+    }
+
+
+    .services-head {
+
+      display: flex;
+
+      align-items: flex-end;
+
+      justify-content: space-between;
+
+      margin-bottom: 60px;
+
+    }
+
+
+    .services-index {
+
+      font-size: 8px;
+
+      letter-spacing: .2em;
+
+      text-transform: uppercase;
+
+      opacity: .5;
+
+    }
+
+
+    .services-title {
+
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
 
       font-size: 18vw;
-      line-height: .8;
 
-      letter-spacing: -.05em;
+      line-height: .75;
+
+      letter-spacing: -.06em;
+
+      text-align: right;
+
     }
 
-    .contact-title em {
+
+    .service {
+
+      position: relative;
+
+      border-top:
+        1px solid
+        rgba(244,239,231,.25);
+
+      padding:
+        26px
+        0;
+
+      min-height: 95px;
+
+      display: grid;
+
+      grid-template-columns:
+        28px
+        1fr
+        30px;
+
+      align-items: center;
+
+      overflow: hidden;
+
+      transition:
+        min-height .55s cubic-bezier(.2,.8,.2,1);
+
+    }
+
+
+    .service:last-child {
+
+      border-bottom:
+        1px solid
+        rgba(244,239,231,.25);
+
+    }
+
+
+    .service-number {
+
+      font-size: 8px;
+
+      opacity: .45;
+
+    }
+
+
+    .service-name {
+
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+
+      font-size: 30px;
+
+      transition:
+        transform .5s cubic-bezier(.2,.8,.2,1),
+        color .3s ease;
+
+    }
+
+
+    .service-arrow {
+
+      font-size: 19px;
+
+      transition:
+        transform .5s cubic-bezier(.2,.8,.2,1);
+
+    }
+
+
+    .service-description {
+
+      position: absolute;
+
+      left: 28px;
+
+      bottom: -40px;
+
+      width: 78%;
+
+      font-size: 10px;
+
+      line-height: 1.45;
+
+      opacity: 0;
+
+      transition:
+        opacity .35s ease,
+        bottom .5s ease;
+
+    }
+
+
+    .service.active {
+
+      min-height: 180px;
+
+    }
+
+
+    .service.active .service-name {
+
+      transform:
+        translateX(10px);
+
+      color: var(--pink);
+
+    }
+
+
+    .service.active .service-arrow {
+
+      transform:
+        rotate(90deg);
+
+    }
+
+
+    .service.active .service-description {
+
+      opacity: .7;
+
+      bottom: 25px;
+
+    }
+
+
+
+    /* ==================================================
+       CONTACT
+    ================================================== */
+
+    .contact {
+
+      min-height: 100svh;
+
+      background:
+        var(--burgundy);
+
+      color:
+        var(--cream);
+
+      padding:
+        100px
+        18px
+        50px;
+
+      position: relative;
+
+      overflow: hidden;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+    }
+
+
+    .contact-small {
+
+      font-size: 8px;
+
+      letter-spacing: .2em;
+
+      text-transform: uppercase;
+
+      opacity: .6;
+
+      margin-bottom: 45px;
+
+    }
+
+
+    .contact-title {
+
+      font-family:
+        "DM Serif Display",
+        Georgia,
+        serif;
+
+      font-size: 20vw;
+
+      line-height: .72;
+
+      letter-spacing: -.065em;
+
+    }
+
+
+    .contact-title span {
+
       display: block;
-      margin-left: 16vw;
+
+      transition:
+        transform .7s cubic-bezier(.2,.8,.2,1);
+
     }
 
-    .contact-text {
+
+    .contact-title span:nth-child(2) {
+
+      margin-left: 13vw;
+
+    }
+
+
+    .contact-title span:nth-child(3) {
+
+      color: var(--pink);
+
+      margin-left: 5vw;
+
+    }
+
+
+    .contact-copy {
+
       width: 75%;
 
       margin-top: 55px;
 
       font-size: 11px;
+
       line-height: 1.55;
 
-      opacity: .75;
+      opacity: .72;
+
     }
 
 
-    /* =========================
-       SCROLL REVEAL
-    ========================= */
+    .contact-button {
+
+      margin-top: 38px;
+
+      width: 100%;
+
+      padding: 18px;
+
+      border:
+        1px solid
+        rgba(244,239,231,.6);
+
+      color: var(--cream);
+
+      text-decoration: none;
+
+      text-transform: uppercase;
+
+      letter-spacing: .18em;
+
+      font-size: 8px;
+
+      text-align: center;
+
+      transition:
+        background .3s ease,
+        color .3s ease,
+        transform .4s ease;
+
+    }
+
+
+    .contact-button:active {
+
+      background: var(--cream);
+
+      color: var(--burgundy);
+
+      transform:
+        scale(.96);
+
+    }
+
+
+
+    /* ==================================================
+       TOUCH INK
+    ================================================== */
+
+    .touch-ink {
+
+      position: fixed;
+
+      width: 16px;
+      height: 16px;
+
+      border-radius: 50%;
+
+      background: var(--burgundy);
+
+      pointer-events: none;
+
+      z-index: 1000;
+
+      transform:
+        translate(-50%,-50%)
+        scale(0);
+
+      animation:
+        touchInk .8s ease-out forwards;
+
+    }
+
+
+    @keyframes touchInk {
+
+      0% {
+
+        transform:
+          translate(-50%,-50%)
+          scale(0);
+
+        opacity: .6;
+
+      }
+
+      70% {
+
+        transform:
+          translate(-50%,-50%)
+          scale(7);
+
+        opacity: .18;
+
+      }
+
+      100% {
+
+        transform:
+          translate(-50%,-50%)
+          scale(11);
+
+        opacity: 0;
+
+      }
+
+    }
+
+
+
+    /* ==================================================
+       REVEAL
+    ================================================== */
 
     .reveal {
+
       opacity: 0;
-      transform: translateY(35px);
+
+      transform:
+        translateY(45px)
+        rotate(1deg);
 
       transition:
         opacity .8s ease,
-        transform .8s cubic-bezier(.2,.8,.2,1);
+        transform .9s cubic-bezier(.2,.8,.2,1);
+
     }
+
 
     .reveal.visible {
+
       opacity: 1;
-      transform: translateY(0);
+
+      transform:
+        translateY(0)
+        rotate(0);
+
     }
 
+
+
   </style>
+
 </head>
+
 
 
 <body>
 
 
-  <!-- NAV -->
+
+  <!-- ==================================================
+       NAV
+  ================================================== -->
 
   <header class="navbar">
 
     <a href="index.html">
+
       <img
         src="IMG-20260904-WA0041.jpg"
+        class="logo"
         alt="Greta Design Lab"
-        class="nav-logo"
       >
+
     </a>
 
-    <a href="portfolio.html" class="menu">
-      Portfolio
-    </a>
+
+    <button
+      class="menu-button"
+      id="menuButton"
+      aria-label="Apri menu"
+    >
+
+      <span></span>
+      <span></span>
+
+    </button>
 
   </header>
 
 
 
-  <!-- HERO -->
+  <!-- ==================================================
+       MENU
+  ================================================== -->
 
-  <section class="hero">
+  <nav
+    class="menu-overlay"
+    id="menuOverlay"
+  >
 
-    <div class="hero-small">
+    <div class="menu-small">
+      Greta Design Lab — menu
+    </div>
+
+
+    <div class="menu-links">
+
+      <a
+        href="index.html"
+        class="menu-link"
+      >
+        Home
+      </a>
+
+      <a
+        href="portfolio.html"
+        class="menu-link"
+      >
+        Portfolio
+      </a>
+
+      <a
+        href="chi-sono.html"
+        class="menu-link"
+      >
+        Chi sono
+      </a>
+
+      <a
+        href="contatti.html"
+        class="menu-link"
+      >
+        Contatti
+      </a>
+
+    </div>
+
+
+    <div class="menu-bottom">
+
+      <span>
+        GDL
+      </span>
+
+      <span>
+        2026
+      </span>
+
+    </div>
+
+  </nav>
+
+
+
+  <!-- ==================================================
+       HERO
+  ================================================== -->
+
+  <section class="hero" id="home">
+
+
+    <div class="hero-label">
       Un laboratorio di idee
     </div>
 
@@ -513,27 +1448,29 @@
     </h1>
 
 
-    <span class="floating-word idea">
+    <span class="hero-word word-idea">
       IDEA
     </span>
 
-    <span class="floating-word forma">
+    <span class="hero-word word-forma">
       FORMA
     </span>
 
-    <span class="floating-word identita">
+    <span class="hero-word word-identita">
       IDENTITÀ
     </span>
 
 
-    <div class="macchia"></div>
+    <div class="hero-circle"></div>
+
+    <div class="hero-blob"></div>
 
 
-    <div class="scroll">
+    <div class="scroll-mark">
 
-      <span class="scroll-line"></span>
+      <i></i>
 
-      scrolla
+      scorri
 
     </div>
 
@@ -541,47 +1478,101 @@
 
 
 
-  <!-- MANIFESTO -->
+  <!-- ==================================================
+       BAND
+  ================================================== -->
+
+  <div class="moving-band">
+
+    <div class="band-track">
+
+      <span>
+        PRECISIONE ✦ IMPERFEZIONE ✦ IDENTITÀ ✦
+      </span>
+
+      <span>
+        PRECISIONE ✦ IMPERFEZIONE ✦ IDENTITÀ ✦
+      </span>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- ==================================================
+       MANIFESTO
+  ================================================== -->
 
   <section class="manifesto">
 
-    <div class="manifesto-label">
+
+    <div class="section-index">
       01 — Manifesto
     </div>
 
 
-    <div class="manifesto-text reveal">
+    <div class="manifesto-title reveal">
 
-      La perfezione
-      <span>lascia</span>
-      una macchia.
+      <span class="line">
+        La
+      </span>
+
+      <span class="line">
+        perfezione
+      </span>
+
+      <span class="line">
+        lascia.
+      </span>
 
     </div>
 
 
-    <p class="manifesto-note reveal">
+    <p class="manifesto-copy reveal">
 
-      Ogni progetto nasce dalla ricerca della
-      precisione, ma trova la propria identità
-      in quella piccola imperfezione che lo
-      rende unico.
+      Ogni progetto nasce dalla ricerca
+      della precisione, ma trova la propria
+      identità in quella piccola imperfezione
+      che lo rende unico.
 
     </p>
+
+
+    <div class="manifesto-stamp">
+      NO RULES
+    </div>
+
 
   </section>
 
 
 
-  <!-- SERVICES -->
+  <!-- ==================================================
+       SERVICES
+  ================================================== -->
 
   <section class="services">
 
-    <div class="services-label">
-      02 — Cosa faccio
+
+    <div class="services-head">
+
+      <div class="services-index">
+        02 — Servizi
+      </div>
+
+      <h2 class="services-title">
+        Faccio.
+      </h2>
+
     </div>
 
 
-    <div class="service reveal">
+
+    <div
+      class="service reveal"
+      data-service
+    >
 
       <span class="service-number">
         01
@@ -595,10 +1586,21 @@
         ↗
       </span>
 
+
+      <p class="service-description">
+        Identità visive, sistemi grafici,
+        colori, tipografia e tutto ciò che
+        rende riconoscibile un progetto.
+      </p>
+
     </div>
 
 
-    <div class="service reveal">
+
+    <div
+      class="service reveal"
+      data-service
+    >
 
       <span class="service-number">
         02
@@ -612,10 +1614,21 @@
         ↗
       </span>
 
+
+      <p class="service-description">
+        Contenuti social, campagne,
+        template e visual pensati per
+        comunicare senza sembrare tutti uguali.
+      </p>
+
     </div>
 
 
-    <div class="service reveal">
+
+    <div
+      class="service reveal"
+      data-service
+    >
 
       <span class="service-number">
         03
@@ -629,36 +1642,65 @@
         ↗
       </span>
 
+
+      <p class="service-description">
+        Poster, editorial design, materiali
+        digitali e progetti visivi costruiti
+        attorno a un'idea.
+      </p>
+
     </div>
+
 
   </section>
 
 
 
-  <!-- CONTACT -->
+  <!-- ==================================================
+       CONTACT
+  ================================================== -->
 
   <section class="contact">
 
-    <div class="contact-label">
+
+    <div class="contact-small">
       03 — Contatti
     </div>
 
 
-    <h2 class="contact-title">
+    <h2 class="contact-title reveal">
 
-      Parliamone
-      <em>insieme.</em>
+      <span>
+        Facciamo
+      </span>
+
+      <span>
+        qualcosa
+      </span>
+
+      <span>
+        insieme.
+      </span>
 
     </h2>
 
 
-    <p class="contact-text">
+    <p class="contact-copy reveal">
 
-      Un progetto, una collaborazione,
-      o semplicemente un'idea da trasformare
-      in qualcosa di visivo.
+      Hai un'idea, un progetto o semplicemente
+      qualcosa che vuoi trasformare in qualcosa
+      di visivo?
 
     </p>
+
+
+    <a
+      href="contatti.html"
+      class="contact-button"
+    >
+      Contattami ↗
+    </a>
+
 
   </section>
 
@@ -666,14 +1708,69 @@
 
   <script>
 
-    /* =========================
-       SCROLL REVEAL
-    ========================= */
+
+    /* ==================================================
+       MENU
+    ================================================== */
+
+    const menuButton =
+      document.getElementById("menuButton");
+
+    const menuOverlay =
+      document.getElementById("menuOverlay");
+
+
+    menuButton.addEventListener(
+      "click",
+      () => {
+
+        const open =
+          menuOverlay.classList.toggle("open");
+
+        menuButton.classList.toggle(
+          "active",
+          open
+        );
+
+        document.body.classList.toggle(
+          "menu-open",
+          open
+        );
+
+      }
+    );
+
+
+    document
+      .querySelectorAll(".menu-link")
+      .forEach(link => {
+
+        link.addEventListener(
+          "click",
+          () => {
+
+            menuOverlay.classList.remove("open");
+
+            menuButton.classList.remove("active");
+
+            document.body.classList.remove("menu-open");
+
+          }
+        );
+
+      });
+
+
+
+    /* ==================================================
+       REVEAL
+    ================================================== */
 
     const reveals =
       document.querySelectorAll(".reveal");
 
-    const observer =
+
+    const revealObserver =
       new IntersectionObserver(
         entries => {
 
@@ -689,84 +1786,359 @@
 
         },
         {
-          threshold: .2
+          threshold: .15
         }
       );
 
 
     reveals.forEach(element => {
 
-      observer.observe(element);
+      revealObserver.observe(element);
 
     });
 
 
 
-    /* =========================
-       SCROLL INTERACTION
-    ========================= */
+    /* ==================================================
+       SCROLL ENGINE
+    ================================================== */
 
     const hero =
       document.querySelector(".hero");
 
-    const macchia =
-      document.querySelector(".macchia");
+    const blob =
+      document.querySelector(".hero-blob");
+
+    const circle =
+      document.querySelector(".hero-circle");
+
+    const title =
+      document.querySelector(".hero-title");
 
     const words =
-      document.querySelectorAll(".floating-word");
+      document.querySelectorAll(".hero-word");
+
+    const manifestoLines =
+      document.querySelectorAll(".manifesto-title .line");
+
+    const stamp =
+      document.querySelector(".manifesto-stamp");
+
+
+
+    let lastScroll =
+      window.scrollY;
+
+    let velocity =
+      0;
+
 
     window.addEventListener(
       "scroll",
       () => {
 
+
         const scroll =
           window.scrollY;
+
+
+        const delta =
+          scroll - lastScroll;
+
+
+        velocity +=
+          (delta - velocity) * .18;
+
+
+        lastScroll =
+          scroll;
+
 
         const heroHeight =
           hero.offsetHeight;
 
-        if (scroll < heroHeight) {
 
-          const progress =
-            scroll / heroHeight;
-
-
-          macchia.style.transform =
-            `
-            translateY(${progress * 90}px)
-            rotate(${-18 + progress * 25}deg)
-            scale(${1 + progress * .15})
-            `;
-
-
-          words.forEach(
-            (word, index) => {
-
-              const direction =
-                index % 2 === 0 ? 1 : -1;
-
-              word.style.transform =
-                `
-                translate(
-                  ${progress * 18 * direction}px,
-                  ${progress * -35}px
-                )
-                rotate(${progress * 8 * direction}deg)
-                `;
-
-              word.style.opacity =
-                1 - progress * .5;
-
-            }
+        const progress =
+          Math.min(
+            Math.max(
+              scroll / heroHeight,
+              0
+            ),
+            1
           );
 
-        }
 
+
+        /* HERO TITLE */
+
+        title.style.setProperty(
+          "--title-skew",
+          `${velocity * -0.45}deg`
+        );
+
+
+        const titleMove =
+          Math.min(
+            scroll * .08,
+            40
+          );
+
+
+        title.style.transform =
+          `
+          translateY(${titleMove}px)
+          skewX(${velocity * -.45}deg)
+          `;
+
+
+
+        /* MACCHIA */
+
+        const blobX =
+          velocity * -2.5;
+
+
+        const blobY =
+          progress * 150;
+
+
+        const blobRotate =
+          -18 +
+          progress * 65 +
+          velocity * -1.8;
+
+
+        const blobScale =
+          1 +
+          Math.min(
+            Math.abs(velocity) * .025,
+            .25
+          );
+
+
+        const radiusA =
+          64 +
+          Math.sin(scroll * .012) * 10;
+
+
+        const radiusB =
+          36 -
+          Math.sin(scroll * .012) * 10;
+
+
+        blob.style.transform =
+          `
+          translate(
+            ${blobX}px,
+            ${blobY}px
+          )
+          rotate(${blobRotate}deg)
+          scale(${blobScale})
+          `;
+
+
+        blob.style.borderRadius =
+          `
+          ${radiusA}% ${radiusB}% 47% 53% /
+          40% 58% 42% 60%
+          `;
+
+
+
+        /* CIRCLE */
+
+        circle.style.transform =
+          `
+          translate(
+            ${velocity * 1.5}px,
+            ${progress * 100}px
+          )
+          rotate(${scroll * .12}deg)
+          `;
+
+
+
+        /* FLOATING WORDS */
+
+        words.forEach(
+          (word, index) => {
+
+            const direction =
+              index === 1 ? -1 : 1;
+
+
+            const movement =
+              scroll *
+              (.04 + index * .015);
+
+
+            word.style.transform =
+              `
+              translate(
+                ${movement * direction}px,
+                ${-movement}px
+              )
+              rotate(
+                ${movement * direction * .35}deg
+              )
+              `;
+
+          }
+        );
+
+
+
+        /* MANIFESTO */
+
+        manifestoLines.forEach(
+          (line, index) => {
+
+            const offset =
+              velocity *
+              (index % 2 === 0 ? 1 : -1);
+
+            line.style.transform =
+              `
+              translateX(${offset}px)
+              `;
+
+          }
+        );
+
+
+        stamp.style.transform =
+          `
+          rotate(${14 + scroll * .08}deg)
+          `;
+
+
+      },
+      {
+        passive: true
       }
     );
+
+
+
+    /* ==================================================
+       SERVICE INTERACTION
+    ================================================== */
+
+    const services =
+      document.querySelectorAll("[data-service]");
+
+
+    services.forEach(service => {
+
+      service.addEventListener(
+        "click",
+        () => {
+
+          services.forEach(other => {
+
+            if (other !== service) {
+
+              other.classList.remove("active");
+
+            }
+
+          });
+
+
+          service.classList.toggle("active");
+
+        }
+      );
+
+    });
+
+
+
+    /* ==================================================
+       TOUCH INK
+    ================================================== */
+
+    document.addEventListener(
+      "touchstart",
+      event => {
+
+
+        const touch =
+          event.touches[0];
+
+
+        const ink =
+          document.createElement("div");
+
+
+        ink.className =
+          "touch-ink";
+
+
+        ink.style.left =
+          `${touch.clientX}px`;
+
+
+        ink.style.top =
+          `${touch.clientY}px`;
+
+
+        document.body.appendChild(ink);
+
+
+        setTimeout(
+          () => ink.remove(),
+          850
+        );
+
+
+      },
+      {
+        passive: true
+      }
+    );
+
+
+
+    /* ==================================================
+       TOUCH TITLE REACTION
+    ================================================== */
+
+    const heroTitle =
+      document.querySelector(".hero-title");
+
+
+    heroTitle.addEventListener(
+      "touchstart",
+      () => {
+
+        heroTitle.style.transform =
+          "scale(.96) rotate(-1deg)";
+
+      },
+      {
+        passive: true
+      }
+    );
+
+
+    heroTitle.addEventListener(
+      "touchend",
+      () => {
+
+        heroTitle.style.transform =
+          "scale(1) rotate(0)";
+
+      },
+      {
+        passive: true
+      }
+    );
+
 
   </script>
 
 
 </body>
+
 </html>
