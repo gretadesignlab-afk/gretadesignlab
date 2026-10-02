@@ -2156,6 +2156,33 @@
         const viewport =
           window.innerHeight || 1;
 
+const heroTitle =
+  document.querySelector(".hero-title");
+
+if (heroTitle) {
+
+  const heroProgress =
+    Math.min(
+      scrollY / viewport,
+      1
+    );
+
+  if (heroProgress > 0.18) {
+
+    heroTitle.classList.add(
+      "is-shifting"
+    );
+
+  } else {
+
+    heroTitle.classList.remove(
+      "is-shifting"
+    );
+
+  }
+
+}        
+
 
         /* HERO TYPOGRAPHY */
 
