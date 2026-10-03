@@ -340,29 +340,6 @@
       background: var(--burgundy);
     }
 
-    .hero-mark {
-  position: absolute;
-  right: 2vw;
-  top: 2vh;
-  width: 110px;
-  height: 110px;
-  z-index: 2;
-}
-
-.hero-mark img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transition:
-    transform .45s cubic-bezier(.2,.8,.2,1);
-}
-
-.hero-mark:hover img {
-  transform:
-    rotate(-3deg)
-    scale(1.05);
-}
-
     .hero-title {
       font-family:
         "DM Serif Display",
@@ -691,6 +668,122 @@
         translateY(-50%)
         translateX(0);
     }
+.featured-projects {
+  position: relative;
+  min-height: 100vh;
+  padding: 150px 7vw 130px;
+  overflow: hidden;
+}
+
+.featured-projects-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.featured-projects-title {
+  max-width: 800px;
+  font-family:
+    "DM Serif Display",
+    Georgia,
+    serif;
+  font-size:
+    clamp(55px, 8vw, 105px);
+  font-weight: 400;
+  line-height: .9;
+  letter-spacing: -.035em;
+}
+
+.featured-projects-title em {
+  color: var(--burgundy);
+  font-style: italic;
+}
+
+.projects-composition {
+  position: relative;
+  min-height: 720px;
+  margin-top: 80px;
+}
+
+.project-placeholder {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(100,20,38,.08);
+  border: 1px solid rgba(100,20,38,.18);
+  color: var(--burgundy);
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  transition:
+    transform .6s cubic-bezier(.2,.8,.2,1),
+    background .4s ease;
+}
+
+.project-placeholder:hover {
+  background: rgba(100,20,38,.13);
+}
+
+.project-one {
+  width: 47%;
+  height: 430px;
+  left: 2%;
+  top: 0;
+}
+
+.project-two {
+  width: 31%;
+  height: 360px;
+  right: 4%;
+  top: 110px;
+}
+
+.project-three {
+  width: 38%;
+  height: 300px;
+  left: 25%;
+  bottom: 0;
+}
+
+.project-one:hover {
+  transform: translateY(-10px) rotate(-1deg);
+}
+
+.project-two:hover {
+  transform: translateY(10px) rotate(1.2deg);
+}
+
+.project-three:hover {
+  transform: translateY(-8px) rotate(-.8deg);
+}
+
+.projects-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 25px;
+  color: var(--black);
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  transition:
+    color .3s ease,
+    gap .4s ease;
+}
+
+.projects-cta span {
+  color: var(--burgundy);
+  font-size: 20px;
+}
+
+.projects-cta:hover {
+  color: var(--burgundy);
+  gap: 25px;
+}
+    
 
     .home-contact {
       min-height: 60vh;
@@ -1138,10 +1231,10 @@
           </div>
 
           <div class="service-description">
-            Logo, palette, tipografia e identità
-            visiva pensati per dare forma
-            a un progetto.
-          </div>
+  Costruisco identità visive riconoscibili:
+  logo, colore, tipografia e sistemi grafici
+  pensati per dare forma a un'idea.
+</div>
 
           <div class="service-arrow">
             →
@@ -1164,11 +1257,11 @@
             Social Design
           </div>
 
-          <div class="service-description">
-            Post, stories, reel e contenuti
-            visivi pensati per comunicare
-            sui social.
-          </div>
+         <div class="service-description">
+  Creo contenuti e grafiche
+  pensati per rendere un brand
+  riconoscibile anche sui social.
+</div>
 
           <div class="service-arrow">
             →
@@ -1191,10 +1284,10 @@
             Graphic Design
           </div>
 
-          <div class="service-description">
-            Locandine, brochure, inviti,
-            menù e materiali grafici.
-          </div>
+         <div class="service-description">
+  Progetto idee che prendono forma su carta,
+tra poster, brochure, locandine e flyer.
+</div>
 
           <div class="service-arrow">
             →
@@ -1218,9 +1311,10 @@
           </div>
 
           <div class="service-description">
-            Idee, concept e progetti
-            personalizzati fuori dagli schemi.
-          </div>
+  Parto dalla tua idea, anche quando non sai
+  ancora che forma darle. Il resto lo troviamo
+  insieme.
+</div>
 
           <div class="service-arrow">
             →
@@ -1235,6 +1329,41 @@
 
   </section>
 
+    <section class="featured-projects">
+
+    <div class="featured-projects-inner">
+
+      <h2 class="featured-projects-title">
+        Alcuni dei miei <em>progetti.</em>
+      </h2>
+
+      <div class="projects-composition">
+
+        <div class="project-placeholder project-one">
+          IMMAGINE 1
+        </div>
+
+        <div class="project-placeholder project-two">
+          IMMAGINE 2
+        </div>
+
+        <div class="project-placeholder project-three">
+          IMMAGINE 3
+        </div>
+
+      </div>
+
+      <a
+        href="portfolio.html"
+        class="projects-cta"
+        data-name="Portfolio"
+      >
+        Vedi il portfolio <span>→</span>
+      </a>
+
+    </div>
+
+  </section>
 
   <section class="home-contact">
 
