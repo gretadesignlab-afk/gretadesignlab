@@ -843,6 +843,14 @@
 
       margin-bottom: 7px;
     }
+
+    .category-title {
+  font-family: var(--serif);
+  font-size: clamp(26px, 7.5vw, 38px);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  font-weight: 400;
+}
     
 .statement-copy {
   width: 82%;
@@ -935,13 +943,18 @@
     .project-title {
   font-family: var(--serif);
 
-  font-size: clamp(42px, 11vw, 58px);
+  font-size: clamp(40px, 10.5vw, 56px);
 
-  line-height: .92;
+  line-height: 1.02;
 
-  letter-spacing: -.035em;
+  letter-spacing: -.025em;
 
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+}
+
+.project-title em {
+  color: var(--burgundy);
+  font-style: italic;
 }
 
     .project-title em {
