@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Greta Design Lab</title>
+  <title>Greta Design Lab — Graphic Design</title>
 
+  <meta
+    name="description"
+    content="Greta Design Lab — identità visive, social design e graphic design."
+  >
+
+  <!-- GOOGLE FONTS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -15,7 +22,12 @@
     rel="stylesheet"
   >
 
+
   <style>
+
+    /* =========================================================
+       RESET
+    ========================================================= */
 
     * {
       box-sizing: border-box;
@@ -23,12 +35,25 @@
       padding: 0;
     }
 
+
+    /* =========================================================
+       VARIABLES
+    ========================================================= */
+
     :root {
       --cream: #f3eee6;
       --burgundy: #641426;
       --black: #171313;
       --pink: #cda7ad;
+
+      --serif: "DM Serif Display", Georgia, serif;
+      --sans: "Inter", Arial, sans-serif;
     }
+
+
+    /* =========================================================
+       BASE
+    ========================================================= */
 
     html {
       scroll-behavior: auto;
@@ -38,55 +63,95 @@
       min-height: 100vh;
       background: var(--cream);
       color: var(--black);
-      font-family: "Inter", Arial, sans-serif;
+      font-family: var(--sans);
       overflow-x: hidden;
       cursor: none;
     }
 
+    a {
+      color: inherit;
+    }
+
+    button {
+      font: inherit;
+    }
+
+
+    /* =========================================================
+       CUSTOM CURSOR
+    ========================================================= */
+
     .cursor {
       position: fixed;
-      width: 10px;
-      height: 10px;
       left: 0;
       top: 0;
+
+      width: 10px;
+      height: 10px;
+
       border-radius: 50%;
+
       background: var(--burgundy);
+
       pointer-events: none;
-      z-index: 2000;
-      transform: translate(-50%, -50%);
+
+      z-index: 3000;
+
+      transform:
+        translate(-50%, -50%);
+
       transition:
         width .25s ease,
         height .25s ease,
-        background .25s ease;
+        background .25s ease,
+        border .25s ease;
     }
 
     .cursor.active {
       width: 28px;
       height: 28px;
+
       background: transparent;
-      border: 1px solid var(--burgundy);
+
+      border:
+        1px solid var(--burgundy);
     }
+
+
+    /* =========================================================
+       PAGE TRANSITION
+    ========================================================= */
 
     .page-transition {
       position: fixed;
       inset: 0;
-      z-index: 1500;
+
+      z-index: 2500;
+
       pointer-events: none;
+
       visibility: hidden;
+
       overflow: hidden;
     }
 
     .ink-transition {
       position: absolute;
+
       width: 55vw;
       height: 55vw;
+
       max-width: 900px;
       max-height: 900px;
+
       border-radius:
         57% 43% 48% 52% /
         45% 58% 42% 55%;
+
       background: var(--burgundy);
+
       transform: scale(0);
+
       opacity: .98;
     }
 
@@ -98,6 +163,7 @@
     .ink-transition.two {
       right: -18%;
       top: 12%;
+
       width: 45vw;
       height: 45vw;
     }
@@ -105,6 +171,7 @@
     .ink-transition.three {
       left: 8%;
       bottom: -28%;
+
       width: 60vw;
       height: 60vw;
     }
@@ -112,25 +179,30 @@
     .ink-transition.four {
       right: 4%;
       bottom: -20%;
+
       width: 38vw;
       height: 38vw;
     }
 
     .transition-name {
       position: absolute;
+
       left: 50%;
       top: 50%;
+
       transform:
         translate(-50%, -50%)
         translateY(20px);
+
       color: var(--cream);
-      font-family:
-        "DM Serif Display",
-        Georgia,
-        serif;
+
+      font-family: var(--serif);
+
       font-size:
         clamp(42px, 7vw, 95px);
+
       white-space: nowrap;
+
       opacity: 0;
     }
 
@@ -169,28 +241,42 @@
     }
 
     @keyframes inkEnter {
+
       0% {
-        transform: scale(0) rotate(0deg);
+        transform:
+          scale(0)
+          rotate(0deg);
       }
 
       100% {
-        transform: scale(2.2) rotate(8deg);
+        transform:
+          scale(2.2)
+          rotate(8deg);
       }
+
     }
 
     @keyframes inkLeave {
+
       0% {
-        transform: scale(2.2) rotate(8deg);
+        transform:
+          scale(2.2)
+          rotate(8deg);
       }
 
       100% {
-        transform: scale(0) rotate(-5deg);
+        transform:
+          scale(0)
+          rotate(-5deg);
       }
+
     }
 
     @keyframes nameEnter {
+
       from {
         opacity: 0;
+
         transform:
           translate(-50%, -50%)
           translateY(20px);
@@ -198,28 +284,43 @@
 
       to {
         opacity: 1;
+
         transform:
           translate(-50%, -50%)
           translateY(0);
       }
+
     }
 
     @keyframes nameLeave {
+
       to {
         opacity: 0;
       }
+
     }
+
+
+    /* =========================================================
+       MACCHIA FOLLOW MOUSE
+    ========================================================= */
 
     .macchia {
       position: fixed;
+
       width: 250px;
       height: 200px;
+
       left: 50%;
       top: 50%;
+
       pointer-events: none;
+
       z-index: 1;
+
       transform:
         translate(-50%, -50%);
+
       background:
         radial-gradient(
           ellipse at center,
@@ -228,292 +329,357 @@
           rgba(100,20,38,.05) 70%,
           rgba(100,20,38,0) 100%
         );
+
       border-radius: 50%;
+
       filter: blur(12px);
     }
-/* =========================
-   HAMBURGER MENU
-========================= */
-
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 92px;
-  padding: 18px 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 1000;
-  background: rgba(243,238,230,.84);
-  backdrop-filter: blur(10px);
-}
-
-.nav-logo {
-  width: 86px;
-  height: 86px;
-  object-fit: contain;
-  transition: transform .35s ease;
-}
-
-.nav-logo:hover {
-  transform: rotate(-2deg) scale(1.05);
-}
 
 
-/* HAMBURGER */
+    /* =========================================================
+       NAVBAR
+    ========================================================= */
 
-.menu-toggle {
-  width: 48px;
-  height: 48px;
-  border: none;
-  background: transparent;
-  padding: 0;
-  cursor: none;
-  position: relative;
-  z-index: 1200;
-}
+    .navbar {
+      position: fixed;
 
-.menu-lines,
-.menu-lines::before,
-.menu-lines::after {
-  content: "";
-  position: absolute;
-  width: 25px;
-  height: 1px;
-  background: var(--burgundy);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  transition:
-    transform .4s ease,
-    opacity .3s ease;
-}
+      top: 0;
+      left: 0;
 
-.menu-lines::before {
-  top: -7px;
-}
+      width: 100%;
+      height: 92px;
 
-.menu-lines::after {
-  top: 7px;
-}
+      padding:
+        12px 48px;
 
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-/* MENU APERTO */
+      z-index: 1200;
 
-.menu-toggle.active .menu-lines {
-  background: transparent;
-}
+      background:
+        rgba(243,238,230,.82);
 
-.menu-toggle.active .menu-lines::before {
-  transform:
-    translate(-50%, -50%)
-    rotate(45deg);
-}
+      backdrop-filter:
+        blur(12px);
 
-.menu-toggle.active .menu-lines::after {
-  transform:
-    translate(-50%, -50%)
-    rotate(-45deg);
-}
-
-
-/* OVERLAY */
-
-.menu-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1100;
-  background: var(--cream);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-
-  transition:
-    opacity .45s ease,
-    visibility .45s ease;
-}
-
-.menu-overlay.active {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-
-
-/* CONTENUTO MENU */
-
-.menu-content {
-  width: min(1100px, 82vw);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.menu-item {
-  position: relative;
-  display: flex;
-  align-items: baseline;
-  gap: 18px;
-
-  padding: 14px 0;
-
-  color: var(--black);
-  text-decoration: none;
-
-  font-family:
-    "DM Serif Display",
-    Georgia,
-    serif;
-
-  font-size:
-    clamp(48px, 7vw, 100px);
-
-  line-height: .9;
-
-  border-bottom:
-    1px solid rgba(100,20,38,.18);
-
-  transition:
-    color .3s ease,
-    padding-left .4s ease;
-}
-
-.menu-item-number {
-  font-family:
-    "Inter",
-    Arial,
-    sans-serif;
-
-  font-size: 9px;
-  letter-spacing: .15em;
-  color: var(--burgundy);
-  opacity: .65;
-}
-
-.menu-item:hover {
-  color: var(--burgundy);
-  padding-left: 18px;
-}
-
-
-/* LAB DIVERSO */
-
-.menu-item.lab-menu {
-  color: var(--burgundy);
-}
-
-.menu-item.lab-menu:hover {
-  color: var(--black);
-}
-
-
-/* INFO IN BASSO */
-
-.menu-info {
-  position: absolute;
-  left: 48px;
-  bottom: 35px;
-
-  font-size: 8px;
-  line-height: 1.7;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-
-  color: var(--burgundy);
-  opacity: .65;
-}
-
-@media (max-width: 600px) {
-
-  .navbar {
-    height: 72px;
-    padding: 10px 18px;
-  }
-
-  .nav-logo {
-    width: 52px;
-    height: 52px;
-  }
-
-  .menu-content {
-    width: 82vw;
-  }
-
-  .menu-item {
-    font-size: 48px;
-  }
-
-  .menu-info {
-    left: 20px;
-    bottom: 25px;
-  }
-
-}
-   
+      -webkit-backdrop-filter:
+        blur(12px);
     }
+
+
+    /* LOGO */
+
+    .nav-logo-link {
+      display: flex;
+      align-items: center;
+
+      text-decoration: none;
+
+      position: relative;
+      z-index: 1300;
+    }
+
+    .nav-logo {
+      width: 72px;
+      height: 72px;
+
+      object-fit: contain;
+
+      display: block;
+
+      transition:
+        transform .35s ease;
+    }
+
+    .nav-logo:hover {
+      transform:
+        rotate(-2deg)
+        scale(1.05);
+    }
+
+
+    /* =========================================================
+       HAMBURGER
+    ========================================================= */
+
+    .menu-toggle {
+      width: 48px;
+      height: 48px;
+
+      border: none;
+
+      background: transparent;
+
+      padding: 0;
+
+      cursor: none;
+
+      position: relative;
+
+      z-index: 1400;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-lines,
+    .menu-lines::before,
+    .menu-lines::after {
+      content: "";
+
+      position: absolute;
+
+      width: 27px;
+      height: 1px;
+
+      background: var(--burgundy);
+
+      left: 50%;
+      top: 50%;
+
+      transform:
+        translate(-50%, -50%);
+
+      transition:
+        transform .4s ease,
+        opacity .3s ease,
+        background .3s ease;
+    }
+
+    .menu-lines::before {
+      top: -7px;
+    }
+
+    .menu-lines::after {
+      top: 7px;
+    }
+
+    .menu-toggle.active .menu-lines {
+      background: transparent;
+    }
+
+    .menu-toggle.active .menu-lines::before {
+      transform:
+        translate(-50%, -50%)
+        rotate(45deg);
+    }
+
+    .menu-toggle.active .menu-lines::after {
+      transform:
+        translate(-50%, -50%)
+        rotate(-45deg);
+    }
+
+
+    /* =========================================================
+       MENU OVERLAY
+    ========================================================= */
+
+    .menu-overlay {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 1100;
+
+      background: var(--cream);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+
+      transition:
+        opacity .45s ease,
+        visibility .45s ease;
+    }
+
+    .menu-overlay.active {
+      opacity: 1;
+
+      visibility: visible;
+
+      pointer-events: auto;
+    }
+
+    .menu-content {
+      width:
+        min(1100px, 82vw);
+
+      display: flex;
+      flex-direction: column;
+
+      gap: 4px;
+    }
+
+    .menu-item {
+      position: relative;
+
+      display: flex;
+      align-items: baseline;
+
+      gap: 18px;
+
+      padding:
+        12px 0;
+
+      color: var(--black);
+
+      text-decoration: none;
+
+      font-family: var(--serif);
+
+      font-size:
+        clamp(48px, 7vw, 100px);
+
+      line-height: .9;
+
+      border-bottom:
+        1px solid
+        rgba(100,20,38,.18);
+
+      transition:
+        color .3s ease,
+        padding-left .4s ease;
+    }
+
+    .menu-item-number {
+      font-family: var(--sans);
+
+      font-size: 9px;
+
+      letter-spacing: .15em;
+
+      color: var(--burgundy);
+
+      opacity: .65;
+    }
+
+    .menu-item:hover {
+      color: var(--burgundy);
+
+      padding-left: 18px;
+    }
+
+    .menu-item.lab-menu {
+      color: var(--burgundy);
+    }
+
+    .menu-item.lab-menu:hover {
+      color: var(--black);
+    }
+
+    .menu-info {
+      position: absolute;
+
+      left: 48px;
+      bottom: 35px;
+
+      font-size: 8px;
+
+      line-height: 1.7;
+
+      letter-spacing: .15em;
+
+      text-transform: uppercase;
+
+      color: var(--burgundy);
+
+      opacity: .65;
+    }
+
+
+    /* =========================================================
+       HERO
+    ========================================================= */
 
     .hero {
       position: relative;
-      min-height: 100vh;
+
+      min-height: 94vh;
+
       padding:
-        150px
-        7vw
-        40px;
+        125px 7vw 70px;
+
       display: flex;
       align-items: center;
+
       overflow: hidden;
     }
 
     .hero-inner {
       position: relative;
+
       width: 100%;
+
       max-width: 1450px;
+
       margin: 0 auto;
+
       z-index: 5;
     }
 
     .hero-label {
       display: flex;
+
       align-items: center;
+
       gap: 14px;
-      margin-bottom: 38px;
+
+      margin-bottom: 28px;
+
       font-size: 9px;
+
       font-weight: 500;
+
       letter-spacing: .25em;
+
       text-transform: uppercase;
+
       color: var(--black);
+
       opacity: .58;
     }
 
     .hero-label::before {
       content: "";
+
       width: 42px;
       height: 1px;
-      background: var(--burgundy);
+
+      background:
+        var(--burgundy);
     }
 
+
+    /* HERO TITLE */
+
     .hero-title {
-      font-family:
-        "DM Serif Display",
-        Georgia,
-        serif;
+      font-family: var(--serif);
+
       font-size:
-        clamp(72px, 11vw, 155px);
+        clamp(72px, 10.7vw, 155px);
+
       font-weight: 400;
-      line-height: .9;
-      letter-spacing: -.035em;
+
+      line-height: .84;
+
+      letter-spacing: -.04em;
+
       color: var(--burgundy);
     }
 
     .hero-title .word {
       display: block;
+
       width: fit-content;
+
       transition:
         transform .45s
         cubic-bezier(.2,.8,.2,1),
@@ -521,13 +687,16 @@
     }
 
     .hero-title .design {
-      margin-left: 12vw;
-      margin-top: 12px;
+      margin-left: 11vw;
+
+      margin-top: 9px;
     }
 
     .hero-title .lab {
-      margin-left: 25vw;
-      margin-top: 12px;
+      margin-left: 23vw;
+
+      margin-top: 9px;
+
       color: var(--black);
     }
 
@@ -540,24 +709,32 @@
       color: var(--burgundy);
     }
 
+
+    /* HERO SLOGAN */
+
     .hero-slogan {
-      margin-top: 62px;
-      margin-left: 46vw;
-      max-width: 380px;
-      font-family:
-        "DM Serif Display",
-        Georgia,
-        serif;
+      margin-top: 38px;
+
+      margin-left: 47vw;
+
+      max-width: 390px;
+
+      font-family: var(--serif);
+
       font-size:
-        clamp(19px, 2.2vw, 28px);
-      line-height: 1.35;
+        clamp(19px, 2vw, 27px);
+
+      line-height: 1.3;
+
       color: var(--black);
+
       transition:
         transform .5s ease;
     }
 
     .hero-slogan span {
       color: var(--burgundy);
+
       font-style: italic;
     }
 
@@ -566,13 +743,22 @@
         translateX(8px);
     }
 
+
+    /* FLOATING WORDS */
+
     .floating-word {
       position: absolute;
+
       font-size: 9px;
+
       letter-spacing: .22em;
+
       text-transform: uppercase;
+
       color: var(--burgundy);
+
       opacity: .5;
+
       transition:
         transform .4s ease,
         opacity .3s ease;
@@ -580,6 +766,7 @@
 
     .floating-word:hover {
       opacity: 1;
+
       transform:
         translateY(-8px)
         rotate(-2deg);
@@ -587,128 +774,162 @@
 
     .word-idea {
       right: 10%;
-      top: 28%;
+      top: 27%;
     }
 
     .word-forma {
       right: 5%;
-      bottom: 25%;
+      bottom: 19%;
     }
 
     .word-identita {
       left: 5%;
-      bottom: 16%;
+      bottom: 13%;
     }
+
+
+    /* CONSTRUCTION LINES */
 
     .construction-line {
       position: absolute;
+
       background: var(--burgundy);
+
       opacity: .3;
     }
 
     .construction-horizontal {
       width: 130px;
       height: 1px;
+
       right: 7%;
-      top: 30%;
+      top: 29%;
     }
 
     .construction-vertical {
       width: 1px;
       height: 100px;
+
       right: 12%;
-      top: 19%;
+      top: 18%;
     }
+
+
+    /* INK DOTS */
 
     .ink-dot {
       position: absolute;
+
       border-radius: 50%;
+
       background: var(--burgundy);
+
       opacity: .45;
+
       transition:
         transform .5s ease,
         opacity .3s ease;
     }
 
     .ink-dot:hover {
-      transform: scale(2.5);
+      transform:
+        scale(2.5);
+
       opacity: .8;
     }
 
     .ink-one {
       right: 8%;
-      top: 31%;
+      top: 30%;
+
       width: 6px;
       height: 6px;
     }
 
     .ink-two {
       right: 10%;
-      top: 35%;
+      top: 34%;
+
       width: 3px;
       height: 3px;
     }
 
     .ink-three {
       left: 7%;
-      bottom: 18%;
+      bottom: 15%;
+
       width: 5px;
       height: 5px;
     }
 
+
+    /* =========================================================
+       IDENTITY
+    ========================================================= */
+
     .identity {
       position: relative;
-      min-height: 100vh;
+
       padding:
-        150px
-        7vw
-        130px;
+        105px 7vw 105px;
+
       overflow: hidden;
     }
 
     .identity-inner {
       max-width: 1400px;
+
       margin: 0 auto;
+
       position: relative;
+
       z-index: 5;
     }
 
     .section-number {
       font-size: 9px;
+
       letter-spacing: .25em;
+
       text-transform: uppercase;
+
       color: var(--burgundy);
+
       opacity: .65;
-      margin-bottom: 30px;
+
+      margin-bottom: 25px;
     }
 
     .identity-title {
-      font-family:
-        "DM Serif Display",
-        Georgia,
-        serif;
+      font-family: var(--serif);
+
       font-size:
         clamp(55px, 8vw, 105px);
+
       font-weight: 400;
-      line-height: .9;
+
+      line-height: .87;
+
       color: var(--black);
     }
 
     .identity-title span {
       color: var(--burgundy);
+
       font-style: italic;
     }
 
     .identity-intro {
       max-width: 680px;
-      margin-top: 45px;
-      font-family:
-        "DM Serif Display",
-        Georgia,
-        serif;
+
+      margin-top: 32px;
+
+      font-family: var(--serif);
+
       font-size:
         clamp(19px, 2.2vw, 28px);
-      line-height: 1.4;
+
+      line-height: 1.35;
     }
 
     .identity-intro em {
@@ -716,66 +937,117 @@
     }
 
     .identity-detail {
-  max-width: 620px;
-  margin-top: 28px;
-  margin-left: 18vw;
-  font-size: 12px;
-  line-height: 1.8;
-  letter-spacing: .02em;
-  color: var(--burgundy);
-  opacity: .8;
-}
+      max-width: 620px;
+
+      margin-top: 22px;
+
+      margin-left: 18vw;
+
+      font-size: 12px;
+
+      line-height: 1.8;
+
+      letter-spacing: .02em;
+
+      color: var(--burgundy);
+
+      opacity: .8;
+    }
+
+
+    /* =========================================================
+       SERVICES TITLE
+    ========================================================= */
+
+    .services-title {
+      margin-top: 85px;
+
+      margin-bottom: 25px;
+
+      font-family: var(--serif);
+
+      font-size:
+        clamp(36px, 5vw, 62px);
+
+      font-weight: 400;
+
+      line-height: .95;
+
+      color: var(--black);
+    }
+
+    .services-title em {
+      color: var(--burgundy);
+
+      font-style: italic;
+    }
+
+
+    /* =========================================================
+       SERVICES
+    ========================================================= */
 
     .services {
-      margin-top: 120px;
       border-top:
-        1px solid rgba(100,20,38,.25);
+        1px solid
+        rgba(100,20,38,.25);
     }
 
     .service {
       position: relative;
-      min-height: 135px;
+
+      min-height: 120px;
+
       padding:
-        30px 10px;
+        25px 10px;
+
       display: grid;
+
       grid-template-columns:
         90px
         1fr
         1fr;
+
       align-items: center;
+
       border-bottom:
-        1px solid rgba(100,20,38,.25);
+        1px solid
+        rgba(100,20,38,.25);
+
       text-decoration: none;
+
       color: var(--black);
+
       cursor: none;
+
       transition:
         padding .45s ease,
         background .45s ease;
     }
 
     .service:hover {
-      padding-left: 35px;
+      padding-left: 30px;
+
       padding-right: 45px;
+
       background:
         rgba(100,20,38,.045);
     }
 
     .service-number {
-      font-family:
-        "DM Serif Display",
-        Georgia,
-        serif;
-      font-size: 28px;
+      font-family: var(--serif);
+
+      font-size: 27px;
+
       color: var(--burgundy);
     }
 
     .service-name {
-      font-family:
-        "DM Serif Display",
-        Georgia,
-        serif;
+      font-family: var(--serif);
+
       font-size:
         clamp(28px, 4vw, 55px);
+
       transition:
         color .3s ease,
         transform .45s ease;
@@ -783,16 +1055,22 @@
 
     .service:hover .service-name {
       color: var(--burgundy);
+
       transform:
         translateX(12px);
     }
 
     .service-description {
       max-width: 350px;
+
       justify-self: end;
+
       font-size: 11px;
+
       line-height: 1.6;
+
       opacity: .62;
+
       transition:
         opacity .3s ease;
     }
@@ -803,18 +1081,23 @@
 
     .service-arrow {
       position: absolute;
+
       right: 12px;
+
       top: 50%;
+
       transform:
         translateY(-50%)
         translateX(-10px);
-      font-family:
-        "DM Serif Display",
-        Georgia,
-        serif;
+
+      font-family: var(--serif);
+
       font-size: 25px;
+
       color: var(--burgundy);
+
       opacity: 0;
+
       transition:
         opacity .3s ease,
         transform .4s ease;
@@ -822,195 +1105,449 @@
 
     .service:hover .service-arrow {
       opacity: 1;
+
       transform:
         translateY(-50%)
         translateX(0);
     }
-.featured-projects {
-  position: relative;
-  min-height: 100vh;
-  padding: 150px 7vw 130px;
-  overflow: hidden;
-}
 
-.featured-projects-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  position: relative;
-}
 
-.featured-projects-title {
-  max-width: 800px;
-  font-family:
-    "DM Serif Display",
-    Georgia,
-    serif;
-  font-size:
-    clamp(55px, 8vw, 105px);
-  font-weight: 400;
-  line-height: .9;
-  letter-spacing: -.035em;
-}
+    /* =========================================================
+       FEATURED PROJECTS
+    ========================================================= */
 
-.featured-projects-title em {
-  color: var(--burgundy);
-  font-style: italic;
-}
-.featured-projects-intro {
-  margin-top: 22px;
-  margin-left: 18vw;
-  max-width: 420px;
-  font-size: 11px;
-  line-height: 1.7;
-  letter-spacing: .04em;
-  color: var(--burgundy);
-  opacity: .75;
-}
-    
+    .featured-projects {
+      position: relative;
 
-.projects-composition {
-  position: relative;
-  min-height: 720px;
-  margin-top: 80px;
-}
+      padding:
+        105px 7vw 110px;
 
-.project-placeholder {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(100,20,38,.08);
-  border: 1px solid rgba(100,20,38,.18);
-  color: var(--burgundy);
-  font-size: 9px;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  transition:
-    transform .6s cubic-bezier(.2,.8,.2,1),
-    background .4s ease;
-}
+      overflow: hidden;
+    }
 
-.project-placeholder:hover {
-  background: rgba(100,20,38,.13);
-}
+    .featured-projects-inner {
+      max-width: 1400px;
 
-.project-one {
-  width: 48%;
-  height: 440px;
-  left: 0;
-  top: 0;
-}
+      margin: 0 auto;
 
-.project-two {
-  width: 29%;
-  height: 350px;
-  right: 2%;
-  top: 135px;
-}
+      position: relative;
+    }
 
-.project-three {
-  width: 36%;
-  height: 285px;
-  left: 29%;
-  bottom: 0;
-}
+    .featured-projects-title {
+      max-width: 800px;
 
-.project-one:hover {
-  transform: translateY(-10px) rotate(-1deg);
-}
+      font-family: var(--serif);
 
-.project-two:hover {
-  transform: translateY(10px) rotate(1.2deg);
-}
+      font-size:
+        clamp(55px, 8vw, 105px);
 
-.project-three:hover {
-  transform: translateY(-8px) rotate(-.8deg);
-}
+      font-weight: 400;
 
-.projects-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 18px;
-  margin-top: 25px;
-  color: var(--black);
-  text-decoration: none;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  transition:
-    color .3s ease,
-    gap .4s ease;
-}
+      line-height: .87;
 
-.projects-cta span {
-  color: var(--burgundy);
-  font-size: 20px;
-}
+      letter-spacing: -.035em;
+    }
 
-.projects-cta:hover {
-  color: var(--burgundy);
-  gap: 25px;
-}
-    
+    .featured-projects-title em {
+      color: var(--burgundy);
+
+      font-style: italic;
+    }
+
+    .featured-projects-intro {
+      margin-top: 20px;
+
+      margin-left: 18vw;
+
+      max-width: 420px;
+
+      font-size: 11px;
+
+      line-height: 1.7;
+
+      letter-spacing: .04em;
+
+      color: var(--burgundy);
+
+      opacity: .75;
+    }
+
+
+    /* PROJECT COMPOSITION */
+
+    .projects-composition {
+      position: relative;
+
+      min-height: 590px;
+
+      margin-top: 55px;
+    }
+
+    .project-placeholder {
+      position: absolute;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      background:
+        rgba(100,20,38,.08);
+
+      border:
+        1px solid
+        rgba(100,20,38,.18);
+
+      color: var(--burgundy);
+
+      font-size: 9px;
+
+      letter-spacing: .2em;
+
+      text-transform: uppercase;
+
+      transition:
+        transform .6s
+        cubic-bezier(.2,.8,.2,1),
+        background .4s ease;
+    }
+
+    .project-placeholder:hover {
+      background:
+        rgba(100,20,38,.13);
+    }
+
+    .project-one {
+      width: 48%;
+      height: 360px;
+
+      left: 0;
+      top: 0;
+    }
+
+    .project-two {
+      width: 29%;
+      height: 290px;
+
+      right: 2%;
+      top: 90px;
+    }
+
+    .project-three {
+      width: 36%;
+      height: 235px;
+
+      left: 29%;
+      bottom: 0;
+    }
+
+    .project-one:hover {
+      transform:
+        translateY(-10px)
+        rotate(-1deg);
+    }
+
+    .project-two:hover {
+      transform:
+        translateY(10px)
+        rotate(1.2deg);
+    }
+
+    .project-three:hover {
+      transform:
+        translateY(-8px)
+        rotate(-.8deg);
+    }
+
+    .projects-cta {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 18px;
+
+      margin-top: 18px;
+
+      color: var(--black);
+
+      text-decoration: none;
+
+      font-size: 10px;
+
+      font-weight: 500;
+
+      letter-spacing: .2em;
+
+      text-transform: uppercase;
+
+      transition:
+        color .3s ease,
+        gap .4s ease;
+    }
+
+    .projects-cta span {
+      color: var(--burgundy);
+
+      font-size: 20px;
+    }
+
+    .projects-cta:hover {
+      color: var(--burgundy);
+
+      gap: 25px;
+    }
+
+
+    /* =========================================================
+       MANIFESTO
+    ========================================================= */
+
+    .home-manifesto {
+      position: relative;
+
+      padding:
+        100px 7vw 105px;
+
+      overflow: hidden;
+    }
+
+    .manifesto-stage {
+      position: relative;
+
+      max-width: 1400px;
+
+      min-height: 480px;
+
+      margin: 0 auto;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+    }
+
+    .manifesto-line {
+      position: absolute;
+
+      width: 72%;
+
+      height: 1px;
+
+      background:
+        rgba(100,20,38,.22);
+
+      left: 14%;
+
+      top: 50%;
+
+      transform:
+        rotate(-8deg);
+    }
+
+    .manifesto-circle {
+      position: absolute;
+
+      width: 170px;
+      height: 170px;
+
+      border-radius: 50%;
+
+      border:
+        1px solid
+        var(--burgundy);
+
+      left: 14%;
+
+      top: 25%;
+
+      cursor: none;
+
+      transition:
+        transform .6s
+        cubic-bezier(.2,.8,.2,1),
+        background .4s ease;
+    }
+
+    .manifesto-circle:hover {
+      transform:
+        scale(1.08)
+        rotate(8deg);
+
+      background:
+        rgba(100,20,38,.05);
+    }
+
+    .manifesto-ink {
+      position: absolute;
+
+      width: 120px;
+      height: 85px;
+
+      border-radius:
+        58% 42% 49% 51% /
+        45% 55% 44% 56%;
+
+      background:
+        rgba(100,20,38,.08);
+
+      right: 16%;
+      bottom: 17%;
+
+      transform:
+        rotate(-15deg);
+
+      filter:
+        blur(1px);
+    }
+
+    .manifesto-title {
+      position: relative;
+
+      z-index: 3;
+
+      display: flex;
+
+      flex-direction: column;
+
+      font-family: var(--serif);
+
+      font-size:
+        clamp(48px, 7vw, 92px);
+
+      font-weight: 400;
+
+      line-height: .88;
+
+      text-align: center;
+    }
+
+    .manifesto-title span:nth-child(2) {
+      margin-left: 11vw;
+    }
+
+    .manifesto-accent {
+      color: var(--burgundy);
+
+      font-style: italic;
+    }
+
+    .manifesto-title .manifesto-accent:nth-child(3) {
+      margin-left: -3vw;
+    }
+
+    .manifesto-title .manifesto-accent:nth-child(4) {
+      margin-left: 9vw;
+    }
+
+    .manifesto-note {
+      position: absolute;
+
+      right: 4%;
+
+      top: 11%;
+
+      max-width: 180px;
+
+      font-size: 9px;
+
+      line-height: 1.8;
+
+      letter-spacing: .08em;
+
+      text-transform: uppercase;
+
+      color: var(--burgundy);
+
+      opacity: .7;
+    }
+
+    .manifesto-caption {
+      position: absolute;
+
+      left: 3%;
+
+      bottom: 8%;
+
+      font-size: 8px;
+
+      letter-spacing: .2em;
+
+      color: var(--burgundy);
+
+      opacity: .6;
+    }
+
+
+    /* =========================================================
+       CONTACT
+    ========================================================= */
 
     .home-contact {
-      min-height: 60vh;
+      min-height: 55vh;
+
       padding:
-        150px 7vw;
-      background: var(--burgundy);
-      color: var(--cream);
+        110px 7vw;
+
+      background:
+        var(--burgundy);
+
+      color:
+        var(--cream);
+
       display: flex;
+
       align-items: center;
     }
 
     .home-contact-inner {
       max-width: 1100px;
+
       margin: 0 auto;
+
       width: 100%;
     }
 
     .home-contact-title {
-      font-family:
-        "DM Serif Display",
-        Georgia,
-        serif;
+      font-family: var(--serif);
+
       font-size:
         clamp(60px, 9vw, 125px);
-      line-height: .85;
+
+      line-height: .84;
+
       font-weight: 400;
     }
 
     .home-contact-title span {
       color: var(--pink);
+
       font-style: italic;
     }
 
     .home-contact-text {
       max-width: 550px;
-      margin-top: 45px;
-      font-family:
-        "DM Serif Display",
-        Georgia,
-        serif;
-      font-size: 25px;
-      line-height: 1.4;
+
+      margin-top: 32px;
+
+      font-family: var(--serif);
+
+      font-size:
+        clamp(20px, 2.3vw, 27px);
+
+      line-height: 1.35;
     }
+
+
+    /* =========================================================
+       TABLET
+    ========================================================= */
 
     @media (max-width: 900px) {
 
       .navbar {
         padding:
-          15px 28px;
-      }
-
-      .nav-logo {
-        width: 68px;
-        height: 68px;
-      }
-
-      .nav-links {
-        gap: 23px;
+          12px 28px;
       }
 
       .hero {
@@ -1024,23 +1561,40 @@
       }
 
       .hero-title .design {
-        margin-left: 10vw;
+        margin-left: 9vw;
       }
 
       .hero-title .lab {
-        margin-left: 20vw;
+        margin-left: 18vw;
       }
 
       .hero-slogan {
-        margin-left: 38vw;
+        margin-left: 35vw;
       }
 
-      .identity {
+      .identity,
+      .featured-projects,
+      .home-manifesto {
         padding-left: 6vw;
         padding-right: 6vw;
       }
 
+      .identity-detail,
+      .featured-projects-intro {
+        margin-left: 12vw;
+      }
+
+      .manifesto-circle {
+        width: 130px;
+        height: 130px;
+      }
+
     }
+
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
 
     @media (max-width: 600px) {
 
@@ -1052,10 +1606,14 @@
         display: none;
       }
 
+
+      /* NAV */
+
       .navbar {
-        height: 72px;
+        height: 70px;
+
         padding:
-          10px 18px;
+          9px 18px;
       }
 
       .nav-logo {
@@ -1063,46 +1621,89 @@
         height: 52px;
       }
 
-      .nav-links {
-        gap: 12px;
+      .menu-toggle {
+        width: 42px;
+        height: 42px;
+
+        cursor: pointer;
       }
 
-      .nav-links a {
-        font-size: 7px;
-        letter-spacing: .08em;
+
+      /* MENU */
+
+      .menu-content {
+        width: 84vw;
+
+        gap: 2px;
       }
+
+      .menu-item {
+        font-size: 48px;
+
+        padding:
+          11px 0;
+      }
+
+      .menu-item-number {
+        font-size: 7px;
+      }
+
+      .menu-info {
+        left: 20px;
+
+        bottom: 24px;
+
+        font-size: 7px;
+      }
+
+
+      /* HERO */
 
       .hero {
-        min-height: 100vh;
+        min-height: 88vh;
+
         padding:
-          115px 22px 70px;
+          100px 22px 65px;
       }
 
       .hero-label {
         font-size: 7px;
+
         letter-spacing: .18em;
-        margin-bottom: 30px;
+
+        margin-bottom: 25px;
+      }
+
+      .hero-label::before {
+        width: 28px;
       }
 
       .hero-title {
         font-size:
           clamp(54px, 17vw, 82px);
-        line-height: .88;
+
+        line-height: .84;
       }
 
       .hero-title .design {
-        margin-left: 7vw;
-        margin-top: 8px;
+        margin-left: 6vw;
+
+        margin-top: 7px;
       }
 
       .hero-title .lab {
-        margin-left: 15vw;
-        margin-top: 13px;
+        margin-left: 13vw;
+
+        margin-top: 8px;
       }
 
       .hero-slogan {
-        margin-top: 45px;
-        margin-left: 18vw;
+        margin-top: 34px;
+
+        margin-left: 15vw;
+
+        max-width: 250px;
+
         font-size: 18px;
       }
 
@@ -1112,67 +1713,246 @@
 
       .word-idea {
         right: 7%;
-        top: 24%;
+        top: 22%;
       }
 
       .word-forma {
         right: 6%;
-        bottom: 22%;
+        bottom: 19%;
       }
 
       .word-identita {
         left: 7%;
-        bottom: 13%;
+        bottom: 11%;
       }
+
+      .construction-horizontal {
+        width: 70px;
+
+        right: 8%;
+      }
+
+      .construction-vertical {
+        height: 70px;
+
+        right: 13%;
+      }
+
+
+      /* IDENTITY */
 
       .identity {
         padding:
-          110px 22px 90px;
+          80px 22px 80px;
+      }
+
+      .identity-title {
+        font-size:
+          clamp(50px, 15vw, 76px);
       }
 
       .identity-intro {
+        margin-top: 28px;
+
         font-size: 20px;
       }
 
-      .services {
-        margin-top: 75px;
+      .identity-detail {
+        margin-left: 8vw;
+
+        margin-top: 20px;
+
+        font-size: 10px;
       }
 
+      .services-title {
+        margin-top: 65px;
+
+        font-size:
+          clamp(34px, 10vw, 48px);
+      }
+
+
+      /* SERVICES */
+
       .service {
-        min-height: 150px;
+        min-height: 145px;
+
         grid-template-columns:
-          48px 1fr;
+          45px 1fr;
+
         padding:
-          25px 0;
+          22px 0;
       }
 
       .service-number {
-        font-size: 22px;
+        font-size: 21px;
       }
 
       .service-name {
-        font-size: 31px;
+        font-size: 30px;
       }
 
       .service-description {
         grid-column: 2;
+
         justify-self: start;
-        margin-top: 10px;
-        font-size: 10px;
+
+        margin-top: 8px;
+
+        font-size: 9px;
+
+        max-width: 260px;
       }
 
       .service-arrow {
         right: 0;
+
+        font-size: 20px;
       }
 
-      .home-contact {
+
+      /* PROJECTS */
+
+      .featured-projects {
         padding:
-          110px 22px;
+          80px 22px 85px;
+      }
+
+      .featured-projects-title {
+        font-size:
+          clamp(50px, 15vw, 78px);
+      }
+
+      .featured-projects-intro {
+        margin-left: 8vw;
+
+        margin-top: 18px;
+
+        font-size: 10px;
+      }
+
+      .projects-composition {
+        min-height: 500px;
+
+        margin-top: 42px;
+      }
+
+      .project-one {
+        width: 73%;
+
+        height: 250px;
+      }
+
+      .project-two {
+        width: 47%;
+
+        height: 190px;
+
+        right: 0;
+
+        top: 150px;
+      }
+
+      .project-three {
+        width: 55%;
+
+        height: 160px;
+
+        left: 17%;
+
+        bottom: 0;
+      }
+
+
+      /* MANIFESTO */
+
+      .home-manifesto {
+        padding:
+          75px 22px 80px;
+      }
+
+      .manifesto-stage {
+        min-height: 420px;
+      }
+
+      .manifesto-line {
+        width: 100%;
+
+        left: 0;
+      }
+
+      .manifesto-circle {
+        width: 90px;
+        height: 90px;
+
+        left: 4%;
+
+        top: 19%;
+      }
+
+      .manifesto-ink {
+        width: 75px;
+        height: 55px;
+
+        right: 4%;
+        bottom: 16%;
+      }
+
+      .manifesto-title {
+        font-size:
+          clamp(43px, 12vw, 65px);
+      }
+
+      .manifesto-title span:nth-child(2) {
+        margin-left: 8vw;
+      }
+
+      .manifesto-title .manifesto-accent:nth-child(3) {
+        margin-left: -2vw;
+      }
+
+      .manifesto-title .manifesto-accent:nth-child(4) {
+        margin-left: 7vw;
+      }
+
+      .manifesto-note {
+        right: 0;
+
+        top: 4%;
+
+        max-width: 125px;
+
+        font-size: 7px;
+      }
+
+      .manifesto-caption {
+        left: 0;
+
+        bottom: 4%;
+
+        font-size: 7px;
+      }
+
+
+      /* CONTACT */
+
+      .home-contact {
+        min-height: 50vh;
+
+        padding:
+          90px 22px;
       }
 
       .home-contact-title {
         font-size:
           clamp(52px, 15vw, 80px);
+      }
+
+      .home-contact-text {
+        margin-top: 28px;
+
+        font-size: 20px;
       }
 
     }
@@ -1181,11 +1961,20 @@
 
 </head>
 
+
 <body>
 
 
+  <!-- =======================================================
+       CURSOR
+  ======================================================== -->
+
   <div class="cursor"></div>
 
+
+  <!-- =======================================================
+       PAGE TRANSITION
+  ======================================================== -->
 
   <div
     class="page-transition"
@@ -1207,480 +1996,612 @@
   </div>
 
 
+  <!-- =======================================================
+       MACCHIA
+  ======================================================== -->
+
   <div class="macchia"></div>
 
 
+  <!-- =======================================================
+       NAVIGATION
+  ======================================================== -->
+
   <nav class="navbar">
-
-  <a
-    href="index.html"
-    class="nav-link"
-    data-name="Home"
-  >
-
-    <img
-      class="nav-logo"
-      src="IMG-20260904-WA0041.jpg"
-      alt="Greta Design Lab"
-    >
-
-  </a>
-
-
-  <button
-    class="menu-toggle"
-    id="menuToggle"
-    aria-label="Apri menu"
-    aria-expanded="false"
-  >
-
-    <span class="menu-lines"></span>
-
-  </button>
-
-</nav>
-
-
-<div
-  class="menu-overlay"
-  id="menuOverlay"
->
-
-  <div class="menu-content">
 
     <a
       href="index.html"
-      class="menu-item"
+      class="nav-logo-link"
       data-name="Home"
     >
-      <span class="menu-item-number">01</span>
-      Home
+
+      <img
+        class="nav-logo"
+        src="IMG-20260904-WA0041.jpg"
+        alt="Greta Design Lab"
+      >
+
     </a>
 
 
-    <a
-      href="portfolio.html"
-      class="menu-item"
-      data-name="Portfolio"
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      aria-label="Apri menu"
+      aria-expanded="false"
+      type="button"
     >
-      <span class="menu-item-number">02</span>
-      Portfolio
-    </a>
+
+      <span class="menu-lines"></span>
+
+    </button>
+
+  </nav>
 
 
-    <a
-      href="chi-sono.html"
-      class="menu-item"
-      data-name="Chi sono"
-    >
-      <span class="menu-item-number">03</span>
-      Chi sono
-    </a>
+  <!-- =======================================================
+       FULL SCREEN MENU
+  ======================================================== -->
 
+  <div
+    class="menu-overlay"
+    id="menuOverlay"
+  >
 
-    <a
-      href="contatti.html"
-      class="menu-item"
-      data-name="Contatti"
-    >
-      <span class="menu-item-number">04</span>
-      Contatti
-    </a>
-
-
-    <a
-      href="lab.html"
-      class="menu-item lab-menu"
-      data-name="Lab"
-    >
-      <span class="menu-item-number">05</span>
-      Lab
-    </a>
-
-  </div>
-
-
-  <div class="menu-info">
-
-    Greta Design Lab<br>
-    Precisione / Forma / Imperfezione
-
-  </div>
-
-</div>
-
+    <div class="menu-content">
 
       <a
         href="index.html"
-        class="nav-link"
+        class="menu-item"
         data-name="Home"
       >
+
+        <span class="menu-item-number">
+          01
+        </span>
+
         Home
+
       </a>
 
 
       <a
         href="portfolio.html"
-        class="nav-link"
+        class="menu-item"
         data-name="Portfolio"
       >
+
+        <span class="menu-item-number">
+          02
+        </span>
+
         Portfolio
+
       </a>
 
 
       <a
         href="chi-sono.html"
-        class="nav-link"
+        class="menu-item"
         data-name="Chi sono"
       >
+
+        <span class="menu-item-number">
+          03
+        </span>
+
         Chi sono
+
       </a>
 
 
       <a
         href="contatti.html"
-        class="nav-link"
+        class="menu-item"
         data-name="Contatti"
       >
+
+        <span class="menu-item-number">
+          04
+        </span>
+
         Contatti
+
       </a>
 
 
+      <a
+        href="lab.html"
+        class="menu-item lab-menu"
+        data-name="Lab"
+      >
+
+        <span class="menu-item-number">
+          05
+        </span>
+
+        Lab
+
+      </a>
+
     </div>
 
-  </nav>
+
+    <div class="menu-info">
+
+      Greta Design Lab<br>
+      Precisione / Forma / Imperfezione
+
+    </div>
+
+  </div>
 
 
-  <main
-    id="home"
-    class="hero"
-  >
+  <!-- =======================================================
+       MAIN
+  ======================================================== -->
 
-    <div class="hero-inner">
+  <main id="home">
 
-    
-    <div class="hero-mark">
-  <img
-    src="IMG-20260904-WA0041.jpg"
-    alt="GDL"
-  >
-</div>
 
-      <div class="hero-label">
-        Un laboratorio di idee
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="hero">
+
+      <div class="hero-inner">
+
+
+        <div class="hero-label">
+          Un laboratorio di idee
+        </div>
+
+
+        <h1 class="hero-title">
+
+          <span class="word greta">
+            GRETA
+          </span>
+
+          <span class="word design">
+            DESIGN
+          </span>
+
+          <span class="word lab">
+            LAB.
+          </span>
+
+        </h1>
+
+
+        <p class="hero-slogan">
+
+          Anche la perfezione lascia una
+          <span>macchia.</span>
+
+        </p>
+
       </div>
 
-      <h1 class="hero-title">
 
-        <span class="word greta">
-          GRETA
-        </span>
+      <!-- FLOATING WORDS -->
 
-        <span class="word design">
-          DESIGN
-        </span>
+      <span class="floating-word word-idea">
+        IDEA
+      </span>
 
-        <span class="word lab">
-          LAB.
-        </span>
+      <span class="floating-word word-forma">
+        FORMA
+      </span>
 
-      </h1>
-
-      <p class="hero-slogan">
-
-        Anche la perfezione lascia una
-        <span>macchia.</span>
-
-      </p>
-
-    </div>
+      <span class="floating-word word-identita">
+        IDENTITÀ
+      </span>
 
 
-    <span class="floating-word word-idea">
-      IDEA
-    </span>
+      <!-- CONSTRUCTION -->
 
-    <span class="floating-word word-forma">
-      FORMA
-    </span>
+      <span
+        class="construction-line construction-horizontal"
+      ></span>
 
-    <span class="floating-word word-identita">
-      IDENTITÀ
-    </span>
+      <span
+        class="construction-line construction-vertical"
+      ></span>
 
 
-    <span class="construction-line construction-horizontal"></span>
+      <!-- DOTS -->
 
-    <span class="construction-line construction-vertical"></span>
+      <span class="ink-dot ink-one"></span>
+
+      <span class="ink-dot ink-two"></span>
+
+      <span class="ink-dot ink-three"></span>
 
 
-    <span class="ink-dot ink-one"></span>
+    </section>
 
-    <span class="ink-dot ink-two"></span>
 
-    <span class="ink-dot ink-three"></span>
+    <!-- =====================================================
+         IDENTITY
+    ====================================================== -->
+
+    <section
+      class="identity"
+      id="identity"
+    >
+
+      <div class="identity-inner">
+
+
+        <div class="section-number">
+          01 / IDENTITÀ
+        </div>
+
+
+        <h2 class="identity-title">
+
+          Dall'idea<br>
+          all'<span>identità.</span>
+
+        </h2>
+
+
+        <p class="identity-intro">
+
+          Trasformo idee, intuizioni e visioni
+          in progetti visivi pensati per
+          <em>lasciare il segno.</em>
+
+        </p>
+
+
+        <p class="identity-detail">
+
+          Ogni elemento nasce da una ricerca precisa,
+          dal concept alla composizione, fino a quella
+          piccola imperfezione che rende il risultato
+          riconoscibile.
+
+        </p>
+
+
+        <h3 class="services-title">
+
+          Cosa posso fare
+          <em>per te.</em>
+
+        </h3>
+
+
+        <!-- SERVICES -->
+
+        <div class="services">
+
+
+          <!-- SERVICE 01 -->
+
+          <a
+            class="service"
+            href="portfolio.html#portfolio-brand"
+            data-name="Brand Identity"
+          >
+
+            <div class="service-number">
+              01
+            </div>
+
+            <div class="service-name">
+              Brand Identity
+            </div>
+
+            <div class="service-description">
+
+              Costruisco identità visive riconoscibili:
+              logo, colore, tipografia e sistemi grafici
+              pensati per dare forma a un'idea.
+
+            </div>
+
+            <div class="service-arrow">
+              →
+            </div>
+
+          </a>
+
+
+          <!-- SERVICE 02 -->
+
+          <a
+            class="service"
+            href="portfolio.html#portfolio-social"
+            data-name="Social Design"
+          >
+
+            <div class="service-number">
+              02
+            </div>
+
+            <div class="service-name">
+              Social Design
+            </div>
+
+            <div class="service-description">
+
+              Creo contenuti e grafiche
+              pensati per rendere un brand
+              riconoscibile anche sui social.
+
+            </div>
+
+            <div class="service-arrow">
+              →
+            </div>
+
+          </a>
+
+
+          <!-- SERVICE 03 -->
+
+          <a
+            class="service"
+            href="portfolio.html#portfolio-graphic"
+            data-name="Graphic Design"
+          >
+
+            <div class="service-number">
+              03
+            </div>
+
+            <div class="service-name">
+              Graphic Design
+            </div>
+
+            <div class="service-description">
+
+              Progetto idee che prendono forma su carta,
+              tra poster, brochure, locandine e flyer.
+
+            </div>
+
+            <div class="service-arrow">
+              →
+            </div>
+
+          </a>
+
+
+          <!-- SERVICE 04 -->
+
+          <a
+            class="service"
+            href="portfolio.html#portfolio-creative"
+            data-name="Creative Design"
+          >
+
+            <div class="service-number">
+              04
+            </div>
+
+            <div class="service-name">
+              Creative Design
+            </div>
+
+            <div class="service-description">
+
+              Parto dalla tua idea, anche quando non sai
+              ancora che forma darle. Il resto lo troviamo
+              insieme.
+
+            </div>
+
+            <div class="service-arrow">
+              →
+            </div>
+
+          </a>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FEATURED PROJECTS
+    ====================================================== -->
+
+    <section class="featured-projects">
+
+      <div class="featured-projects-inner">
+
+
+        <div class="section-number">
+          02 / PROGETTI
+        </div>
+
+
+        <h2 class="featured-projects-title">
+
+          Alcuni dei miei
+          <em>progetti.</em>
+
+        </h2>
+
+
+        <div class="featured-projects-intro">
+
+          Una selezione di idee trasformate in forma.
+
+        </div>
+
+
+        <div class="projects-composition">
+
+
+          <div class="project-placeholder project-one">
+            IMMAGINE 1
+          </div>
+
+
+          <div class="project-placeholder project-two">
+            IMMAGINE 2
+          </div>
+
+
+          <div class="project-placeholder project-three">
+            IMMAGINE 3
+          </div>
+
+
+        </div>
+
+
+        <a
+          href="portfolio.html"
+          class="projects-cta"
+          data-name="Portfolio"
+        >
+
+          Vedi il portfolio
+
+          <span>
+            →
+          </span>
+
+        </a>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MANIFESTO
+    ====================================================== -->
+
+    <section class="home-manifesto">
+
+      <div class="manifesto-stage">
+
+
+        <div class="manifesto-line"></div>
+
+
+        <div
+          class="manifesto-circle"
+          id="manifestoCircle"
+          role="button"
+          tabindex="0"
+          aria-label="Interagisci con la composizione"
+        ></div>
+
+
+        <div
+          class="manifesto-ink"
+          id="manifestoInk"
+        ></div>
+
+
+        <h2 class="manifesto-title">
+
+          <span>
+            La perfezione
+          </span>
+
+          <span>
+            definisce.
+          </span>
+
+          <span class="manifesto-accent">
+            L'imperfezione
+          </span>
+
+          <span class="manifesto-accent">
+            distingue.
+          </span>
+
+        </h2>
+
+
+        <p class="manifesto-note">
+
+          Ogni dettaglio ha un ruolo.<br>
+          Anche quello che rompe<br>
+          l'equilibrio con una macchia.
+
+        </p>
+
+
+        <div class="manifesto-caption">
+
+          PRECISIONE / IMPERFEZIONE
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CONTACT
+    ====================================================== -->
+
+    <section class="home-contact">
+
+      <div class="home-contact-inner">
+
+
+        <h2 class="home-contact-title">
+
+          <span>
+            Un'idea?
+          </span>
+
+          <br>
+
+          Parliamone.
+
+        </h2>
+
+
+        <p class="home-contact-text">
+
+          Hai un progetto in mente?
+          Scrivimi e vediamo insieme
+          dove può portarci.
+
+        </p>
+
+
+      </div>
+
+    </section>
 
 
   </main>
 
 
-  <section
-    class="identity"
-    id="identity"
-  >
-
-    <div class="identity-inner">
-
-
-      <h2 class="identity-title">
-
-        Dall'idea<br>
-        all'<span>identità.</span>
-
-      </h2>
-
-
-      <p class="identity-intro">
-
-        Trasformo idee, intuizioni e visioni
-        in progetti visivi pensati per
-        <em>lasciare il segno.</em>
-
-      </p>
-      
-<p class="identity-detail">
-
-  Ogni elemento nasce da una ricerca precisa,
-  dal concept alla composizione, fino a quella
-  piccola imperfezione che rende il risultato
-  riconoscibile.
-
-</p>
-      
-<h3 class="services-title">
-  Cosa posso fare <em>per te.</em>
-</h3>
-
-      <div class="services">
-
-
-        <a
-          class="service"
-          href="portfolio.html#portfolio-brand"
-          data-name="Brand Identity"
-        >
-
-          <div class="service-number">
-            01
-          </div>
-
-          <div class="service-name">
-            Brand Identity
-          </div>
-
-          <div class="service-description">
-  Costruisco identità visive riconoscibili:
-  logo, colore, tipografia e sistemi grafici
-  pensati per dare forma a un'idea.
-</div>
-
-          <div class="service-arrow">
-            →
-          </div>
-
-        </a>
-
-
-        <a
-          class="service"
-          href="portfolio.html#portfolio-social"
-          data-name="Social Design"
-        >
-
-          <div class="service-number">
-            02
-          </div>
-
-          <div class="service-name">
-            Social Design
-          </div>
-
-         <div class="service-description">
-  Creo contenuti e grafiche
-  pensati per rendere un brand
-  riconoscibile anche sui social.
-</div>
-
-          <div class="service-arrow">
-            →
-          </div>
-
-        </a>
-
-
-        <a
-          class="service"
-          href="portfolio.html#portfolio-graphic"
-          data-name="Graphic Design"
-        >
-
-          <div class="service-number">
-            03
-          </div>
-
-          <div class="service-name">
-            Graphic Design
-          </div>
-
-         <div class="service-description">
-  Progetto idee che prendono forma su carta,
-tra poster, brochure, locandine e flyer.
-</div>
-
-          <div class="service-arrow">
-            →
-          </div>
-
-        </a>
-
-
-        <a
-          class="service"
-          href="portfolio.html#portfolio-creative"
-          data-name="Creative Design"
-        >
-
-          <div class="service-number">
-            04
-          </div>
-
-          <div class="service-name">
-            Creative Design
-          </div>
-
-          <div class="service-description">
-  Parto dalla tua idea, anche quando non sai
-  ancora che forma darle. Il resto lo troviamo
-  insieme.
-</div>
-
-          <div class="service-arrow">
-            →
-          </div>
-
-        </a>
-
-
-      </div>
-
-    </div>
-
-  </section>
-
-    <section class="featured-projects">
-
-    <div class="featured-projects-inner">
-
-    <h2 class="featured-projects-title">
-  Alcuni dei miei <em>progetti.</em>
-</h2>
-
-<div class="featured-projects-intro">
-  Una selezione di idee trasformate in forma.
-</div>
-
-      <div class="projects-composition">
-
-        <div class="project-placeholder project-one">
-          IMMAGINE 1
-        </div>
-
-        <div class="project-placeholder project-two">
-          IMMAGINE 2
-        </div>
-
-        <div class="project-placeholder project-three">
-          IMMAGINE 3
-        </div>
-
-      </div>
-
-      <a
-        href="portfolio.html"
-        class="projects-cta"
-        data-name="Portfolio"
-      >
-        Vedi il portfolio <span>→</span>
-      </a>
-
-    </div>
-
-  </section>
-
-<section class="home-manifesto">
-
-  <div class="manifesto-stage">
-
-    <div class="manifesto-line"></div>
-
-    <div
-      class="manifesto-circle"
-      id="manifestoCircle"
-      role="button"
-      tabindex="0"
-      aria-label="Interagisci con la composizione"
-    ></div>
-
-    <div class="manifesto-ink" id="manifestoInk"></div>
-
-    <h2 class="manifesto-title">
-      <span>La perfezione</span>
-      <span>definisce.</span>
-      <span class="manifesto-accent">L'imperfezione</span>
-      <span class="manifesto-accent">distingue.</span>
-    </h2>
-
-    <p class="manifesto-note">
-      Ogni dettaglio ha un ruolo.<br>
-      Anche quello che rompe<br>
-      l'equilibrio con una macchia.
-    </p>
-
-    <div class="manifesto-caption">
-      PRECISIONE / IMPERFEZIONE
-    </div>
-
-  </div>
-
-</section>
-
-<section class="home-contact">
-    <div class="home-contact-inner">
-
-      <h2 class="home-contact-title">
-
-        <span>Un'idea?</span><br>
-        Parliamone.
-
-      </h2>
-
-      <p class="home-contact-text">
-
-        Hai un progetto in mente?
-        Scrivimi e vediamo insieme
-        dove può portarci.
-
-      </p>
-
-    </div>
-
-  </section>
-
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
 
   <script>
 
+
+    /* =======================================================
+       MACCHIA
+    ======================================================== */
+
     const macchia =
       document.querySelector(".macchia");
+
 
     let mouseX =
       window.innerWidth / 2;
@@ -1699,8 +2620,11 @@ tra poster, brochure, locandine e flyer.
       "pointermove",
       (event) => {
 
-        mouseX = event.clientX;
-        mouseY = event.clientY;
+        mouseX =
+          event.clientX;
+
+        mouseY =
+          event.clientY;
 
       }
     );
@@ -1714,11 +2638,13 @@ tra poster, brochure, locandine e flyer.
       macchiaY +=
         (mouseY - macchiaY) * .075;
 
+
       macchia.style.left =
         macchiaX + "px";
 
       macchia.style.top =
         macchiaY + "px";
+
 
       requestAnimationFrame(
         animaMacchia
@@ -1726,8 +2652,13 @@ tra poster, brochure, locandine e flyer.
 
     }
 
+
     animaMacchia();
 
+
+    /* =======================================================
+       CURSOR
+    ======================================================== */
 
     const cursor =
       document.querySelector(".cursor");
@@ -1749,7 +2680,7 @@ tra poster, brochure, locandine e flyer.
 
     const interactiveElements =
       document.querySelectorAll(
-        "a, .word, .floating-word, .ink-dot, .hero-slogan"
+        "a, button, .word, .floating-word, .ink-dot, .hero-slogan, .service, .manifesto-circle"
       );
 
 
@@ -1759,14 +2690,23 @@ tra poster, brochure, locandine e flyer.
         element.addEventListener(
           "mouseenter",
           () => {
-            cursor.classList.add("active");
+
+            cursor.classList.add(
+              "active"
+            );
+
           }
         );
+
 
         element.addEventListener(
           "mouseleave",
           () => {
-            cursor.classList.remove("active");
+
+            cursor.classList.remove(
+              "active"
+            );
+
           }
         );
 
@@ -1774,10 +2714,128 @@ tra poster, brochure, locandine e flyer.
     );
 
 
+    /* =======================================================
+       HAMBURGER MENU
+    ======================================================== */
+
+    const menuToggle =
+      document.getElementById(
+        "menuToggle"
+      );
+
+
+    const menuOverlay =
+      document.getElementById(
+        "menuOverlay"
+      );
+
+
+    const menuItems =
+      document.querySelectorAll(
+        ".menu-item"
+      );
+
+
+    function chiudiMenu() {
+
+      menuToggle.classList.remove(
+        "active"
+      );
+
+      menuOverlay.classList.remove(
+        "active"
+      );
+
+
+      menuToggle.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+
+      document.body.style.overflow =
+        "";
+
+    }
+
+
+    menuToggle.addEventListener(
+      "click",
+      () => {
+
+        const isOpen =
+          menuToggle.classList.toggle(
+            "active"
+          );
+
+
+        menuOverlay.classList.toggle(
+          "active",
+          isOpen
+        );
+
+
+        menuToggle.setAttribute(
+          "aria-expanded",
+          isOpen
+        );
+
+
+        document.body.style.overflow =
+          isOpen
+            ? "hidden"
+            : "";
+
+      }
+    );
+
+
+    menuItems.forEach(
+      (item) => {
+
+        item.addEventListener(
+          "click",
+          () => {
+
+            chiudiMenu();
+
+          }
+        );
+
+      }
+    );
+
+
+    /* ESC PER CHIUDERE IL MENU */
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          event.key === "Escape" &&
+          menuOverlay.classList.contains(
+            "active"
+          )
+        ) {
+
+          chiudiMenu();
+
+        }
+
+      }
+    );
+
+
+    /* =======================================================
+       PAGE TRANSITIONS
+    ======================================================== */
+
     const pageTransition =
       document.getElementById(
         "pageTransition"
       );
+
 
     const transitionName =
       document.getElementById(
@@ -1785,7 +2843,8 @@ tra poster, brochure, locandine e flyer.
       );
 
 
-    let transitionRunning = false;
+    let transitionRunning =
+      false;
 
 
     const pageLinks =
@@ -1802,21 +2861,31 @@ tra poster, brochure, locandine e flyer.
           (event) => {
 
             const href =
-              link.getAttribute("href");
+              link.getAttribute(
+                "href"
+              );
 
 
             if (
               !href ||
               href.startsWith("http") ||
+              href.startsWith("#") ||
               transitionRunning
             ) {
+
               return;
+
             }
 
 
             event.preventDefault();
 
-            transitionRunning = true;
+
+            transitionRunning =
+              true;
+
+
+            chiudiMenu();
 
 
             transitionName.textContent =
@@ -1827,6 +2896,7 @@ tra poster, brochure, locandine e flyer.
             pageTransition.classList.remove(
               "leaving"
             );
+
 
             pageTransition.classList.add(
               "active"
@@ -1853,114 +2923,154 @@ tra poster, brochure, locandine e flyer.
         );
 
       }
-
     );
 
-/* =========================
-   HAMBURGER MENU
-========================= */
 
-const menuToggle =
-  document.getElementById("menuToggle");
+    /* =======================================================
+       MANIFESTO INTERACTION
+    ======================================================== */
 
-const menuOverlay =
-  document.getElementById("menuOverlay");
-
-const menuItems =
-  document.querySelectorAll(".menu-item");
+    const manifestoCircle =
+      document.getElementById(
+        "manifestoCircle"
+      );
 
 
-menuToggle.addEventListener(
-  "click",
-  () => {
+    const manifestoInk =
+      document.getElementById(
+        "manifestoInk"
+      );
 
-    const isOpen =
-      menuToggle.classList.toggle("active");
 
-    menuOverlay.classList.toggle(
-      "active",
-      isOpen
+    function attivaManifesto() {
+
+      manifestoCircle.style.transform =
+        "scale(1.14) rotate(12deg)";
+
+
+      manifestoCircle.style.background =
+        "rgba(100,20,38,.08)";
+
+
+      manifestoInk.style.transform =
+        "rotate(8deg) scale(1.25)";
+
+
+      manifestoInk.style.background =
+        "rgba(100,20,38,.16)";
+
+    }
+
+
+    function resetManifesto() {
+
+      manifestoCircle.style.transform =
+        "";
+
+      manifestoCircle.style.background =
+        "";
+
+      manifestoInk.style.transform =
+        "";
+
+      manifestoInk.style.background =
+        "";
+
+    }
+
+
+    manifestoCircle.addEventListener(
+      "mouseenter",
+      attivaManifesto
     );
 
-    menuToggle.setAttribute(
-      "aria-expanded",
-      isOpen
+
+    manifestoCircle.addEventListener(
+      "mouseleave",
+      resetManifesto
     );
 
-    document.body.style.overflow =
-      isOpen ? "hidden" : "";
 
-  }
-);
-
-
-menuItems.forEach(
-  (item) => {
-
-    item.addEventListener(
-      "click",
-      () => {
-
-        menuToggle.classList.remove(
-          "active"
-        );
-
-        menuOverlay.classList.remove(
-          "active"
-        );
-
-        menuToggle.setAttribute(
-          "aria-expanded",
-          "false"
-        );
-
-        document.body.style.overflow =
-          "";
-
-      }
+    manifestoCircle.addEventListener(
+      "focus",
+      attivaManifesto
     );
 
-  }
-);    
 
-  </script>
-    <script>
+    manifestoCircle.addEventListener(
+      "blur",
+      resetManifesto
+    );
+
+
+    /* =======================================================
+       INCOMING PAGE TRANSITION
+    ======================================================== */
+
     const incomingTransition =
-      sessionStorage.getItem("gdl-transition");
+      sessionStorage.getItem(
+        "gdl-transition"
+      );
+
 
     if (incomingTransition) {
 
-      sessionStorage.removeItem("gdl-transition");
+      sessionStorage.removeItem(
+        "gdl-transition"
+      );
 
-      const pageTransition =
-        document.getElementById("pageTransition");
-
-      const transitionName =
-        document.getElementById("transitionName");
 
       if (pageTransition) {
 
         if (transitionName) {
-          transitionName.textContent = "HOME";
-          transitionName.style.opacity = "1";
+
+          transitionName.textContent =
+            "HOME";
+
+          transitionName.style.opacity =
+            "1";
+
         }
 
-        pageTransition.style.visibility = "visible";
-        pageTransition.style.opacity = "1";
 
-        pageTransition.classList.add("leaving");
+        pageTransition.style.visibility =
+          "visible";
 
-        setTimeout(() => {
+        pageTransition.style.opacity =
+          "1";
 
-          pageTransition.classList.remove("leaving");
 
-          pageTransition.style.opacity = "0";
-          pageTransition.style.visibility = "hidden";
+        pageTransition.classList.add(
+          "leaving"
+        );
 
-        }, 800);
+
+        setTimeout(
+          () => {
+
+            pageTransition.classList.remove(
+              "leaving"
+            );
+
+
+            pageTransition.style.opacity =
+              "0";
+
+            pageTransition.style.visibility =
+              "hidden";
+
+          },
+          800
+        );
+
       }
+
     }
+
+
   </script>
 
+
 </body>
+
 </html>
