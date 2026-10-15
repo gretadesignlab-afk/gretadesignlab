@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 :root {
   --cream: #f3eee6;
   --burgundy: #641426;
@@ -7,7 +6,7 @@
   --pink: #cda7ad;
   --line: rgba(23, 19, 19, 0.18);
   --serif: "DM Serif Display", Georgia, serif;
-  --sans: "Inter", Arial, sans-serif;
+  --sans: "Space Grotesk", Arial, sans-serif;
 }
 
 * {
@@ -151,7 +150,6 @@ a {
   width: 38vw;
   height: 38vw;
 }
-
 .page-transition.active .ink-transition {
   animation: inkIn 0.75s cubic-bezier(.77, 0, .18, 1) forwards;
 }
