@@ -663,8 +663,8 @@ em {
 ========================= */
 
 .about-intro {
-  min-height: 72vh;
-  padding: 150px 8vw 100px;
+  min-height: auto;
+  padding: 100px 8vw 65px;
   display: grid;
   grid-template-columns: 1fr 1.6fr;
   gap: 6vw;
@@ -690,7 +690,7 @@ em {
 }
 
 .about-story {
-  padding: 130px 8vw;
+  padding: 75px 8vw;
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
   gap: 10vw;
@@ -771,7 +771,7 @@ em {
 }
 
 .about-final {
-  padding: 150px 8vw;
+  padding: 75px 8vw;
 }
 
 .about-final > p:first-child {
