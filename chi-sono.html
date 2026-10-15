@@ -137,6 +137,14 @@
 
   </main>
 
+  <script>
+  document.querySelectorAll(".photo-flip").forEach((photo) => {
+    photo.addEventListener("click", () => {
+      const flipped = photo.classList.toggle("is-flipped");
+      photo.setAttribute("aria-pressed", String(flipped));
+    });
+  });
+</script>
 
   <script src="script.js"></script>
 
