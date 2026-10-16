@@ -156,9 +156,18 @@
 
   <div class="idea-workspace">
 
-    <div class="idea-note">
+    <form
+  class="idea-note"
+  id="ideaForm"
+  action="https://formspree.io/f/xjygjpkq"
+  method="POST"
+>
       <p class="idea-note-label">UN APPUNTO PER GDL</p>
-
+<input
+  type="hidden"
+  name="_subject"
+  value="Nuova idea — Fuori posto | Greta Design Lab"
+>
       <label for="idea-name">Come ti chiami? (facoltativo)</label>
       <input
         type="text"
@@ -185,7 +194,7 @@
       <button type="button" class="idea-submit" id="ideaSubmit">
         Lascia il tuo biglietto ↗
       </button>
-    </div>
+    </form>
 
     <div class="idea-box" id="ideaBox" aria-hidden="true">
       <span class="idea-box-mark">G.</span>
