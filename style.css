@@ -1321,7 +1321,15 @@ em {
   font-weight: 600;
   letter-spacing: .16em;
 }
+.idea-note {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
 
+.idea-note-label {
+  display: block;
+}
 .idea-note label {
   display: block;
   margin: 24px 0 10px;
