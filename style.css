@@ -1298,6 +1298,9 @@ em {
 
 .idea-note {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   padding: 42px;
   background: #fffaf1;
   box-shadow: 0 18px 45px rgba(23, 19, 19, .09);
@@ -1315,21 +1318,14 @@ em {
 }
 
 .idea-note-label {
+  display: block;
   margin-bottom: 35px;
   color: var(--burgundy);
   font-size: .65rem;
   font-weight: 600;
   letter-spacing: .16em;
 }
-.idea-note {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
 
-.idea-note-label {
-  display: block;
-}
 .idea-note label {
   display: block;
   margin: 24px 0 10px;
