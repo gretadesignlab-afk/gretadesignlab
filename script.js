@@ -265,3 +265,47 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
  
+const ideaForm = document.getElementById("ideaForm");
+
+if (ideaForm) {
+  const ideaButton = document.getElementById("ideaSubmit");
+  const ideaBox = document.getElementById("ideaBox");
+  const ideaStatus = document.getElementById("ideaStatus");
+
+  ideaForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (!ideaForm.reportValidity()) return;
+
+    ideaButton.disabled = true;
+    ideaButton.textContent = "La tua idea è in viaggio...";
+    ideaStatus.textContent = "";
+
+    try {
+      const response = await fetch(ideaForm.action, {
+        method: "POST",
+        body: new FormData(ideaForm),
+        headers: {
+          Accept: "application/json"
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error("Invio non riuscito");
+      }
+
+      ideaForm.reset();
+      ideaForm.classList.add("idea-sent");
+      ideaBox.classList.add("idea-received");
+      ideaStatus.textContent =
+        "Idea ricevuta. Vediamo dove ci porta.";
+      ideaButton.textContent = "Biglietto consegnato ✓";
+    } catch (error) {
+      ideaStatus.textContent =
+        "Ops, il biglietto non è partito. Riprova tra poco.";
+      ideaButton.textContent = "Riprova a inviare ↗";
+      ideaButton.disabled = false;
+    }
+  });
+}
+
