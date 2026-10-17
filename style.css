@@ -1446,10 +1446,10 @@ em {
     margin: 35px 0 45px;
   }
 
-  .idea-workspace {
-    grid-template-columns: 1fr;
-    gap: 55px;
-  }
+ .idea-workspace {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+  gap: 20px;
+}
 
   .idea-note {
     padding: 28px 24px;
@@ -1464,7 +1464,12 @@ em {
     margin-top: 50px;
   }
 }
-
+@media (max-width: 480px) {
+  .idea-workspace {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
 .idea-status {
   margin-top: 20px;
   color: var(--burgundy);
