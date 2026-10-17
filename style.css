@@ -1280,6 +1280,9 @@ em {
   font-size: 1rem;
   line-height: 1.8;
 }
+.idea-lead-highlight {
+  opacity: 1;
+}
 .idea-intro .idea-lead {
   opacity: 1;
 }
