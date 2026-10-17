@@ -1281,7 +1281,7 @@ em {
   line-height: 1.8;
 }
 .idea-lead-highlight {
-  opacity: 1;
+  opacity: 0.55;
 }
 .idea-intro .idea-lead {
   opacity: 1;
