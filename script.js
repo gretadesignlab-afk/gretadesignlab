@@ -270,6 +270,7 @@ const ideaForm = document.getElementById("ideaForm");
 if (ideaForm) {
   const ideaButton = document.getElementById("ideaSubmit");
   const ideaBox = document.getElementById("ideaBox");
+  const ideaPlane = document.getElementById("ideaPlane");
   const ideaStatus = document.getElementById("ideaStatus");
 
   ideaForm.addEventListener("submit", async (event) => {
@@ -280,6 +281,12 @@ if (ideaForm) {
     ideaButton.disabled = true;
     ideaButton.textContent = "La tua idea è in viaggio...";
     ideaStatus.textContent = "";
+    ideaPlane.classList.remove("idea-flying");
+ideaPlane.style.opacity = "1";
+
+void ideaPlane.offsetWidth;
+
+ideaPlane.classList.add("idea-flying");
 
     try {
       const response = await fetch(ideaForm.action, {
