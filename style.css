@@ -1526,6 +1526,31 @@ em {
   transform-origin: center;
 }
 
+.idea-plane.idea-flying {
+  animation: idea-flight 1.25s cubic-bezier(.45, 0, .25, 1) forwards;
+}
+
+@keyframes idea-flight {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(-8deg) scale(1);
+  }
+
+  35% {
+    opacity: 1;
+    transform: translate(100px, -65px) rotate(12deg) scale(1.1);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translate(210px, -15px) rotate(25deg) scale(.85);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(280px, 35px) rotate(40deg) scale(.35);
+  }
+}
 .idea-plane svg {
   display: block;
   width: 100%;
