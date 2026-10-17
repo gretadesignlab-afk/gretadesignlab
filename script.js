@@ -281,8 +281,8 @@ if (ideaForm) {
     const startX = noteRect.left + noteRect.width * 0.8;
     const startY = noteRect.top + noteRect.height * 0.65;
 
-    const endX = boxRect.left + boxRect.width * 0.5;
-    const endY = boxRect.top + boxRect.height * 0.5;
+    const endX = boxRect.left + boxRect.width * 0.55;
+    const endY = boxRect.top + boxRect.height * 0.18;
     const workspaceRect = ideaNote.parentElement.getBoundingClientRect();
 
 ideaPlane.style.left = `${startX - workspaceRect.left - planeRect.width / 2}px`;
