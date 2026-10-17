@@ -326,6 +326,7 @@ ideaPlane.style.top = `${startY - workspaceRect.top - planeRect.height / 2}px`;
       ideaBox.classList.add("idea-received");
       ideaPlane.classList.remove("idea-flying");
       ideaPlane.style.opacity = "1";
+      prepareIdeaFlight();
       void ideaPlane.offsetWidth;
       ideaPlane.classList.add("idea-flying");
       ideaStatus.textContent =
