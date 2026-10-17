@@ -271,6 +271,29 @@ if (ideaForm) {
   const ideaButton = document.getElementById("ideaSubmit");
   const ideaBox = document.getElementById("ideaBox");
   const ideaPlane = document.getElementById("ideaPlane");
+    const ideaNote = ideaForm;
+
+  function prepareIdeaFlight() {
+    const planeRect = ideaPlane.getBoundingClientRect();
+    const noteRect = ideaNote.getBoundingClientRect();
+    const boxRect = ideaBox.getBoundingClientRect();
+
+    const startX = noteRect.left + noteRect.width * 0.8;
+    const startY = noteRect.top + noteRect.height * 0.65;
+
+    const endX = boxRect.left + boxRect.width * 0.5;
+    const endY = boxRect.top + boxRect.height * 0.5;
+
+    ideaPlane.style.left = `${startX - planeRect.width / 2}px`;
+    ideaPlane.style.top = `${startY - planeRect.height / 2}px`;
+
+    ideaPlane.style.setProperty("--flight-x1", `${(endX - startX) * 0.35}px`);
+    ideaPlane.style.setProperty("--flight-y1", `${(endY - startY) * 0.35 - 80}px`);
+    ideaPlane.style.setProperty("--flight-x2", `${(endX - startX) * 0.7}px`);
+    ideaPlane.style.setProperty("--flight-y2", `${(endY - startY) * 0.7 - 35}px`);
+    ideaPlane.style.setProperty("--flight-x3", `${endX - startX}px`);
+    ideaPlane.style.setProperty("--flight-y3", `${endY - startY}px`);
+  }
   const ideaStatus = document.getElementById("ideaStatus");
 
   ideaForm.addEventListener("submit", async (event) => {
