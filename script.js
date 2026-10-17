@@ -323,12 +323,24 @@ ideaPlane.style.top = `${startY - workspaceRect.top - planeRect.height / 2}px`;
 
       ideaForm.reset();
       ideaForm.classList.add("idea-sent");
-      ideaBox.classList.add("idea-received");
-      ideaPlane.classList.remove("idea-flying");
-      ideaPlane.style.opacity = "1";
-      prepareIdeaFlight();
-      void ideaPlane.offsetWidth;
-      ideaPlane.classList.add("idea-flying");
+ideaBox.classList.remove("idea-received");
+ideaPlane.classList.remove("idea-flying");
+ideaPlane.style.opacity = "1";
+
+prepareIdeaFlight();
+void ideaPlane.offsetWidth;
+ideaPlane.classList.add("idea-flying");
+
+ideaPlane.addEventListener("animationend", function handleFlightEnd(event) {
+  if (event.animationName !== "idea-flight") return;
+
+  ideaBox.classList.remove("idea-received");
+  void ideaBox.offsetWidth;
+  ideaBox.classList.add("idea-received");
+
+  ideaPlane.removeEventListener("animationend", handleFlightEnd);
+  ideaPlane.style.opacity = "0";
+});
       ideaStatus.textContent =
         "Idea ricevuta. Vediamo dove ci porta.";
       ideaButton.textContent = "Biglietto consegnato ✓";
