@@ -281,12 +281,7 @@ if (ideaForm) {
     ideaButton.disabled = true;
     ideaButton.textContent = "La tua idea è in viaggio...";
     ideaStatus.textContent = "";
-    ideaPlane.classList.remove("idea-flying");
-ideaPlane.style.opacity = "1";
-
-void ideaPlane.offsetWidth;
-
-ideaPlane.classList.add("idea-flying");
+ 
 
     try {
       const response = await fetch(ideaForm.action, {
@@ -304,6 +299,10 @@ ideaPlane.classList.add("idea-flying");
       ideaForm.reset();
       ideaForm.classList.add("idea-sent");
       ideaBox.classList.add("idea-received");
+      ideaPlane.classList.remove("idea-flying");
+      ideaPlane.style.opacity = "1";
+      void ideaPlane.offsetWidth;
+      ideaPlane.classList.add("idea-flying");
       ideaStatus.textContent =
         "Idea ricevuta. Vediamo dove ci porta.";
       ideaButton.textContent = "Biglietto consegnato ✓";
