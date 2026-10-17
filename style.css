@@ -1537,21 +1537,47 @@ em {
     transform: translate(0, 0) rotate(-8deg) scale(1);
   }
 
-  35% {
+  20% {
     opacity: 1;
-    transform: translate(var(--flight-x1, 100px), var(--flight-y1, -65px)) rotate(12deg) scale(1.1);
+    transform: translate(
+      calc(var(--flight-x1, 100px) * .45),
+      calc(var(--flight-y1, -65px) * .65)
+    ) rotate(-2deg) scale(1.08);
+  }
+
+  45% {
+    opacity: 1;
+    transform: translate(
+      var(--flight-x1, 100px),
+      var(--flight-y1, -65px)
+    ) rotate(14deg) scale(1.12);
   }
 
   70% {
     opacity: 1;
-    transform: translate(var(--flight-x2, 210px), var(--flight-y2, -15px)) rotate(25deg) scale(.85);
+    transform: translate(
+      var(--flight-x2, 210px),
+      var(--flight-y2, -15px)
+    ) rotate(5deg) scale(.9);
+  }
+
+  88% {
+    opacity: 1;
+    transform: translate(
+      calc(var(--flight-x3, 280px) * .94),
+      calc(var(--flight-y3, 35px) * .94)
+    ) rotate(18deg) scale(.72);
   }
 
   100% {
     opacity: 0;
-    transform: translate(var(--flight-x3, 280px), var(--flight-y3, 35px)) rotate(40deg) scale(.35);
+    transform: translate(
+      var(--flight-x3, 280px),
+      var(--flight-y3, 35px)
+    ) rotate(28deg) scale(.25);
   }
 }
+
 .idea-plane svg {
   display: block;
   width: 100%;
