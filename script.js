@@ -283,9 +283,11 @@ if (ideaForm) {
 
     const endX = boxRect.left + boxRect.width * 0.5;
     const endY = boxRect.top + boxRect.height * 0.5;
+    const workspaceRect = ideaNote.parentElement.getBoundingClientRect();
 
-    ideaPlane.style.left = `${startX - planeRect.width / 2}px`;
-    ideaPlane.style.top = `${startY - planeRect.height / 2}px`;
+ideaPlane.style.left = `${startX - workspaceRect.left - planeRect.width / 2}px`;
+ideaPlane.style.top = `${startY - workspaceRect.top - planeRect.height / 2}px`;
+    
 
     ideaPlane.style.setProperty("--flight-x1", `${(endX - startX) * 0.35}px`);
     ideaPlane.style.setProperty("--flight-y1", `${(endY - startY) * 0.35 - 80}px`);
