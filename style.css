@@ -902,7 +902,7 @@ em {
   flex-direction: column;
   gap: 12px;
   padding: 18px 7vw 12px;
-  background: var(--burgundy);
+  background-color: #68152D !important;
   color: var(--cream);
   font-size: 11px;
   letter-spacing: 0.03em;
