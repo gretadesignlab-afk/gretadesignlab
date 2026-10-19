@@ -1960,17 +1960,56 @@
        FOOTER GDL — DESKTOP
     ========================================================= */
 
-    .site-footer {
-      position: relative;
-      padding: 65px 7vw 22px;
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 0.7fr;
-      gap: 45px;
-      background: var(--burgundy);
-      color: var(--cream);
-      font-size: 11px;
-      letter-spacing: 0.03em;
-    }
+    
+.site-footer {
+  padding: 45px 7vw 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  background: var(--burgundy);
+  color: var(--cream);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+
+.footer-top {
+  display: flex;
+  align-items: center;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+}
+
+.footer-logo-link {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.footer-slogan {
+  max-width: 320px;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.1vw, 27px);
+  line-height: 1.25;
+  color: var(--cream);
+}
+
+.footer-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  padding-top: 26px;
+  border-top: 1px solid rgba(243, 238, 230, 0.3);
+}
+
+.footer-bottom {
+  margin-top: 0;
+}
 
     .footer-brand,
     .footer-contact,
