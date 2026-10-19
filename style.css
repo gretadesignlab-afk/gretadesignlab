@@ -1001,6 +1001,14 @@ em {
 .footer-socials a:hover {
   color: var(--cream);
 }
+.footer-contact-link span {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.footer-contact-link:hover span {
+  transform: translate(3px, -3px);
+}
 
 .footer-bottom {
   display: flex;
