@@ -1956,6 +1956,102 @@
       }
 
     }
+    /* =========================================================
+       FOOTER GDL — DESKTOP
+    ========================================================= */
+
+    .site-footer {
+      position: relative;
+      padding: 65px 7vw 22px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 0.7fr;
+      gap: 45px;
+      background: var(--black);
+      color: var(--cream);
+      font-size: 11px;
+      letter-spacing: 0.03em;
+    }
+
+    .footer-brand,
+    .footer-contact,
+    .footer-socials {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .footer-logo-link {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .footer-logo {
+      display: block;
+      width: 76px;
+      height: 76px;
+      object-fit: contain;
+    }
+
+    .footer-slogan {
+      max-width: 260px;
+      font-family: var(--serif);
+      font-size: clamp(20px, 2.3vw, 29px);
+      line-height: 1.2;
+      color: var(--pink);
+    }
+
+    .footer-label {
+      margin-bottom: 18px;
+      color: var(--pink);
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .footer-contact-link,
+    .footer-socials a {
+      color: var(--cream);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+
+    .footer-contact-link {
+      font-family: var(--serif);
+      font-size: 27px;
+    }
+
+    .footer-contact-link span,
+    .footer-socials a span {
+      color: var(--pink);
+    }
+
+    .footer-socials {
+      gap: 13px;
+    }
+
+    .footer-socials .footer-label {
+      margin-bottom: 5px;
+    }
+
+    .footer-contact-link:hover,
+    .footer-socials a:hover {
+      color: var(--pink);
+    }
+
+    .footer-bottom {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(243, 238, 230, 0.2);
+      color: var(--cream);
+      opacity: 0.65;
+      font-size: 9px;
+      line-height: 1.6;
+    }    
 
   </style>
 
