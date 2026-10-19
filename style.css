@@ -995,6 +995,14 @@ em {
 .footer-socials a span {
   color: var(--cream);
 }
+.footer-socials a span {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.footer-socials a:hover span {
+  transform: translate(5px, -5px);
+}
 
 .footer-socials {
   gap: 10px;
