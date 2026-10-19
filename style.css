@@ -1007,7 +1007,7 @@ em {
 }
 
 .footer-contact-link:hover span {
-  transform: translate(3px, -3px);
+  transform: translate(6px, -5px);
 }
 
 .footer-bottom {
