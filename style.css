@@ -938,6 +938,13 @@ em {
   height: 70px;
   object-fit: contain;
 }
+.footer-logo {
+  transition: transform 0.35s ease;
+}
+
+.footer-logo-link:hover .footer-logo {
+  transform: translateY(-3px) rotate(-2deg);
+}
 
 .footer-slogan {
   max-width: 300px;
