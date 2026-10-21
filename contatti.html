@@ -20,21 +20,41 @@
 </div>
 
 
-  <header class="navbar">
+<header class="navbar">
+  <a href="index.html" class="nav-logo-link" data-name="Home">
+    <img class="nav-logo" src="IMG-20260904-WA0041.jpg" alt="Greta Design Lab">
+  </a>
 
-    <a href="index.html" class="nav-logo">
-      <img src="IMG-20260904-WA0041.jpg" alt="Greta Design Lab">
+  <button class="menu-toggle" id="menuToggle"
+          aria-label="Apri menu" aria-expanded="false" type="button">
+    <span class="menu-lines"></span>
+  </button>
+</header>
+
+<div class="menu-overlay" id="menuOverlay">
+  <div class="menu-content">
+    <a href="index.html" class="menu-item" data-name="Home">
+      <span class="menu-item-number">01</span>Home
     </a>
+    <a href="portfolio.html" class="menu-item" data-name="Portfolio">
+      <span class="menu-item-number">02</span>Portfolio
+    </a>
+    <a href="chi-sono.html" class="menu-item" data-name="Chi sono">
+      <span class="menu-item-number">03</span>Chi sono
+    </a>
+    <a href="contatti.html" class="menu-item" data-name="Contatti">
+      <span class="menu-item-number">04</span>Contatti
+    </a>
+    <a href="lab.html" class="menu-item lab-menu" data-name="Lab">
+      <span class="menu-item-number">05</span>Lab
+    </a>
+  </div>
 
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="portfolio.html">Portfolio</a>
-      <a href="chi-sono.html">Chi sono</a>
-      <a href="contatti.html" class="active">Contatti</a>
-    </nav>
-
-  </header>
-
+  <div class="menu-info">
+    Greta Design Lab<br>
+    Precisione / Forma / Imperfezione
+  </div>
+</div>
 
   <main class="contact-page">
 
@@ -282,7 +302,7 @@
   </main>
 
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 
 </body>
 </html>
