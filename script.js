@@ -1,5 +1,43 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+
+  /* =========================
+     MENU HAMBURGER
+  ========================= */
+
+  const menuToggle = document.getElementById("menuToggle");
+  const menuOverlay = document.getElementById("menuOverlay");
+  const menuItems = document.querySelectorAll(".menu-item");
+
+  function chiudiMenu() {
+    if (!menuToggle || !menuOverlay) return;
+
+    menuToggle.classList.remove("active");
+    menuOverlay.classList.remove("active");
+    menuToggle.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
+
+  if (menuToggle && menuOverlay) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menuToggle.classList.toggle("active");
+
+      menuOverlay.classList.toggle("active", isOpen);
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      document.body.style.overflow = isOpen ? "hidden" : "";
+    });
+
+    menuItems.forEach((item) => {
+      item.addEventListener("click", chiudiMenu);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && menuOverlay.classList.contains("active")) {
+        chiudiMenu();
+      }
+    });
+  }  
+
   /* =========================
      CURSORE PERSONALIZZATO
   ========================= */
